@@ -1,20 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+
+function encode(value) {
+  return encodeURIComponent(value)
+    .replace(/'/g, '%27')
+    .replace(/"/g, '%22');
+}
+
+function decode(value) {
+  return decodeURIComponent(value.replace(/\+/g, ' '));
+}
+
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+    };
+  }
+
   render() {
+    const { input } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <h1>URL Encoder/Decoder</h1>
+        <textarea value={input} onChange={e => this.onInputChange(e)}></textarea>
+        <button onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</button>
+        <button onClick={() => this.onDecodeButtonClick()} disabled={input === decode(input)}>Decode</button>
       </div>
     );
+  }
+
+  onInputChange({ target }) {
+    this.setState({ input: target.value });
+  }
+
+  onEncodeButtonClick() {
+    this.setState({ input: encode(this.state.input) });
+  }
+
+  onDecodeButtonClick() {
+    this.setState({ input: decode(this.state.input) });
   }
 }
 
