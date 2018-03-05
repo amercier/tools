@@ -1,0 +1,14 @@
+.tool-main {
+  padding: 1rem 1rem;
+}
+
+.tool-toolbar {
+  text-align: right;
+}
+
+.tool-toolbar > * {
+  margin-right: 1rem;
+}
+.tool-toolbar > :last-child {
+  margin-right: 0;
+}

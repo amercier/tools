@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Button } from 'rmwc/Button';
+import { TextField } from 'rmwc/TextField';
+import { Typography } from 'rmwc/Typography';
 import './App.css';
 
 
@@ -23,11 +26,13 @@ class App extends Component {
   render() {
     const { input } = this.state;
     return (
-      <div>
-        <h1>URL Encoder/Decoder</h1>
-        <textarea value={input} onChange={e => this.onInputChange(e)}></textarea>
-        <button onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</button>
-        <button onClick={() => this.onDecodeButtonClick()} disabled={input === decode(input)}>Decode</button>
+      <div className="tool-main">
+        <Typography tag="h1" use="display1">URL Encoder/Decoder</Typography>
+        <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={this.state.input} />
+        <div className="tool-toolbar">
+          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</Button>
+          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === decode(input)}>Decode</Button>
+        </div>
       </div>
     );
   }
