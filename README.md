@@ -5,6 +5,7 @@ amercier/tools
 > http://tools.amercier.com
 
 [![Build Status](https://img.shields.io/travis/amercier/tools/master.svg)](https://travis-ci.org/amercier/tools)
+[![License](https://img.shields.io/github/license/amercier/tools.svg)](LICENSE.md)
 
 Development
 ===========
@@ -35,6 +36,7 @@ Test
 npx yarn tests
 ```
 
+
 Deployment
 ==========
 
@@ -64,3 +66,9 @@ npx yarn build
 ```
 
 This creates a `build` directory containing the static files to deploy.
+
+
+License
+-------
+
+This project is released under the [ISC License](LICENSE.md).
