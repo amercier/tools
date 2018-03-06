@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import { Button } from 'rmwc/Button';
+import {
+  Drawer,
+  DrawerContent
+} from 'rmwc/Drawer';
+import {
+  ListItem,
+  ListItemGraphic,
+  ListItemText,
+  ListItemSecondaryText
+} from 'rmwc/List';
 import { TextField } from 'rmwc/TextField';
-import { Toolbar, ToolbarFixedAdjust, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarMenuIcon, ToolbarIcon } from 'rmwc/Toolbar';
+import { Theme } from 'rmwc/Theme';
+import {
+  Toolbar,
+  ToolbarFixedAdjust,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarIcon
+} from 'rmwc/Toolbar';
+import { Typography } from 'rmwc/Typography';
 import './App.css';
 
 
@@ -20,19 +39,20 @@ class App extends Component {
     super();
     this.state = {
       input: '',
+      isMobile: false,
+      isMenuOpen: true,
     };
   }
 
   render() {
     const { input } = this.state;
     return (
-      <div className="tool-main">
+      <Theme className="app__root" tag="div">
 
-        <Toolbar fixed waterfall flexible className="mdc-toolbar--flexible-default-behavior">
+        <Toolbar fixed waterfall>
           <ToolbarRow>
             <ToolbarSection alignStart>
-              <ToolbarMenuIcon use="menu"/>
-              <ToolbarTitle >URL Encoder/Decoder</ToolbarTitle>
+              <ToolbarTitle>Web Development tools</ToolbarTitle>
             </ToolbarSection>
             <ToolbarSection alignEnd>
             <ToolbarIcon
@@ -55,12 +75,96 @@ class App extends Component {
         </Toolbar>
         <ToolbarFixedAdjust />
 
-        <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={this.state.input} />
-        <div className="tool-toolbar">
-          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</Button>
-          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === decode(input)}>Decode</Button>
+        <div className="app__content">
+          <Drawer
+            persistent={!this.state.isMobile}
+            temporary={this.state.isMobile}
+            open={this.state.isMenuOpen}
+            onClose={() => this.setState({ isMenuOpen: false })}
+          >
+            <DrawerContent twoLine>
+              <ListItem activated>
+                <ListItemGraphic use="compare_arrows" />
+                <ListItemText>URL encoder/decoder</ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="spellcheck" />
+                <ListItemText>
+                  JSON validator
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="code" />
+                <ListItemText>
+                  Base64 encoder/decoder
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="developer_mode" />
+                <ListItemText>
+                  Base64 image
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="colorize" />
+                <ListItemText>
+                  Unicode characters picker
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="straighten" />
+                <ListItemText>
+                  CSS minifier/gzipper
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="insert_photo" />
+                <ListItemText>
+                  Favicon generator
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="assignment_turned_in" />
+                <ListItemText>
+                  Travis.yml validator
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="visibility_off" />
+                <ListItemText>
+                  Password generator
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+              <ListItem className="mdc-list-item--disabled">
+                <ListItemGraphic use="photo_camera" />
+                <ListItemText>
+                  Tilt–shift generator
+                  <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
+                </ListItemText>
+              </ListItem>
+            </DrawerContent>
+          </Drawer>
+
+          <main className="app__content-main">
+            <Typography tag="h1" use="display1">URL Encoder/Decoder</Typography>
+
+            <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={this.state.input} />
+            <div className="tool-toolbar">
+              <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</Button>
+              <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === decode(input)}>Decode</Button>
+            </div>
+          </main>
+
         </div>
-      </div>
+      </Theme>
     );
   }
 

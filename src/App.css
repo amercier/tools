@@ -19,10 +19,6 @@ html {
   background-color: #dcdcdc;
 }
 
-.tool-main {
-  padding: 1rem 1rem;
-}
-
 .tool-toolbar {
   text-align: right;
 }
@@ -30,18 +26,42 @@ html {
 .tool-toolbar > * {
   margin-right: 1rem;
 }
+
 .tool-toolbar > :last-child {
   margin-right: 0;
 }
 
-.mdc-toolbar__row:first-child::after {
-  background: #282c34 url(toolbar-bg.png) 50% 50%;
-  background-size: cover;
+#root > div {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-@media (min-width: 600px) {
-  .mdc-toolbar__title {
-    position: relative;
-    top: -0.4em;
-  }
+.app__content {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.app__content-main {
+  flex: 1 1 auto;
+  padding: 0 1rem;
+}
+
+.mdc-drawer--persistent.mdc-drawer--open,
+.mdc-drawer--persistent .mdc-drawer__drawer {
+  width: 260px;
+}
+
+.mdc-list-item {
+  cursor: pointer;
+}
+
+.mdc-list-item.mdc-list-item--activated,
+.mdc-list-item.mdc-list-item--disabled {
+  pointer-events: none !important;
+}
+
+.mdc-list-item.mdc-list-item--disabled {
+  opacity: 0.5;
 }
