@@ -15,6 +15,7 @@ import { Theme } from 'rmwc/Theme';
 import {
   Toolbar,
   ToolbarFixedAdjust,
+  ToolbarMenuIcon,
   ToolbarRow,
   ToolbarSection,
   ToolbarTitle,
@@ -52,6 +53,7 @@ class App extends Component {
         <Toolbar fixed waterfall>
           <ToolbarRow>
             <ToolbarSection alignStart>
+              <ToolbarMenuIcon use="menu" onClick={() => this.toggleMenu()}/>
               <ToolbarTitle>Web Development tools</ToolbarTitle>
             </ToolbarSection>
             <ToolbarSection alignEnd>
@@ -97,7 +99,7 @@ class App extends Component {
               <ListItem className="mdc-list-item--disabled">
                 <ListItemGraphic use="code" />
                 <ListItemText>
-                  Base64 encoder/decoder
+                  Base64 encoder encoder/decoder
                   <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
                 </ListItemText>
               </ListItem>
@@ -166,6 +168,10 @@ class App extends Component {
         </div>
       </Theme>
     );
+  }
+
+  toggleMenu() {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
   onInputChange({ target }) {

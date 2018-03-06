@@ -65,3 +65,7 @@ html {
 .mdc-list-item.mdc-list-item--disabled {
   opacity: 0.5;
 }
+
+.mdc-drawer--persistent {
+  z-index: 1;
+}
