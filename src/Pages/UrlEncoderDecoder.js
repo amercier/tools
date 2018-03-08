@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Typography } from 'rmwc/Typography';
 import { Button } from 'rmwc/Button';
 import { TextField } from 'rmwc/TextField';
 
@@ -25,8 +24,6 @@ export default class UrlEncoderDecoder extends Component {
     const { input } = this.state;
     return (
       <div>
-        <Typography tag="h1" use="display1">URL encoder/decoder</Typography>
-
         <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={this.state.input} />
         <div className="tool-toolbar">
           <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</Button>
