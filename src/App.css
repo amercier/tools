@@ -8,9 +8,14 @@
   --mdc-theme-secondary-dark: #a00037;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .mdc-toolbar {
-  color: #000000;
-  fill: #000000;
+  color: var(--mdc-theme-text-primary-on-background);
+  fill: var(--mdc-theme-text-primary-on-background);
 }
 
 .tool-toolbar {
@@ -39,7 +44,11 @@
 
 .app__content-main {
   flex: 1 1 auto;
-  padding: 0 1rem;
+  padding: 2rem;
+}
+
+.app__content-main .mdc-typography--display1 {
+  margin-top: 0;
 }
 
 .mdc-drawer--persistent {
