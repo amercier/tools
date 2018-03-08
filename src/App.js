@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import {
-  Drawer,
-  DrawerContent
-} from 'rmwc/Drawer';
-import {
-  ListItem,
-  ListItemGraphic,
-  ListItemText,
-  ListItemSecondaryText
-} from 'rmwc/List';
+import { Drawer, DrawerContent } from 'rmwc/Drawer';
+import { SimpleListItem } from 'rmwc/List';
 import { Theme } from 'rmwc/Theme';
 import {
   Toolbar,
@@ -78,23 +70,22 @@ class App extends Component {
               <DrawerContent twoLine>
                 {pages.map(({ id, title, icon, component}) => {
                   if (component) {
+                    // Inspired from NavLink implementation
+                    // https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/modules/NavLink.js
+                    const path = `/${id}`.replace(/([.+*?=^!:${}()[\]|/\\])/g, '\\$1');
                     return (
-                      <Link key={id} to={id}>
-                        <ListItem>
-                          <ListItemGraphic use={icon} />
-                          <ListItemText>{title}</ListItemText>
-                        </ListItem>
-                      </Link>
+                      <Route key={id} exact path={path} children={({ location, match }) => (
+                        <Link to={id}>
+                          <SimpleListItem graphic={icon} text={title} activated={match} />
+                        </Link>
+                      )} />
                     );
                   } else {
                     return (
-                      <ListItem key={id} className="mdc-list-item--disabled">
-                        <ListItemGraphic use={icon} />
-                        <ListItemText>
-                          {title}
-                          <ListItemSecondaryText>Not available yet</ListItemSecondaryText>
-                        </ListItemText>
-                      </ListItem>
+                      <SimpleListItem key={id} graphic={icon} text={title}
+                        secondaryText="Not available yet"
+                        className="mdc-list-item--disabled"
+                      />
                     );
                   }
                 })}
