@@ -44,7 +44,11 @@ a {
 
 .app__content-main {
   flex: 1 1 auto;
-  padding: 0 1rem;
+  padding: 2rem;
+}
+
+.app__content-main .mdc-typography--display1 {
+  margin-top: 0;
 }
 
 .mdc-drawer--persistent {

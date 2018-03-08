@@ -15,6 +15,7 @@ import {
 import { Typography } from 'rmwc/Typography';
 
 import './App.css';
+import Home from './Home';
 import pages from './Pages';
 
 class App extends Component {
@@ -94,11 +95,12 @@ class App extends Component {
             </Drawer>
 
             <main className="app__content-main">
+              <Route exact path="/" component={Home}/>
               {pages.map(({ id, title, icon, component}) => {
                 return component && (
                   <Route
                     key={id} exact path={`/${id}`}
-                    children={(
+                    render={() => (
                       <div>
                         <Typography tag="h1" use="display1">URL encoder/decoder</Typography>
                         {React.createElement(component)}
