@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Button } from 'rmwc/Button';
 import {
   Drawer,
   DrawerContent
@@ -11,7 +10,6 @@ import {
   ListItemText,
   ListItemSecondaryText
 } from 'rmwc/List';
-import { TextField } from 'rmwc/TextField';
 import { Theme } from 'rmwc/Theme';
 import {
   Toolbar,
@@ -22,100 +20,9 @@ import {
   ToolbarTitle,
   ToolbarIcon
 } from 'rmwc/Toolbar';
-import { Typography } from 'rmwc/Typography';
+
 import './App.css';
-
-
-function encode(value) {
-  return encodeURIComponent(value)
-    .replace(/'/g, '%27')
-    .replace(/"/g, '%22');
-}
-
-function decode(value) {
-  return decodeURIComponent(value.replace(/\+/g, ' '));
-}
-
-class UrlEncoderDecoder extends Component {
-  constructor() {
-    super();
-    this.state = {
-      input: '',
-    };
-  }
-
-  render() {
-    const { input } = this.state;
-    return (
-      <div>
-        <Typography tag="h1" use="display1">URL encoder/decoder</Typography>
-
-        <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={this.state.input} />
-        <div className="tool-toolbar">
-          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</Button>
-          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === decode(input)}>Decode</Button>
-        </div>
-      </div>
-    );
-  }
-
-  onInputChange({ target }) {
-    this.setState({ input: target.value });
-  }
-
-  onEncodeButtonClick() {
-    this.setState({ input: encode(this.state.input) });
-  }
-
-  onDecodeButtonClick() {
-    this.setState({ input: decode(this.state.input) });
-  }
-}
-
-const pages = [
-  {
-    id: 'url-encoder',
-    title: 'URL encoder/decoder',
-    icon: 'compare_arrows',
-    component: UrlEncoderDecoder,
-  },
-  {
-    title: 'JSON validator',
-    icon: 'spellcheck',
-  },
-  {
-    title: 'Base64 encoder/decoder',
-    icon: 'code',
-  },
-  {
-    title: 'Base64 image',
-    icon: 'developer_mode',
-  },
-  {
-    title: 'Unicode characters picker',
-    icon: 'colorize',
-  },
-  {
-    title: 'CSS minifier/gzipper',
-    icon: 'straighten',
-  },
-  {
-    title: 'Favicon generator',
-    icon: 'insert_photo',
-  },
-  {
-    title: 'Travis.yml validator',
-    icon: 'assignment_turned_in',
-  },
-  {
-    title: 'Password generator',
-    icon: 'visibility_off',
-  },
-  {
-    title: 'Tilt–shift generator',
-    icon: 'photo_camera',
-  }
-];
+import pages from './Pages';
 
 class App extends Component {
   constructor() {
@@ -172,7 +79,7 @@ class App extends Component {
                 {pages.map(({ id, title, icon, component}) => {
                   if (component) {
                     return (
-                      <Link to={id}>
+                      <Link key={id} to={id}>
                         <ListItem>
                           <ListItemGraphic use={icon} />
                           <ListItemText>{title}</ListItemText>
@@ -181,7 +88,7 @@ class App extends Component {
                     );
                   } else {
                     return (
-                      <ListItem className="mdc-list-item--disabled">
+                      <ListItem key={id} className="mdc-list-item--disabled">
                         <ListItemGraphic use={icon} />
                         <ListItemText>
                           {title}
@@ -195,8 +102,10 @@ class App extends Component {
             </Drawer>
 
             <main className="app__content-main">
-              <Route exact path="/" component={UrlEncoderDecoder} />
-              <Route exact path="/url-encoder" component={UrlEncoderDecoder} />
+              <Route exact path="/" component={pages[0].component} />
+              {pages.map(({ id, title, icon, component}) => {
+                return component && (<Route key={id} exact path={`/${id}`} component={component} />)
+              })}
             </main>
           </div>
 
