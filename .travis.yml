@@ -3,9 +3,12 @@ node_js: node # Current
 cache: yarn
 before_deploy: yarn build
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket: amercier-tools
+  region: eu-west-3
   local_dir: build
   on:
     branch: master
+  skip_cleanup: true
