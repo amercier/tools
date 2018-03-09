@@ -1,13 +1,19 @@
 language: node_js
 node_js: node # Current
 cache: yarn
+env:
+  global:
+    - AWS_S3_BUCKET=amercier-tools
+    - AWS_S3_REGION=eu-west-3
 before_deploy:
   - yarn build
   - pip install --user awscli
 deploy:
   provider: script
   # Note: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set in Travis project settings
-  script: ~/.local/bin/aws s3 sync build s3://amercier-tools --region=eu-west-3 --delete
+  script: ~/.local/bin/aws s3 sync build s3://${AWS_S3_BUCKET} --region=${AWS_S3_REGION} --delete
   on:
     branch: master
   skip_cleanup: true
+after_deploy:
+  - curl --fail --silent --show-error http://${AWS_S3_BUCKET}.s3-website.${AWS_S3_REGION}.amazonaws.com/
