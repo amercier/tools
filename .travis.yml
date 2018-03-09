@@ -17,3 +17,7 @@ deploy:
   skip_cleanup: true
 after_deploy:
   - curl --fail --silent --show-error http://${AWS_S3_BUCKET}.s3-website.${AWS_S3_REGION}.amazonaws.com/
+  # Invalidates only index.html as other files are versioned
+  # Note: CLOUDFRONT_DISTRIBUTION_ID must be set in Travis project settings
+  - ~/.local/bin/aws configure set preview.cloudfront true
+  - ~/.local/bin/aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths /index.html
