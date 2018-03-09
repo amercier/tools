@@ -2,7 +2,7 @@ amercier/tools
 ==============
 
 > My personal toolkit for web development.  
-> http://tools.amercier.com
+> https://tools.amercier.com
 
 [![Build Status](https://img.shields.io/travis/amercier/tools/master.svg)](https://travis-ci.org/amercier/tools)
 [![License](https://img.shields.io/github/license/amercier/tools.svg)](LICENSE.md)
@@ -40,23 +40,22 @@ npx yarn tests
 Deployment
 ==========
 
+Website https://tools.amercier.com/ is hosted on [Amazon S3][1] and served by
+[Amazon CloudFront][2], as described in [this blog post][3].
+
 Continuous deployment
 ---------------------
 
-1. Each commit triggers a build on [Travis CI][1] (2 on Pull Requests commits).
-Successful builds on `master` branch trigger deployment on [Github Pages][2]
+1. Each commit triggers a build on [Travis CI][4] (2 on Pull Requests commits).
+Successful builds on `master` branch trigger deployment on [Amazon S3][1]
 automatically.
 2. Additionally, weekly builds are triggered automatically. It does not trigger
 any deployment.
 
-**Note:** a valid [GitHub personal access token][3] must be created with the
-`public_repo` permission, and stored in Travis CI project settings as an
-[environment variable][4] called `GITHUB_TOKEN` (see `.travis.yml` for details).
-
-[1]: https://travis-ci.org/amercier/tools
-[2]: https://pages.github.com/
-[3]: https://github.com/settings/tokens
-[4]: https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings
+[1]: https://aws.amazon.com/s3/
+[2]: https://aws.amazon.com/cloudfront/
+[3]: https://medium.com/@willmorgan/moving-a-static-website-to-aws-s3-cloudfront-with-https-1fdd95563106
+[4]: https://travis-ci.org/amercier/tools
 
 Manual deployment
 -----------------
