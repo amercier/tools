@@ -1,14 +1,13 @@
 language: node_js
 node_js: node # Current
 cache: yarn
-before_deploy: yarn build
+before_deploy:
+  - yarn build
+  - pip install --user awscli
 deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: amercier-tools
-  region: eu-west-3
-  local_dir: build
+  provider: script
+  # Note: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set in Travis project settings
+  script: ~/.local/bin/aws s3 sync build s3://amercier-tools --region=eu-west-3 --delete
   on:
     branch: master
   skip_cleanup: true
