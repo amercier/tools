@@ -102,7 +102,7 @@ class App extends Component {
                     key={id} exact path={`/${id}`}
                     render={() => (
                       <div>
-                        <Typography tag="h1" use="display1">URL encoder/decoder</Typography>
+                        <Typography tag="h1" use="display1">{title}</Typography>
                         {React.createElement(component)}
                       </div>
                     )}
