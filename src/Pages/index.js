@@ -1,3 +1,4 @@
+import Base64EncoderDecoder from './Base64EncoderDecoder';
 import UrlEncoderDecoder from './UrlEncoderDecoder';
 
 export default [
@@ -16,6 +17,7 @@ export default [
     id: 'base64-encoder',
     title: 'Base64 encoder/decoder',
     icon: 'code',
+    component: Base64EncoderDecoder,
   },
   {
     id: 'base64-image',
