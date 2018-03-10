@@ -25,6 +25,15 @@ describe('input field', () => {
 });
 
 describe('"Encode" button', () => {
+  it('disables "Encode" button when input is empty', () => {
+    const wrapper = mount(<UrlEncoderDecoder />);
+    wrapper.setState({ input: ''});
+
+    const encodeButton = wrapper.find(Button).get(0);
+    expect(encodeButton.props.disabled).toBeDefined();
+    expect(encodeButton.props.disabled).toBe(true);
+  });
+
   it('encodes input when "Encode" button is pressed', () => {
     const wrapper = mount(<UrlEncoderDecoder />);
     wrapper.setState({ input: 'http://localhost/'});
@@ -34,25 +43,25 @@ describe('"Encode" button', () => {
     encodeButton.props.onClick();
     expect(wrapper.state('input')).toBe('http%3A%2F%2Flocalhost%2F');
   });
+});
 
+describe('"Decode" button', () => {
   it('disables "Decode" button when output would be identical', () => {
     const wrapper = mount(<UrlEncoderDecoder />);
     wrapper.setState({ input: 'http://localhost/'});
 
-    const encodeButton = wrapper.find(Button).get(1);
-    expect(encodeButton.props.disabled).toBeDefined();
-    expect(encodeButton.props.disabled).toBe(true);
+    const decodeButton = wrapper.find(Button).get(1);
+    expect(decodeButton.props.disabled).toBeDefined();
+    expect(decodeButton.props.disabled).toBe(true);
   });
-});
 
-describe('"Decode" button', () => {
   it('enables "Decode" button when output would be different', () => {
     const wrapper = mount(<UrlEncoderDecoder />);
     wrapper.setState({ input: 'http://localhost/%20'});
 
-    const encodeButton = wrapper.find(Button).get(1);
-    expect(encodeButton.props.disabled).toBeDefined();
-    expect(encodeButton.props.disabled).toBe(false);
+    const decodeButton = wrapper.find(Button).get(1);
+    expect(decodeButton.props.disabled).toBeDefined();
+    expect(decodeButton.props.disabled).toBe(false);
   });
 
   it('decodes input when "Decode" button is pressed', () => {
