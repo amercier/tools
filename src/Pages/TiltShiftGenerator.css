@@ -1,0 +1,36 @@
+.tilt-shift-url {
+  display: flex;
+}
+
+.tilt-shift-url > .mdc-text-field {
+  flex-grow: 1;
+  padding-top: 20px; /* workaround for bug with 'fullwidth' property */
+}
+
+.tilt-shift-url > .mdc-button {
+  margin-left: 1rem;
+  align-self: flex-end;
+}
+
+.tilt-shift-image {
+  margin-top: 2rem;
+}
+
+.tilt-shift-image img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.tilt-shift-image {
+  position: relative;
+}
+
+.tilt-shift-image__content-clear,
+.tilt-shift-image__content-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -1,3 +1,4 @@
+import TiltShiftGenerator from './TiltShiftGenerator';
 import Base64EncoderDecoder from './Base64EncoderDecoder';
 import UrlEncoderDecoder from './UrlEncoderDecoder';
 
@@ -53,5 +54,6 @@ export default [
     id: 'tilt-shift',
     title: 'Tilt–shift generator',
     icon: 'photo_camera',
+    component: TiltShiftGenerator,
   }
 ];
