@@ -11,7 +11,7 @@ export default () => (
         <Card key={id} style={{width: '20rem'}}>
           <Link to={id}>
             <CardPrimaryAction>
-              <CardMedia sixteenByNine style={{backgroundImage: 'url(url-encoder-preview.png)'}}/>
+              <CardMedia sixteenByNine style={{backgroundImage: `url(${id}-preview.png)`}}/>
               <div style={{padding: '0 1rem 1rem 1rem'}}>
                 <Typography use="title" tag="h2">{title}</Typography>
               </div>
