@@ -1,9 +1,9 @@
+import { format as formatUrl } from 'url';
 import isUrl from 'is-url';
 import React, { Component } from 'react';
 import { Button } from 'rmwc/Button';
 import { TextField } from 'rmwc/TextField';
 
-import { encode as encodeUrl } from './UrlEncoderDecoder';
 import './TiltShiftGenerator.css';
 
 export default class TiltShiftGenerator extends Component {
@@ -15,8 +15,8 @@ export default class TiltShiftGenerator extends Component {
   }
 
   render() {
-    const imageWidth = 1920;
-    const imageHeight = 1080;
+    const imageWidth = 1280;
+    const imageHeight = 720;
 
     const perspective = 940;
     const rotateX = 50
@@ -57,7 +57,7 @@ export default class TiltShiftGenerator extends Component {
           }}
         >
           <img
-            src={this.getScreenshotUrl()}
+            src={this.getScreenshotUrl(imageWidth, imageHeight)}
             width={imageWidth}
             height={imageHeight}
             style={{
@@ -78,7 +78,7 @@ export default class TiltShiftGenerator extends Component {
           }}
         >
           <img
-            src={this.getScreenshotUrl()}
+            src={this.getScreenshotUrl(imageWidth, imageHeight)}
             width={imageWidth}
             height={imageHeight}
             style={{
@@ -113,8 +113,14 @@ export default class TiltShiftGenerator extends Component {
     });
   }
 
-  getScreenshotUrl() {
-    const strippedUrl = this.state.url.replace(/^[^/]*\/\//, '');
-    return `https://screenshot.amercier.com/?url=${encodeUrl(strippedUrl)}&delay=1000`;
+  getScreenshotUrl(width, height) {
+    const url = this.state.url.replace(/^[^/]*\/\//, '');
+    const clipRect = JSON.stringify({ top: 0, left: 0, width, height });
+    const delay = 1000;
+    return formatUrl({
+      protocol: 'https',
+      host: 'screenshot.amercier.com',
+      query: { url, width, height, delay, clipRect }
+    });
   }
 }
