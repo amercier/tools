@@ -1,5 +1,6 @@
-import TiltShiftGenerator from './TiltShiftGenerator';
 import Base64EncoderDecoder from './Base64EncoderDecoder';
+import PasswordGenerator from './PasswordGenerator';
+import TiltShiftGenerator from './TiltShiftGenerator';
 import UrlEncoderDecoder from './UrlEncoderDecoder';
 
 export default [
@@ -49,6 +50,7 @@ export default [
     id: 'password-generator',
     title: 'Password generator',
     icon: 'visibility_off',
+    component: PasswordGenerator
   },
   {
     id: 'tilt-shift',

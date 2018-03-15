@@ -45,6 +45,7 @@ a {
 .app__content-main {
   flex: 1 1 auto;
   padding: 2rem;
+  overflow-x: hidden;
 }
 
 .app__content-main .mdc-typography--display1 {
