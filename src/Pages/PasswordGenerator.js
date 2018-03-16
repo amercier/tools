@@ -26,6 +26,9 @@ export default class PasswordGenerator extends Component {
     return (
       <div className="password-generator">
         <div className="password-generator-slider">
+          <span className="password-generator-slider__label">
+            Length ({this.state.length})
+          </span>
           <Slider
             min={4}
             max={64}
@@ -35,7 +38,6 @@ export default class PasswordGenerator extends Component {
             onChange={() => this.updatePassword()}
             discrete
           />
-          {this.state.length}
         </div>
 
         <div className="password-generator-switches">
