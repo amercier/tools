@@ -1,8 +1,9 @@
-import { format as formatUrl } from 'url';
 import isUrl from 'is-url';
+import { format as formatUrl } from 'url';
 import React, { Component } from 'react';
 import { Button } from 'rmwc/Button';
 import { TextField } from 'rmwc/TextField';
+import 'whatwg-fetch';
 
 import './TiltShiftGenerator.css';
 
@@ -10,7 +11,7 @@ export default class TiltShiftGenerator extends Component {
   constructor() {
     super();
     this.state = {
-      urlInput: 'https://google.com/',
+      url: 'https://google.com/',
     };
   }
 
@@ -39,7 +40,7 @@ export default class TiltShiftGenerator extends Component {
     )`;
     const backgroundColor = 'rgb(255, 255, 255)';
 
-    const image = this.state.url && (
+    const image = this.state.blobUrl && (
       <div
         className="tilt-shift-image"
         style={{
@@ -57,7 +58,7 @@ export default class TiltShiftGenerator extends Component {
           }}
         >
           <img
-            src={this.getScreenshotUrl(imageWidth, imageHeight)}
+            src={this.state.blobUrl}
             width={imageWidth}
             height={imageHeight}
             style={{
@@ -78,7 +79,7 @@ export default class TiltShiftGenerator extends Component {
           }}
         >
           <img
-            src={this.getScreenshotUrl(imageWidth, imageHeight)}
+            src={this.state.blobUrl}
             width={imageWidth}
             height={imageHeight}
             style={{
@@ -95,26 +96,33 @@ export default class TiltShiftGenerator extends Component {
     return (
       <div>
         <div className="tilt-shift-url">
-          <TextField fullwidth label="Website URL" onChange={e => this.onUrlChange(e)} value={this.state.urlInput} />
-          <Button raised disabled={!isUrl(this.state.urlInput)} onClick={() => this.applyUrl()}>Go</Button>
+          <TextField fullwidth label="Website URL" onChange={e => this.onUrlChange(e)} value={this.state.url} />
+          <Button raised disabled={!isUrl(this.state.url)} onClick={() => this.applyUrl(imageWidth, imageHeight)}>Go</Button>
         </div>
+
         {image}
       </div>
     );
   }
 
   onUrlChange({ target }) {
-    this.setState({ urlInput: target.value });
+    this.setState({ url: target.value });
   }
 
-  applyUrl() {
-    this.setState({
-      url: this.state.urlInput
-    });
+  applyUrl(width, height) {
+    const actualUrl = this.getScreenshotUrl(this.state.url, width, height);
+    this.setState({ blobUrl: null });
+
+    return fetch(actualUrl)
+      .then(response => response.blob())
+      .then(blob => {
+        const blobUrl = URL.createObjectURL(blob);
+        this.setState({ blobUrl });
+      });
   }
 
-  getScreenshotUrl(width, height) {
-    const url = this.state.url.replace(/^[^/]*\/\//, '');
+  getScreenshotUrl(pageUrl, width, height) {
+    const url = pageUrl.replace(/^[^/]*\/\//, '');
     const clipRect = JSON.stringify({ top: 0, left: 0, width, height });
     const delay = 1000;
     return formatUrl({
