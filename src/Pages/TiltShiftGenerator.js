@@ -3,9 +3,10 @@ import { format as formatUrl } from 'url';
 import React, { Component } from 'react';
 import { Button } from 'rmwc/Button';
 import { TextField } from 'rmwc/TextField';
-import 'whatwg-fetch';
+import fetchPonyfill from 'fetch-ponyfill';
 
 import './TiltShiftGenerator.css';
+const { fetch } = fetchPonyfill();
 
 export default class TiltShiftGenerator extends Component {
   constructor() {
