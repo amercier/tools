@@ -42,16 +42,7 @@ export default class TiltShiftGenerator extends Component {
     const backgroundColor = 'rgb(255, 255, 255)';
 
     const image = this.state.blobUrl && (
-      <div
-        className="tilt-shift-image"
-        style={{
-          width: '100%',
-          height: 0,
-          paddingTop: `${100 * (imageHeight / imageWidth)}%`, // maintain aspect-ratio
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
+      <div>
         <div
           className="tilt-shift-image__content-clear"
           style={{
@@ -101,7 +92,24 @@ export default class TiltShiftGenerator extends Component {
           <Button raised disabled={!isUrl(this.state.url)} onClick={() => this.applyUrl(imageWidth, imageHeight)}>Go</Button>
         </div>
 
-        {image}
+        <div
+          className={`tilt-shift-image tilt-shift-image--${this.state.loadingState}`}
+          style={{
+            width: '100%',
+            height: 0,
+            paddingTop: `${100 * (imageHeight / imageWidth)}%`, // maintain aspect-ratio
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          {image}
+
+          <div className="tilt-shift-image__progress">
+            <svg className="mdc-circular-progress" viewBox="25 25 50 50">
+              <circle className="mdc-circular-progress__path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
+            </svg>
+          </div>
+        </div>
       </div>
     );
   }
@@ -112,13 +120,17 @@ export default class TiltShiftGenerator extends Component {
 
   applyUrl(width, height) {
     const actualUrl = this.getScreenshotUrl(this.state.url, width, height);
-    this.setState({ blobUrl: null });
+
+    this.setState({ blobUrl: null, loadingState: 'loading' });
 
     return fetch(actualUrl)
       .then(response => response.blob())
       .then(blob => {
         const blobUrl = URL.createObjectURL(blob);
-        this.setState({ blobUrl });
+        this.setState({ blobUrl, loadingState: 'loaded' });
+      })
+      .catch(() => {
+        this.setState({ loadingState: 'failed' });
       });
   }
 
