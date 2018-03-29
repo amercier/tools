@@ -2,6 +2,7 @@ import Base64EncoderDecoder from './Base64EncoderDecoder';
 import PasswordGenerator from './PasswordGenerator';
 import TiltShiftGenerator from './TiltShiftGenerator';
 import UrlEncoderDecoder from './UrlEncoderDecoder';
+import UnicodeCharacterPicker from './UnicodeCharacterPicker';
 
 export default [
   {
@@ -28,8 +29,9 @@ export default [
   },
   {
     id: 'unicode-characters',
-    title: 'Unicode characters picker',
+    title: 'Unicode character picker',
     icon: 'colorize',
+    component: UnicodeCharacterPicker,
   },
   {
     id: 'css-minifier',
