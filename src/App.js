@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Button, ButtonIcon } from 'rmwc/Button';
 import { Drawer, DrawerContent } from 'rmwc/Drawer';
 import { SimpleListItem } from 'rmwc/List';
 import { Theme } from 'rmwc/Theme';
@@ -102,7 +103,12 @@ class App extends Component {
                     key={id} exact path={`/${id}`}
                     render={() => (
                       <div>
-                        <Typography tag="h1" use="display1">{title}</Typography>
+                        <div className="app__content-title">
+                          <Typography tag="h1" use="display1">{title}</Typography>
+                          <Link to={'/'}>
+                            <Button compact theme="background text-primary-on-background"><ButtonIcon use="close" /></Button>
+                          </Link>
+                        </div>
                         {React.createElement(component)}
                       </div>
                     )}

@@ -77,3 +77,23 @@ a {
 .mdc-list-item.mdc-list-item--disabled {
   opacity: 0.5;
 }
+
+.app__content-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.app__content-title .mdc-typography--display1 {
+  flex: 1;
+}
+
+.app__content-title .mdc-button {
+  font-size: 2em;
+  margin-left: 1rem;
+  min-width: 36px;
+}
+
+.app__content-title .mdc-button i {
+  margin-right: 0;
+}
