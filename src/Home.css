@@ -1,0 +1,5 @@
+.home-tools-list .mdc-card,
+.home-tools-list .mdc-card > a,
+.home-tools-list .mdc-card__primary-action {
+  height: 100%;
+}

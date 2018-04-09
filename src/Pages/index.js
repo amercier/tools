@@ -10,6 +10,7 @@ export default [
     title: 'URL encoder/decoder',
     icon: 'compare_arrows',
     component: UrlEncoderDecoder,
+    description: 'Encode or decode text using percent (URL) encoding.',
   },
   {
     id: 'json-validator',
@@ -21,6 +22,7 @@ export default [
     title: 'Base64 encoder/decoder',
     icon: 'code',
     component: Base64EncoderDecoder,
+    description: 'Encode or decode text using base64 encoding.',
   },
   {
     id: 'base64-image',
@@ -32,6 +34,7 @@ export default [
     title: 'Unicode character picker',
     icon: 'colorize',
     component: UnicodeCharacterPicker,
+    description: 'Copy fancy unicode characters to your clipboard.',
   },
   {
     id: 'css-minifier',
@@ -52,12 +55,14 @@ export default [
     id: 'password-generator',
     title: 'Password generator',
     icon: 'visibility_off',
-    component: PasswordGenerator
+    component: PasswordGenerator,
+    description: 'Generate a strong password and copy it to your clipboard.',
   },
   {
     id: 'tilt-shift',
     title: 'Tilt–shift generator',
     icon: 'photo_camera',
     component: TiltShiftGenerator,
+    description: 'Generate a screenshot from a website with a fancy tilt-shift effect.',
   }
 ];
