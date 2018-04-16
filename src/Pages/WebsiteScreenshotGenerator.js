@@ -2,8 +2,8 @@ import isUrl from 'is-url';
 import { format as formatUrl } from 'url';
 import React, { Component } from 'react';
 import { Button } from 'rmwc/Button';
+import { Select } from 'rmwc/Select';
 import { TextField } from 'rmwc/TextField';
-import { saveAs } from 'file-saver';
 import fetchPonyfill from 'fetch-ponyfill';
 import filenamifyUrl from 'filenamify-url';
 
@@ -27,16 +27,25 @@ function getFilenameFromUrl(pageUrl, extension) {
 }
 
 export default class WebsiteScreenshotGenerator extends Component {
+
   constructor() {
     super();
+
+    this.resolutions = [
+      '640 x 480',
+      '1024 x 768',
+      '1280 x 720',
+      '1920 x 1080',
+    ];
+
     this.state = {
       url: 'https://google.com/',
+      resolution: this.resolutions[2],
     };
   }
 
   render() {
-    const imageWidth = 1280;
-    const imageHeight = 720;
+    const [imageWidth, imageHeight] = this.state.resolution.split(' x ');
 
     const image = this.state.displayedUrl && (
       <img
@@ -47,18 +56,22 @@ export default class WebsiteScreenshotGenerator extends Component {
       />
     );
 
-    const downloadButton = this.state.displayedUrl
-      ? (
+    const downloadButton = this.state.displayedUrl && (
         <a href={this.state.blobUrl} download={getFilenameFromUrl(this.state.displayedUrl, 'jpg')}>
-          <Button raised>Download</Button>
+          <Button raised disabled={!this.state.blobUrl}>Download</Button>
         </a>
-      )
-      : (<Button raised disabled>Download</Button>);
+      );
 
     return (
       <div>
         <div className="website-screenshot-url">
-          <TextField fullwidth label="Website URL" onChange={e => this.onUrlChange(e)} value={this.state.url} />
+          <TextField label="Website URL" onChange={e => this.onUrlChange(e)} value={this.state.url} />
+          <Select
+            value={this.state.resolution}
+            onChange={e => this.setState({ resolution: e.target.value })}
+            label="Resolution"
+            options={this.resolutions.map(resolution => ({label: resolution, value: resolution}))}
+          />
           <Button raised disabled={!isUrl(this.state.url)} onClick={() => this.applyUrl(imageWidth, imageHeight)}>Go</Button>
         </div>
 
@@ -95,7 +108,7 @@ export default class WebsiteScreenshotGenerator extends Component {
     const actualUrl = getScreenshotUrl(displayedUrl, width, height);
 
     this.setState({
-      displayedUrl: null,
+      displayedUrl,
       blobUrl: null,
       loadingState: 'loading',
     });
@@ -105,7 +118,6 @@ export default class WebsiteScreenshotGenerator extends Component {
       .then(blob => {
         const blobUrl = URL.createObjectURL(blob);
         this.setState({
-          displayedUrl,
           blobUrl,
           loadingState: 'loaded'
         });

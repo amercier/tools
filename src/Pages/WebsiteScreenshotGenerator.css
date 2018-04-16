@@ -1,15 +1,16 @@
 .website-screenshot-url {
   display: flex;
+  align-items: center;
 }
 
 .website-screenshot-url > .mdc-text-field {
   flex-grow: 1;
-  padding-top: 20px; /* workaround for bug with 'fullwidth' property */
+  margin-right: 1rem;
 }
 
 .website-screenshot-url > .mdc-button {
   margin-left: 1rem;
-  align-self: flex-end;
+  margin-top: 1rem;
 }
 
 .website-screenshot-image {
@@ -27,9 +28,10 @@
 }
 
 .website-screenshot-image img {
-  max-width: 100%;
-  width: auto;
+  display: block;
+  width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
 .website-screenshot-image__progress {

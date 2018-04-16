@@ -20,6 +20,7 @@ a {
 
 .tool-toolbar {
   text-align: right;
+  margin-top: 2rem;
 }
 
 .tool-toolbar > * {
