@@ -3,6 +3,7 @@ import PasswordGenerator from './PasswordGenerator';
 import TiltShiftGenerator from './TiltShiftGenerator';
 import UrlEncoderDecoder from './UrlEncoderDecoder';
 import UnicodeCharacterPicker from './UnicodeCharacterPicker';
+import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
 
 export default [
   {
@@ -59,9 +60,16 @@ export default [
     description: 'Generate a strong password and copy it to your clipboard.',
   },
   {
+    id: 'website-screenshot',
+    title: 'Website screenshot',
+    icon: 'camera_alt',
+    component: WebsiteScreenshotGenerator,
+    description: 'Generate a screenshot from a website.',
+  },
+  {
     id: 'tilt-shift',
     title: 'Tilt–shift generator',
-    icon: 'photo_camera',
+    icon: 'blur_on',
     component: TiltShiftGenerator,
     description: 'Generate a screenshot from a website with a fancy tilt-shift effect.',
   }
