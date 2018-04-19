@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import { Button, ButtonIcon } from 'rmwc/Button';
 import { Drawer, DrawerContent } from 'rmwc/Drawer';
 import { SimpleListItem } from 'rmwc/List';
@@ -19,6 +19,13 @@ import './App.css';
 import Home from './Home';
 import pages from './Pages';
 
+const LocationAwareTheme = withRouter(class extends Component {
+  render() {
+    const { match, location, history, staticContext, ...props } = this.props;
+    return (<Theme {...props} data-path={location.pathname}/>);
+  }
+});
+
 class App extends Component {
   constructor() {
     super();
@@ -31,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Theme className="app__root" tag="div">
+        <LocationAwareTheme className="app__root" tag="div">
 
           <Toolbar fixed waterfall>
             <ToolbarRow>
@@ -118,7 +125,7 @@ class App extends Component {
             </main>
           </div>
 
-        </Theme>
+        </LocationAwareTheme>
       </Router>
     );
   }

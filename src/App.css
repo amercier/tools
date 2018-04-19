@@ -1,4 +1,4 @@
-:root {
+.app__root {
   --mdc-theme-primary: #4caf50;
   --mdc-theme-primary-light: #80e27e;
   --mdc-theme-primary-dark: #087f23;
@@ -6,6 +6,16 @@
   --mdc-theme-secondary: #d81b60;
   --mdc-theme-secondary-light: #ff5c8d;
   --mdc-theme-secondary-dark: #a00037;
+}
+
+.app__root[data-path='/unicode-characters'] {
+  --mdc-theme-primary: #f57c00;
+  --mdc-theme-primary-light: #ffad42;
+  --mdc-theme-primary-dark: #bb4d00;
+
+  --mdc-theme-secondary: #03a9f4;
+  --mdc-theme-secondary-light: #67daff;
+  --mdc-theme-secondary-dark: #007ac1;
 }
 
 a {
@@ -16,6 +26,10 @@ a {
 .mdc-toolbar {
   color: var(--mdc-theme-text-primary-on-background);
   fill: var(--mdc-theme-text-primary-on-background);
+  transition:
+    background-color 250ms ease-out,
+    color 250ms ease-out,
+    box-shadow .28s cubic-bezier(.4,0,.2,1),-webkit-box-shadow .28s cubic-bezier(.4,0,.2,1) !important;
 }
 
 .tool-toolbar {
