@@ -92,3 +92,9 @@
   stroke-linecap: round;
   stroke: var(--mdc-theme-primary);
 }
+
+.mdc-circular-progress.mdc-circular-progress--small {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+}

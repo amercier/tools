@@ -4,6 +4,7 @@ import TiltShiftGenerator from './TiltShiftGenerator';
 import UrlEncoderDecoder from './UrlEncoderDecoder';
 import UnicodeCharacterPicker from './UnicodeCharacterPicker';
 import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
+import TravisConfigValidator from './TravisConfigValidator';
 
 export default [
   {
@@ -51,6 +52,8 @@ export default [
     id: 'travis-validator',
     title: 'Travis.yml validator',
     icon: 'assignment_turned_in',
+    component: TravisConfigValidator,
+    description: 'Travis CI Yaml config validator.'
   },
   {
     id: 'password-generator',
