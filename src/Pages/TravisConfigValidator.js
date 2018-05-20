@@ -80,19 +80,20 @@ export default class TravisConfigValidator extends Component {
           value={input}
           disabled={loading}
           label="Paste .travis.yml here"
-          rows="12"
+          rows="30"
           onChange={e => this.onInputChange(e)}
+          style={{ fontFamily: 'monospace' }}
         />
         <div className="tool-toolbar">
           {validationMessage}
           <Button raised onClick={() => this.onValidateButtonClick()} disabled={loading || validationResponse || input === ''}>Validate</Button>
         </div>
-        {logs && (
+        {logs ? (
           <Typography tag="div" use="body1" theme="text-secondary-on-light">
             <Typography tag="h3" use="headline4">Log</Typography>
             {logs}
           </Typography>
-        )}
+        ) : null}
       </div>
     );
   }
