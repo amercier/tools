@@ -8,6 +8,15 @@ import fetchPonyfill from 'fetch-ponyfill';
 import './TiltShiftGenerator.css';
 const { fetch } = fetchPonyfill();
 
+function getScreenshotUrl(url, width, height) {
+  return formatUrl({
+    protocol: 'https',
+    host: 'screenshot.amercier.com',
+    pathname: '/screenshot',
+    query: { url, width, height }
+  });
+}
+
 export default class TiltShiftGenerator extends Component {
   constructor() {
     super();
@@ -119,7 +128,7 @@ export default class TiltShiftGenerator extends Component {
   }
 
   applyUrl(width, height) {
-    const actualUrl = this.getScreenshotUrl(this.state.url, width, height);
+    const actualUrl = getScreenshotUrl(this.state.url, width, height);
 
     this.setState({ blobUrl: null, loadingState: 'loading' });
 
@@ -132,16 +141,5 @@ export default class TiltShiftGenerator extends Component {
       .catch(() => {
         this.setState({ loadingState: 'failed' });
       });
-  }
-
-  getScreenshotUrl(pageUrl, width, height) {
-    const url = pageUrl.replace(/^[^/]*\/\//, '');
-    const clipRect = JSON.stringify({ top: 0, left: 0, width, height });
-    const delay = 1000;
-    return formatUrl({
-      protocol: 'https',
-      host: 'screenshot.amercier.com',
-      query: { url, width, height, delay, clipRect }
-    });
   }
 }

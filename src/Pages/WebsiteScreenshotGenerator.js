@@ -10,20 +10,18 @@ import filenamifyUrl from 'filenamify-url';
 import './WebsiteScreenshotGenerator.css';
 const { fetch } = fetchPonyfill();
 
-function getScreenshotUrl(pageUrl, width, height) {
-  const url = pageUrl.replace(/^[^/]*\/\//, '');
-  const clipRect = JSON.stringify({ top: 0, left: 0, width, height });
-  const delay = 1000;
+function getScreenshotUrl(url, width, height) {
   return formatUrl({
     protocol: 'https',
     host: 'screenshot.amercier.com',
-    query: { url, width, height, delay, clipRect }
+    pathname: '/screenshot',
+    query: { url, width, height }
   });
 }
 
-function getFilenameFromUrl(pageUrl, extension) {
-  const url = filenamifyUrl(pageUrl, {replacement: '-'});
-  return `${url}.${extension}`;
+function getFilenameFromUrl(url, extension) {
+  const basename = filenamifyUrl(url, {replacement: '-'});
+  return `${basename}.${extension}`;
 }
 
 export default class WebsiteScreenshotGenerator extends Component {
