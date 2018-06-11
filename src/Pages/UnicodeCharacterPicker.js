@@ -8,7 +8,7 @@ const charactersMap = [
   {
     name: 'Our favorite set',
     icon: 'favorite_border',
-    characters: '⌘⌥⇧←→↑↓⬇⬆«»‹›✓✗✔✘▲▼◀▶▴▾◂▸⟵⟶⟳•⚑⚐✰'
+    characters: '⌘⌥⇧←→↑↓⬇⬆«»‹›✓✗✔✘▲▼◀▶▴▾◂▸⟵⟶⟳•⚑⚐★☆⚠█░'
   },
   {
     name: 'Arrows',
