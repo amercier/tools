@@ -1,3 +1,8 @@
+// Workaround for https://github.com/jamesmfriedman/rmwc/issues/276
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: var(--mdc-theme-primary);
+}
+
 $green-theme: (
   primary: #4caf50,
   primary-light: #80e27e,
