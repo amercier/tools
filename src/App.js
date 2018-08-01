@@ -137,7 +137,7 @@ class App extends Component {
                         <div className="app__content-title">
                           <Typography tag="h1" use="display1">{title}</Typography>
                           <Link to={'/'}>
-                            <Button compact theme="background text-primary-on-background"><ButtonIcon use="close" /></Button>
+                            <Button theme="background text-primary-on-background"><ButtonIcon use="close" /></Button>
                           </Link>
                         </div>
                         {React.createElement(component)}

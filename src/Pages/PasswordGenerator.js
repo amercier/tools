@@ -49,7 +49,7 @@ export default class PasswordGenerator extends Component {
 
         <div className="password-generator-password">
           <pre className="password-generator-password__password">{this.state.password}</pre>
-          <Button compact onClick={() => this.updatePassword()}><ButtonIcon use="refresh" /></Button>
+          <Button onClick={() => this.updatePassword()}><ButtonIcon use="refresh" /></Button>
           <div></div>
         </div>
 
