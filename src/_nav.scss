@@ -13,10 +13,11 @@
 
 .mdc-list-item {
   cursor: pointer;
+  user-select: none;
 
   &.mdc-list-item--activated,
   &.mdc-list-item--disabled {
-    pointer-events: none !important;
+    cursor: default;
   }
 
   &.mdc-list-item--disabled {

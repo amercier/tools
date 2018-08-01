@@ -49,6 +49,12 @@ class App extends Component {
     this.setState({ isNarrow: this.isNarrow });
   }
 
+  onMenuClick() {
+    if (this.state.isNarrow) {
+      this.setState({ isMenuOpen: false });
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -97,23 +103,23 @@ class App extends Component {
               open={this.state.isMenuOpen}
               onClose={() => this.setState({ isMenuOpen: false })}
             >
-              <DrawerContent twoLine>
+              <DrawerContent>
                 {pages.map(({ id, title, icon, component}) => {
                   if (component) {
                     // Inspired from NavLink implementation
                     // https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/modules/NavLink.js
                     const path = `/${id}`.replace(/([.+*?=^!:${}()[\]|/\\])/g, '\\$1');
                     return (
-                      <Route key={id} exact path={path} children={({ location, match }) => (
-                        <Link to={id}>
-                          <SimpleListItem graphic={icon} text={title} activated={match} />
-                        </Link>
-                      )} />
+                      <Route key={id} exact path={path} children={
+                        ({ match, location }) => match
+                        ? (<SimpleListItem graphic={icon} text={title} activated ripple={false} />)
+                        : (<Link to={id} onClick={() => this.onMenuClick(location)}><SimpleListItem graphic={icon} text={title} /> </Link>)
+                      } />
                     );
                   } else {
                     return (
-                      <SimpleListItem key={id} graphic={icon} text={title}
-                        secondaryText="Not available yet"
+                      <SimpleListItem key={id} graphic={icon} text={title} ripple={false}
+                        title="Not available yet"
                         className="mdc-list-item--disabled"
                       />
                     );
