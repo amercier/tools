@@ -1,100 +1,73 @@
 .tilt-shift-url {
   display: flex;
-}
 
-.tilt-shift-url > .mdc-text-field {
-  flex-grow: 1;
-  padding-top: 20px; /* workaround for bug with 'fullwidth' property */
-}
+  & > .mdc-text-field {
+    flex-grow: 1;
+    padding-top: 20px; // workaround for bug with 'fullwidth' property
+  }
 
-.tilt-shift-url > .mdc-button {
-  margin-left: 1rem;
-  align-self: flex-end;
-}
-
-.tilt-shift-image {
-  margin-top: 2rem;
-}
-
-.tilt-shift-image img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
+  & > .mdc-button {
+    align-self: flex-end;
+    margin-left: 1rem;
+  }
 }
 
 .tilt-shift-image {
   position: relative;
-}
+  margin-top: 2rem;
 
-.tilt-shift-image__content-clear,
-.tilt-shift-image__content-blur {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.tilt-shift-image__progress {
-  background: #fff;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  transition: opacity 250ms ease-out;
-  pointer-events: none;
-  opacity: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tilt-shift-image--loading .tilt-shift-image__progress {
-  opacity: 1;
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
+  & img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
   }
 
-  50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35;
+  &__content-clear,
+  &__content-blur {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 
-  100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -124;
+  &__progress {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 250ms ease-out;
+    opacity: 0;
+    background: var(--mdc-theme-surface);
+    pointer-events: none;
+
+    .tilt-shift-image--loading & {
+      opacity: 1;
+    }
   }
 }
 
 .mdc-circular-progress {
   position: relative;
+  animation: rotate 2s linear infinite;
   width: 100px;
   height: 100px;
-  animation: rotate 2s linear infinite;
-}
 
-.mdc-circular-progress__path {
-  stroke-dasharray: 1, 200;
-  stroke-dashoffset: 0;
-  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-  stroke-linecap: round;
-  stroke: var(--mdc-theme-primary);
-}
+  &--small {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+  }
 
-.mdc-circular-progress.mdc-circular-progress--small {
-  width: 32px;
-  height: 32px;
-  vertical-align: middle;
+  &__path {
+    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    stroke: var(--mdc-theme-primary);
+  }
 }
