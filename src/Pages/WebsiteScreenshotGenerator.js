@@ -7,7 +7,7 @@ import { TextField } from 'rmwc/TextField';
 import fetchPonyfill from 'fetch-ponyfill';
 import filenamifyUrl from 'filenamify-url';
 
-import './WebsiteScreenshotGenerator.css';
+import './WebsiteScreenshotGenerator.scss';
 const { fetch } = fetchPonyfill();
 
 function getScreenshotUrl(url, width, height) {

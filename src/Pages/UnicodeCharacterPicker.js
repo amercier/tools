@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tab, TabBar, TabBarScroller, TabIcon, TabIconText } from 'rmwc/Tabs';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import './UnicodeCharacterPicker.css';
+import './UnicodeCharacterPicker.scss';
 
 const charactersMap = [
   {

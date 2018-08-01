@@ -57,7 +57,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     },
   ];
   if (preProcessor) {
-    loaders.push(require.resolve(preProcessor));
+    loaders.push(preProcessor);
   }
   return loaders;
 };
@@ -137,7 +137,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -170,7 +170,7 @@ module.exports = {
               baseConfig: {
                 extends: [require.resolve('eslint-config-react-app')],
               },
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -212,7 +212,7 @@ module.exports = {
               {
                 loader: require.resolve('babel-loader'),
                 options: {
-                  
+
                   presets: [require.resolve('babel-preset-react-app')],
                   plugins: [
                     [
@@ -293,7 +293,12 @@ module.exports = {
           {
             test: sassRegex,
             exclude: sassModuleRegex,
-            use: getStyleLoaders({ importLoaders: 2 }, 'sass-loader'),
+            use: getStyleLoaders({ importLoaders: 2 }, {
+              loader: require.resolve('sass-loader'),
+              options: {
+                includePaths: [paths.appNodeModules],
+              },
+            }),
           },
           // Adds support for CSS Modules, but using SASS
           // using the extension .module.scss or .module.sass
@@ -305,7 +310,12 @@ module.exports = {
                 modules: true,
                 getLocalIdent: getCSSModuleLocalIdent,
               },
-              'sass-loader'
+              {
+                loader: require.resolve('sass-loader'),
+                options: {
+                  includePaths: [paths.appNodeModules],
+                },
+              },
             ),
           },
           // The GraphQL loader preprocesses GraphQL queries in .graphql files.

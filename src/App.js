@@ -16,7 +16,7 @@ import {
 } from 'rmwc/Toolbar';
 import { Typography } from 'rmwc/Typography';
 
-import './App.css';
+import './App.scss';
 import Home from './Home';
 import pages from './Pages';
 

@@ -5,7 +5,7 @@ import { Button } from 'rmwc/Button';
 import { TextField } from 'rmwc/TextField';
 import fetchPonyfill from 'fetch-ponyfill';
 
-import './TiltShiftGenerator.css';
+import './TiltShiftGenerator.scss';
 const { fetch } = fetchPonyfill();
 
 function getScreenshotUrl(url, width, height) {

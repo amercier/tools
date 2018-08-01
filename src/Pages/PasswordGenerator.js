@@ -6,7 +6,7 @@ import { Switch } from 'rmwc/Switch';
 import { Typography } from 'rmwc/Typography';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import './PasswordGenerator.css';
+import './PasswordGenerator.scss';
 
 export default class PasswordGenerator extends Component {
   constructor() {
