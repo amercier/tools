@@ -67,10 +67,6 @@ export default class UnicodeCharacterPicker extends Component {
   }
 
   render() {
-    const style = {
-      fontSize: '2rem'
-    }
-
     const characterToComponent = (categoryId, character) => {
       const id = `character-${categoryId}-${character}`;
       return (
@@ -82,7 +78,6 @@ export default class UnicodeCharacterPicker extends Component {
           <span
             id={id}
             className={`unicode-characters-character${id === this.state.copiedCharacter ? ' unicode-characters-character--copied' : ''}`}
-            style={style}
           >
             {character}
           </span>

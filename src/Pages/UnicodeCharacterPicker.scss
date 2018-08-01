@@ -23,7 +23,8 @@
   vertical-align: middle;
   text-align: center;
   line-height: 1.7em;
-  font-family: sans-serif;
+  font-family: Menlo, unicode;
+  font-size: 2rem;
 
   &:hover {
     background-color: var(--mdc-theme-primary-light);
