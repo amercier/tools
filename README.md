@@ -4,8 +4,7 @@ amercier/tools
 > My personal toolkit for web development.  
 > https://tools.amercier.com
 
-[![Build Status](https://img.shields.io/travis/amercier/tools/master.svg)](https://travis-ci.org/amercier/tools)
-[![License](https://img.shields.io/github/license/amercier/tools.svg)](LICENSE.md)
+[![Build Status](https://travis-ci.org/amercier/tools.svg?branch=master)](https://travis-ci.org/amercier/tools)
 
 Development
 ===========
@@ -70,4 +69,4 @@ This creates a `build` directory containing the static files to deploy.
 License
 -------
 
-This project is released under the [ISC License](LICENSE.md).
+[![License](https://img.shields.io/github/license/amercier/tools.svg)](LICENSE.md)
