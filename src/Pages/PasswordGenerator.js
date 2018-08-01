@@ -55,7 +55,7 @@ export default class PasswordGenerator extends Component {
 
         <CopyToClipboard text={this.state.password} onCopy={() => this.onCopy()}>
           <div className="password-generator-clipboard">
-            <Button unelevated className="password-generator-button">Copy to clipboard</Button>
+            <Button unelevated className="password-generator-clipboard__button">Copy to clipboard</Button>
             <Typography use="body1" className="password-generator-clipboard__copied">{this.state.copied ? 'Copied!' : null}</Typography>
           </div>
         </CopyToClipboard>
