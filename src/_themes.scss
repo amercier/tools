@@ -31,15 +31,11 @@ $orange-theme: (
   &[data-path='/unicode-characters'] {
     @include apply-mdc-theme($orange-theme);
   }
-}
 
-.mdc-toolbar {
-  transition: background-color 500ms ease-out, color 500ms ease-out, box-shadow .28s ease-out;
-  color: var(--mdc-theme-text-primary-on-background);
-  fill: var(--mdc-theme-text-primary-on-background);
-  will-change: background-color, color, box-shadow;
-
-  .mdc-toolbar__icon {
-    color: inherit;
+  .mdc-toolbar--waterfall {
+    transition:
+      color 1s ease-out,
+      background-color 1s ease-out,
+      box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
   }
 }
