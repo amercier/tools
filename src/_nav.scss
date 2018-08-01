@@ -1,0 +1,25 @@
+.mdc-drawer--persistent {
+  z-index: 1;
+
+  .mdc-list-item {
+    padding-left: 24px;
+  }
+
+  &.mdc-drawer--open,
+  & .mdc-drawer__drawer {
+    width: 16.5rem;
+  }
+}
+
+.mdc-list-item {
+  cursor: pointer;
+
+  &.mdc-list-item--activated,
+  &.mdc-list-item--disabled {
+    pointer-events: none !important;
+  }
+
+  &.mdc-list-item--disabled {
+    opacity: .5;
+  }
+}

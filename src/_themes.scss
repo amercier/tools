@@ -1,0 +1,45 @@
+$green-theme: (
+  primary: #4caf50,
+  primary-light: #80e27e,
+  primary-dark: #087f23,
+  secondary: #d81b60,
+  secondary-light: #ff5c8d,
+  secondary-dark: #a00037
+);
+
+$orange-theme: (
+  primary: #f57c00,
+  primary-light: #ffad42,
+  primary-dark: #bb4d00,
+  secondary: #03a9f4,
+  secondary-light: #67daff,
+  secondary-dark: #007ac1
+);
+
+@mixin apply-mdc-theme($theme) {
+  --mdc-theme-primary: #{map-get($theme, primary)};
+  --mdc-theme-primary-light: #{map-get($theme, primary-light)};
+  --mdc-theme-primary-dark: #{map-get($theme, primary-dark)};
+  --mdc-theme-secondary: #{map-get($theme, secondary)};
+  --mdc-theme-secondary-light: #{map-get($theme, secondary-light)};
+  --mdc-theme-secondary-dark: #{map-get($theme, secondary-dark)};
+}
+
+.app__root {
+  @include apply-mdc-theme($green-theme);
+
+  &[data-path='/unicode-characters'] {
+    @include apply-mdc-theme($orange-theme);
+  }
+}
+
+.mdc-toolbar {
+  transition: background-color 500ms ease-out, color 500ms ease-out, box-shadow .28s ease-out;
+  color: var(--mdc-theme-text-primary-on-background);
+  fill: var(--mdc-theme-text-primary-on-background);
+  will-change: background-color, color, box-shadow;
+
+  .mdc-toolbar__icon {
+    color: inherit;
+  }
+}
