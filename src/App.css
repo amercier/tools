@@ -33,7 +33,8 @@ h1, h2, h3, h4, h5, h6 {
   transition:
     background-color 250ms ease-out,
     color 250ms ease-out,
-    box-shadow .28s cubic-bezier(.4,0,.2,1),-webkit-box-shadow .28s cubic-bezier(.4,0,.2,1) !important;
+    box-shadow .28s cubic-bezier(.4,0,.2,1),
+    -webkit-box-shadow .28s cubic-bezier(.4,0,.2,1) !important;
 }
 
 .tool-toolbar {
@@ -81,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mdc-drawer--persistent.mdc-drawer--open,
 .mdc-drawer--persistent .mdc-drawer__drawer {
-  width: 18rem;
+  width: 16.5rem;
 }
 
 .mdc-list-item {

@@ -11,13 +11,13 @@ export default () => (
   <Grid className="home-tools-list">
     {pages.map(({ id, title, icon, description, component }) => {
       return component && (
-        <GridCell key={id} align="left" desktop="3" tablet="4" phone="4">
+        <GridCell key={id} align="left" phone="4" tablet="4" desktop="3">
           <Card>
             <Link to={id}>
               <CardPrimaryAction>
                 <CardMedia sixteenByNine style={{backgroundImage: `url(${id}-preview.png)`}}/>
                 <div style={{padding: '0 1rem 1rem 1rem'}}>
-                  <Typography use="title" tag="h2">{title}</Typography>
+                  <Typography use="headline6" tag="h2">{title}</Typography>
                   <Typography use="body1" theme="text-secondary-on-light">{description}</Typography>
                 </div>
               </CardPrimaryAction>

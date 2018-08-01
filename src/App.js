@@ -31,13 +31,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      isMobile: this.isMobile,
-      isMenuOpen: !this.isMobile,
+      isNarrow: this.isNarrow,
+      isMenuOpen: !this.isNarrow,
     };
   }
 
-  get isMobile() {
-    return window.innerWidth <= 760;
+  get isNarrow() {
+    return window.innerWidth < 1000;
   }
 
   componentDidMount() {
@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   resize() {
-    this.setState({ isMobile: this.isMobile });
+    this.setState({ isNarrow: this.isNarrow });
   }
 
   render() {
@@ -92,8 +92,8 @@ class App extends Component {
 
           <div className="app__content">
             <Drawer
-              persistent={!this.state.isMobile}
-              temporary={this.state.isMobile}
+              persistent={!this.state.isNarrow}
+              temporary={this.state.isNarrow}
               open={this.state.isMenuOpen}
               onClose={() => this.setState({ isMenuOpen: false })}
             >
