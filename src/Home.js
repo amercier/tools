@@ -5,7 +5,7 @@ import { Grid, GridCell } from 'rmwc/Grid';
 import { Typography } from 'rmwc/Typography';
 import pages from './Pages';
 
-import './Home.css';
+import './Home.scss';
 
 export default () => (
   <Grid className="home-tools-list">

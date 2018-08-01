@@ -7,6 +7,7 @@ env:
   global:
     - AWS_S3_BUCKET=amercier-tools
     - AWS_S3_REGION=eu-west-3
+before_script: npm run lint
 before_deploy:
   - npm run build
   - pip install --user awscli

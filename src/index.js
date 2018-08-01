@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import 'material-components-web/dist/material-components-web.min.css';
+import 'material-components-web/material-components-web.scss';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 

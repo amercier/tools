@@ -1,0 +1,9 @@
+.home-tools-list {
+  .mdc-card {
+    &,
+    & > a,
+    &__primary-action {
+      height: 100%;
+    }
+  }
+}

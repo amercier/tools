@@ -6,7 +6,7 @@ import { Switch } from 'rmwc/Switch';
 import { Typography } from 'rmwc/Typography';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import './PasswordGenerator.css';
+import './PasswordGenerator.scss';
 
 export default class PasswordGenerator extends Component {
   constructor() {
@@ -49,13 +49,13 @@ export default class PasswordGenerator extends Component {
 
         <div className="password-generator-password">
           <pre className="password-generator-password__password">{this.state.password}</pre>
-          <Button compact onClick={() => this.updatePassword()}><ButtonIcon use="refresh" /></Button>
+          <Button onClick={() => this.updatePassword()}><ButtonIcon use="refresh" /></Button>
           <div></div>
         </div>
 
         <CopyToClipboard text={this.state.password} onCopy={() => this.onCopy()}>
           <div className="password-generator-clipboard">
-            <Button unelevated className="password-generator-button">Copy to clipboard</Button>
+            <Button unelevated className="password-generator-clipboard__button">Copy to clipboard</Button>
             <Typography use="body1" className="password-generator-clipboard__copied">{this.state.copied ? 'Copied!' : null}</Typography>
           </div>
         </CopyToClipboard>

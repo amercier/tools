@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tab, TabBar, TabBarScroller, TabIcon, TabIconText } from 'rmwc/Tabs';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import './UnicodeCharacterPicker.css';
+import './UnicodeCharacterPicker.scss';
 
 const charactersMap = [
   {
@@ -67,10 +67,6 @@ export default class UnicodeCharacterPicker extends Component {
   }
 
   render() {
-    const style = {
-      fontSize: '2rem'
-    }
-
     const characterToComponent = (categoryId, character) => {
       const id = `character-${categoryId}-${character}`;
       return (
@@ -82,7 +78,6 @@ export default class UnicodeCharacterPicker extends Component {
           <span
             id={id}
             className={`unicode-characters-character${id === this.state.copiedCharacter ? ' unicode-characters-character--copied' : ''}`}
-            style={style}
           >
             {character}
           </span>
@@ -107,7 +102,7 @@ export default class UnicodeCharacterPicker extends Component {
         <TabBarScroller className="unicode-characters-tabs">
           <TabBar
             activeTabIndex={this.state.activeTabIndex}
-            onChange={evt => this.setState({ 'activeTabIndex': evt.target.value })}
+            onChange={evt => this.setState({ 'activeTabIndex': evt.detail.activeTabIndex })}
           >
             {tabs}
           </TabBar>
