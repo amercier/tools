@@ -107,7 +107,7 @@ export default class UnicodeCharacterPicker extends Component {
         <TabBarScroller className="unicode-characters-tabs">
           <TabBar
             activeTabIndex={this.state.activeTabIndex}
-            onChange={evt => this.setState({ 'activeTabIndex': evt.target.value })}
+            onChange={evt => this.setState({ 'activeTabIndex': evt.detail.activeTabIndex })}
           >
             {tabs}
           </TabBar>
