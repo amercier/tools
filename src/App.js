@@ -31,9 +31,22 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      isMobile: false,
-      isMenuOpen: true,
+      isMobile: this.isMobile,
+      isMenuOpen: !this.isMobile,
     };
+  }
+
+  get isMobile() {
+    return window.innerWidth <= 760;
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize.bind(this));
+    this.resize();
+  }
+
+  resize() {
+    this.setState({ isMobile: this.isMobile });
   }
 
   render() {
