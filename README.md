@@ -14,25 +14,25 @@ This project is developped using [React](https://reactjs.org/).
 Setup
 -----
 
-1. Requirements: [Node.js](https://nodejs.org/en/) (latest) and [Yarn](https://yarnpkg.com/en/).
+1. Requirements: [Node.js](https://nodejs.org/en/) (latest) and `npm`.
 2. Clone this repository: `git clone {REPOSITORY URL}`
 3. Install dependencies:
 ```sh
-npx yarn install
+npm install
 ```
 
 Run
 ---
 
 ```sh
-npx yarn start
+npm start
 ```
 
 Test
 ----
 
 ```sh
-npx yarn tests
+npm test
 ```
 
 
@@ -60,7 +60,7 @@ Manual deployment
 -----------------
 
 ```sh
-npx yarn build
+npm run build
 ```
 
 This creates a `build` directory containing the static files to deploy.

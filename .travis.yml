@@ -1,20 +1,22 @@
 language: node_js
 node_js: --lts # LTS
-cache: yarn
+cache:
+  directories:
+    - $HOME/.npm
 env:
   global:
     - AWS_S3_BUCKET=amercier-tools
     - AWS_S3_REGION=eu-west-3
 before_deploy:
-  - yarn build
+  - npm run build
   - pip install --user awscli
 deploy:
   provider: script
-  # Note: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set in Travis project settings
-  script: ~/.local/bin/aws s3 sync build s3://${AWS_S3_BUCKET} --region=${AWS_S3_REGION} --delete
+  skip_cleanup: true
   on:
     branch: master
-  skip_cleanup: true
+  # Note: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set in Travis project settings
+  script: ~/.local/bin/aws s3 sync build s3://${AWS_S3_BUCKET} --region=${AWS_S3_REGION} --delete
 after_deploy:
   - curl --fail --silent --show-error http://${AWS_S3_BUCKET}.s3-website.${AWS_S3_REGION}.amazonaws.com/
   # Invalidates only index.html as other files are versioned
