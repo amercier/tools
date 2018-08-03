@@ -34,7 +34,7 @@ export default class PasswordGenerator extends Component {
             max={64}
             step={1}
             value={this.state.length}
-            onInput={e => this.setState({ length: e.target.value })}
+            onInput={e => this.setState({ length: e.detail.value })}
             onChange={() => this.updatePassword()}
             discrete
           />
