@@ -40,12 +40,14 @@
     color: $drop-zone-placeholder-color;
   }
 
-  &-position {
+  &-position,
+  &-perspective,
+  &-zoom {
     display: flex;
     align-items: center;
 
     &__label {
-      width: 9em;
+      width: 13em;
     }
 
     &__slider {
