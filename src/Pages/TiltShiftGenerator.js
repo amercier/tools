@@ -1,6 +1,6 @@
 import bem from 'bem-classnames';
 import * as fx from 'glfx-es6';
-import { debounce } from 'lodash-es'
+import debounce from 'lodash.debounce';
 import React, { Component } from 'react';
 import { Button } from 'rmwc/Button';
 import { Slider } from 'rmwc/Slider';
