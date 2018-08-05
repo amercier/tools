@@ -6,6 +6,7 @@
   position: relative;
 
   &__drop-zone {
+    margin-top: 2rem;
     border: 2px dashed $drop-zone-border-color;
     min-height: 50vh;
 
@@ -37,5 +38,18 @@
     align-items: center;
     justify-content: center;
     color: $drop-zone-placeholder-color;
+  }
+
+  &-position {
+    display: flex;
+    align-items: center;
+
+    &__label {
+      width: 9em;
+    }
+
+    &__slider {
+      flex-grow: 1;
+    }
   }
 }

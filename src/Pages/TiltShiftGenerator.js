@@ -1,10 +1,14 @@
 import bem from 'bem-classnames';
 import * as fx from 'glfx-es6';
+import { debounce } from 'lodash-es'
 import React, { Component } from 'react';
 import { Button } from 'rmwc/Button';
+import { Slider } from 'rmwc/Slider';
 import Dropzone from 'react-dropzone';
 
 import './TiltShiftGenerator.scss';
+
+const { round } = Math;
 
 export default class TiltShiftGenerator extends Component {
   constructor() {
@@ -17,7 +21,11 @@ export default class TiltShiftGenerator extends Component {
       image: null,
       imageWidth: 0,
       imageHeight: 0,
+      position: 0.5,
     };
+
+    this.onPositionInput = this.onPositionInput.bind(this);
+    this.updateImageDownloadDebounced = debounce(this.updateImageDownload, 200);
   }
 
   onDragEnter() {
@@ -71,12 +79,23 @@ export default class TiltShiftGenerator extends Component {
       this.texture.destroy();
     }
     this.texture = this.canvas.texture(this.imageRef.current);
-    this.canvas.draw(this.texture);
     this.updateCanvas(imageWidth, imageHeight);
   }
 
-  updateCanvas(width, height) {
-    const { round } = Math;
+  updateCanvas(width = this.state.imageWidth, height = this.state.imageHeight) {
+    if (!this.canvas) {
+      return;
+    }
+
+    this.canvas.draw(this.texture);
+
+    this.canvas.tiltShift(
+      0,
+      round(this.state.position * height),
+      width,
+      round(this.state.position * height), 20, round(height/2)
+    );
+
     const delta = round(0.1 * width);
     this.canvas.perspective(
       [
@@ -93,10 +112,18 @@ export default class TiltShiftGenerator extends Component {
       ],
     );
     this.canvas.vignette(0.5, 0.2);
-    this.canvas.tiltShift(0, round(height/2), width, round(height/2), 20, round(height/2));
     this.canvas.update();
+    this.updateImageDownloadDebounced();
+  }
+
+  onPositionInput(e) {
+    this.setState({ position: e.detail.value / 100 });
+    this.updateCanvas();
+  }
+
+  updateImageDownload() {
     this.setState({
-      renderedImageUrl: this.canvas.toDataURL('image/jpeg')
+      downloadUrl: this.canvas.toDataURL('image/jpg')
     });
   }
 
@@ -107,6 +134,21 @@ export default class TiltShiftGenerator extends Component {
     };
     return (
       <div className={bem(classes.root, { 'has-image': !!this.state.image })}>
+        <div className="tilt-shift-generator-position">
+          <span className="tilt-shift-generator-position__label">
+            Position ({round(100 * this.state.position)}%)
+          </span>
+          <Slider
+            min={0}
+            max={100}
+            step={1}
+            value={100 * this.state.position}
+            onInput={this.onPositionInput}
+            disabled={!this.state.image}
+            discrete
+            className="tilt-shift-generator-position__slider"
+          />
+        </div>
         <Dropzone
           className={bem(classes.dropZone, { active: !!this.state.dropzoneActive })}
           accept="image/jpeg,image/jpg,image/tiff,image/gif,image/png"
@@ -138,8 +180,8 @@ export default class TiltShiftGenerator extends Component {
         </Dropzone>
 
         <div className="tool-toolbar">
-          <a href={this.state.renderedImageUrl} download="tilt-shift.jpg">
-            <Button raised disabled={!this.state.renderedImageUrl}>Download</Button>
+          <a href={this.state.downloadUrl} download="tilt-shift">
+            <Button raised disabled={!this.state.downloadUrl}>Download</Button>
           </a>
         </div>
       </div>
