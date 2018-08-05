@@ -13,8 +13,8 @@ const { round } = Math;
 export default class TiltShiftGenerator extends Component {
   constructor() {
     super();
+    this.dropZoneRef = React.createRef();
     this.imageRef = React.createRef();
-    this.canvasRef = React.createRef();
 
     this.state = {
       dropzoneActive: false,
@@ -26,6 +26,7 @@ export default class TiltShiftGenerator extends Component {
       zoom: 0.5,
       blur: 30,
       distance: 0,
+      downloadUrl: null,
     };
 
     this.onPositionInput = this.onPositionInput.bind(this);
@@ -52,9 +53,23 @@ export default class TiltShiftGenerator extends Component {
     if (this.state.image) {
       window.URL.revokeObjectURL(this.state.image);
     }
+
+    if (this.texture) {
+      this.texture.destroy();
+      delete this.texture;
+    }
+
+    if (this.canvas) {
+      this.dropZoneRef.current.node.removeChild(this.canvas);
+      delete this.canvas;
+    }
+
     this.setState({
       dropzoneActive: false,
-      image: files[0].preview
+      image: files[0].preview,
+      imageWidth: 0,
+      imageHeight: 0,
+      downloadUrl: null,
     });
   }
 
@@ -69,30 +84,12 @@ export default class TiltShiftGenerator extends Component {
     } = event.target;
     const distance = round(imageHeight/2);
 
-    try {
-      this.canvas = fx.canvas();
-      this.updateTexture();
-    } catch (e) {
-      alert(e);
-      return;
-    }
-
+    this.createCanvas(imageWidth, imageHeight);
     this.setState({ imageWidth, imageHeight, distance });
-  }
-
-  updateTexture() {
-    const className = this.canvasRef.current.className;
-    this.canvas.replace(this.canvasRef.current);
-    this.canvas.className = className;
-    if (this.texture) {
-      this.texture.destroy();
-    }
-    this.texture = this.canvas.texture(this.imageRef.current);
   }
 
   canvasNeedsUpdate(prevState) {
     return [
-      'image',
       'imageWidth',
       'imageHeight',
       'position',
@@ -108,6 +105,13 @@ export default class TiltShiftGenerator extends Component {
       this.updateCanvas();
       this.updateImageDownloadDebounced();
     }
+  }
+
+  createCanvas(width, height) {
+    this.canvas = fx.canvas();
+    this.canvas.className = 'tilt-shift-generator__canvas';
+    this.dropZoneRef.current.node.appendChild(this.canvas);
+    this.texture = this.canvas.texture(this.imageRef.current, width, height);
   }
 
   updateCanvas() {
@@ -255,6 +259,7 @@ export default class TiltShiftGenerator extends Component {
           />
         </div>
         <Dropzone
+          ref={this.dropZoneRef}
           className={bem(classes.dropZone, { active: !!this.state.dropzoneActive })}
           accept="image/jpeg,image/jpg,image/tiff,image/gif,image/png"
           multiple={false}
@@ -276,12 +281,6 @@ export default class TiltShiftGenerator extends Component {
           ) : (
             <span className="tilt-shift-generator__placeholder">Drop an image here</span>
           )}
-          <canvas
-            ref={this.canvasRef}
-            width={this.state.imageWidth}
-            height={this.state.imageHeight}
-            className="tilt-shift-generator__canvas"
-          ></canvas>
         </Dropzone>
 
         <div className="tool-toolbar">
