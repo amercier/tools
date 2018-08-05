@@ -24,11 +24,15 @@ export default class TiltShiftGenerator extends Component {
       position: 0.5,
       perspective: 0.1,
       zoom: 0.5,
+      blur: 30,
+      distance: 0,
     };
 
     this.onPositionInput = this.onPositionInput.bind(this);
     this.onPerspectiveInput = this.onPerspectiveInput.bind(this);
     this.onZoomInput = this.onZoomInput.bind(this);
+    this.onBlurInput = this.onBlurInput.bind(this);
+    this.onDistanceInput = this.onDistanceInput.bind(this);
     this.updateImageDownloadDebounced = debounce(this.updateImageDownload, 200);
   }
 
@@ -63,19 +67,21 @@ export default class TiltShiftGenerator extends Component {
       naturalWidth: imageWidth,
       naturalHeight: imageHeight,
     } = event.target;
+    const distance = round(imageHeight/2);
 
-    this.setState({ imageWidth, imageHeight });
+    this.setState({ imageWidth, imageHeight, distance });
 
     try {
       this.canvas = fx.canvas();
-      this.updateTexture(imageWidth, imageHeight);
+      this.updateTexture();
+      this.updateCanvas(imageWidth, imageHeight, distance);
     } catch (e) {
       alert(e);
       return;
     }
   }
 
-  updateTexture(imageWidth, imageHeight) {
+  updateTexture() {
     const className = this.canvasRef.current.className;
     this.canvas.replace(this.canvasRef.current);
     this.canvas.className = className;
@@ -83,10 +89,13 @@ export default class TiltShiftGenerator extends Component {
       this.texture.destroy();
     }
     this.texture = this.canvas.texture(this.imageRef.current);
-    this.updateCanvas(imageWidth, imageHeight);
   }
 
-  updateCanvas(width = this.state.imageWidth, height = this.state.imageHeight) {
+  updateCanvas(
+    width = this.state.imageWidth,
+    height = this.state.imageHeight,
+    distance = this.state.distance,
+  ) {
     if (!this.canvas) {
       return;
     }
@@ -97,7 +106,9 @@ export default class TiltShiftGenerator extends Component {
       0,
       round(this.state.position * height),
       width,
-      round(this.state.position * height), 20, round(height/2)
+      round(this.state.position * height),
+      this.state.blur,
+      distance,
     );
 
     const delta = round(this.state.perspective * width);
@@ -136,6 +147,16 @@ export default class TiltShiftGenerator extends Component {
     this.updateCanvas();
   }
 
+  onBlurInput(e) {
+    this.setState({ blur: e.detail.value });
+    this.updateCanvas();
+  }
+
+  onDistanceInput(e) {
+    this.setState({ distance: e.detail.value });
+    this.updateCanvas();
+  }
+
   updateImageDownload() {
     this.setState({
       downloadUrl: this.canvas.toDataURL('image/jpg')
@@ -162,6 +183,36 @@ export default class TiltShiftGenerator extends Component {
             disabled={!this.state.image}
             discrete
             className="tilt-shift-generator-position__slider"
+          />
+        </div>
+        <div className="tilt-shift-generator-blur">
+          <span className="tilt-shift-generator-blur__label">
+            Blur ({this.state.blur}px)
+          </span>
+          <Slider
+            min={0}
+            max={200}
+            step={1}
+            value={this.state.blur}
+            onInput={this.onBlurInput}
+            disabled={!this.state.image}
+            discrete
+            className="tilt-shift-generator-blur__slider"
+          />
+        </div>
+        <div className="tilt-shift-generator-distance">
+          <span className="tilt-shift-generator-distance__label">
+            Distance ({this.state.distance}px)
+          </span>
+          <Slider
+            min={0}
+            max={2 * this.state.imageHeight}
+            step={1}
+            value={this.state.distance}
+            onInput={this.onDistanceInput}
+            disabled={!this.state.image}
+            discrete
+            className="tilt-shift-generator-distance__slider"
           />
         </div>
         <div className="tilt-shift-generator-perspective">
