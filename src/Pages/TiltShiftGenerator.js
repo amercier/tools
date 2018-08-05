@@ -26,14 +26,16 @@ export default class TiltShiftGenerator extends Component {
       zoom: 0.5,
       blur: 30,
       distance: 0,
+      vignetting: 0.2,
       downloadUrl: null,
     };
 
     this.onPositionInput = this.onPositionInput.bind(this);
-    this.onPerspectiveInput = this.onPerspectiveInput.bind(this);
-    this.onZoomInput = this.onZoomInput.bind(this);
     this.onBlurInput = this.onBlurInput.bind(this);
     this.onDistanceInput = this.onDistanceInput.bind(this);
+    this.onPerspectiveInput = this.onPerspectiveInput.bind(this);
+    this.onZoomInput = this.onZoomInput.bind(this);
+    this.onVignettingInput = this.onVignettingInput.bind(this);
     this.updateImageDownloadDebounced = debounce(this.updateImageDownload, 500);
   }
 
@@ -93,10 +95,11 @@ export default class TiltShiftGenerator extends Component {
       'imageWidth',
       'imageHeight',
       'position',
-      'perspective',
-      'zoom',
       'blur',
       'distance',
+      'perspective',
+      'zoom',
+      'vignetting',
     ].some(key => prevState[key] !== this.state[key]);
   }
 
@@ -118,7 +121,8 @@ export default class TiltShiftGenerator extends Component {
     this.canvas.draw(this.texture);
 
     const {
-      imageWidth: width, imageHeight: height, position, blur, distance, zoom,
+      imageWidth: width, imageHeight: height, position,
+      blur, distance, zoom, vignetting,
     } = this.state;
 
     this.canvas.tiltShift(
@@ -145,7 +149,7 @@ export default class TiltShiftGenerator extends Component {
         ...[width + round(zoom * delta), height],
       ],
     );
-    this.canvas.vignette(0.5, 0.2);
+    this.canvas.vignette(0.5, vignetting);
     this.canvas.update();
   }
 
@@ -167,6 +171,10 @@ export default class TiltShiftGenerator extends Component {
 
   onDistanceInput(e) {
     this.setState({ distance: e.detail.value });
+  }
+
+  onVignettingInput(e) {
+    this.setState({ vignetting: e.detail.value / 100 });
   }
 
   updateImageDownload() {
@@ -256,6 +264,21 @@ export default class TiltShiftGenerator extends Component {
             disabled={!this.state.image}
             discrete
             className="tilt-shift-generator-zoom__slider"
+          />
+        </div>
+        <div className="tilt-shift-generator-vignetting">
+          <span className="tilt-shift-generator-vignetting__label">
+            Vignetting<sup>beta</sup> ({round(this.state.vignetting * 100)}%)
+          </span>
+          <Slider
+            min={0}
+            max={100}
+            step={1}
+            value={100 * this.state.vignetting}
+            onInput={this.onVignettingInput}
+            disabled={!this.state.image}
+            discrete
+            className="tilt-shift-generator-vignetting__slider"
           />
         </div>
         <Dropzone
