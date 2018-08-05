@@ -33,7 +33,7 @@ export default class TiltShiftGenerator extends Component {
     this.onZoomInput = this.onZoomInput.bind(this);
     this.onBlurInput = this.onBlurInput.bind(this);
     this.onDistanceInput = this.onDistanceInput.bind(this);
-    this.updateImageDownloadDebounced = debounce(this.updateImageDownload, 200);
+    this.updateImageDownloadDebounced = debounce(this.updateImageDownload, 500);
   }
 
   onDragEnter() {
@@ -166,8 +166,9 @@ export default class TiltShiftGenerator extends Component {
   }
 
   updateImageDownload() {
+    this.canvas.update(); // See https://stackoverflow.com/questions/26783586/canvas-todataurl-returns-blank-image-only-in-firefox/26790802#26790802
     this.setState({
-      downloadUrl: this.canvas.toDataURL('image/jpg')
+      downloadUrl: this.canvas.toDataURL('image/png')
     });
   }
 
@@ -284,7 +285,7 @@ export default class TiltShiftGenerator extends Component {
         </Dropzone>
 
         <div className="tool-toolbar">
-          <a href={this.state.downloadUrl} download="tilt-shift.jpg">
+          <a href={this.state.downloadUrl} download="tilt-shift">
             <Button raised disabled={!this.state.downloadUrl}>Download</Button>
           </a>
         </div>
