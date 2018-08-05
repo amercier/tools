@@ -75,9 +75,25 @@ export default class TiltShiftGenerator extends Component {
     this.updateCanvas(imageWidth, imageHeight);
   }
 
-  updateCanvas(imageWidth, imageHeight) {
+  updateCanvas(width, height) {
     const { round } = Math;
-    this.canvas.tiltShift(0, round(imageHeight/2), imageWidth, round(imageHeight/2), 20, imageHeight/3);
+    const delta = round(0.1 * width);
+    this.canvas.perspective(
+      [
+        ...[0, 0],
+        ...[width, 0],
+        ...[0, height],
+        ...[width, height],
+      ],
+      [
+        ...[delta, 0],
+        ...[width - delta, 0],
+        ...[-delta, height],
+        ...[width + delta, height],
+      ],
+    );
+    this.canvas.vignette(0.5, 0.2);
+    this.canvas.tiltShift(0, round(height/2), width, round(height/2), 20, round(height/2));
     this.canvas.update();
     this.setState({
       renderedImageUrl: this.canvas.toDataURL('image/jpeg')
