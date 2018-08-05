@@ -69,16 +69,15 @@ export default class TiltShiftGenerator extends Component {
     } = event.target;
     const distance = round(imageHeight/2);
 
-    this.setState({ imageWidth, imageHeight, distance });
-
     try {
       this.canvas = fx.canvas();
       this.updateTexture();
-      this.updateCanvas(imageWidth, imageHeight, distance);
     } catch (e) {
       alert(e);
       return;
     }
+
+    this.setState({ imageWidth, imageHeight, distance });
   }
 
   updateTexture() {
@@ -91,28 +90,43 @@ export default class TiltShiftGenerator extends Component {
     this.texture = this.canvas.texture(this.imageRef.current);
   }
 
-  updateCanvas(
-    width = this.state.imageWidth,
-    height = this.state.imageHeight,
-    distance = this.state.distance,
-  ) {
-    if (!this.canvas) {
-      return;
-    }
+  canvasNeedsUpdate(prevState) {
+    return [
+      'image',
+      'imageWidth',
+      'imageHeight',
+      'position',
+      'perspective',
+      'zoom',
+      'blur',
+      'distance',
+    ].some(key => prevState[key] !== this.state[key]);
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.canvas && this.canvasNeedsUpdate(prevState)) {
+      this.updateCanvas();
+      this.updateImageDownloadDebounced();
+    }
+  }
+
+  updateCanvas() {
     this.canvas.draw(this.texture);
+
+    const {
+      imageWidth: width, imageHeight: height, position, blur, distance, zoom,
+    } = this.state;
 
     this.canvas.tiltShift(
       0,
-      round(this.state.position * height),
+      round(position * height),
       width,
-      round(this.state.position * height),
-      this.state.blur,
+      round(position * height),
+      blur,
       distance,
     );
 
     const delta = round(this.state.perspective * width);
-    const zoom = this.state.zoom;
     this.canvas.perspective(
       [
         ...[0, 0],
@@ -129,32 +143,26 @@ export default class TiltShiftGenerator extends Component {
     );
     this.canvas.vignette(0.5, 0.2);
     this.canvas.update();
-    this.updateImageDownloadDebounced();
   }
 
   onPositionInput(e) {
     this.setState({ position: e.detail.value / 100 });
-    this.updateCanvas();
   }
 
   onPerspectiveInput(e) {
     this.setState({ perspective: e.detail.value / 100 });
-    this.updateCanvas();
   }
 
   onZoomInput(e) {
     this.setState({ zoom: e.detail.value / 100 });
-    this.updateCanvas();
   }
 
   onBlurInput(e) {
     this.setState({ blur: e.detail.value });
-    this.updateCanvas();
   }
 
   onDistanceInput(e) {
     this.setState({ distance: e.detail.value });
-    this.updateCanvas();
   }
 
   updateImageDownload() {
@@ -276,7 +284,7 @@ export default class TiltShiftGenerator extends Component {
         </Dropzone>
 
         <div className="tool-toolbar">
-          <a href={this.state.downloadUrl} download="tilt-shift">
+          <a href={this.state.downloadUrl} download="tilt-shift.jpg">
             <Button raised disabled={!this.state.downloadUrl}>Download</Button>
           </a>
         </div>
