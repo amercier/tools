@@ -79,7 +79,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "lint": "run-p lint:*",
-    "lint:eslint": "eslint --ignore-path .gitignore .",
+    "lint:js": "eslint --ignore-path .gitignore .",
     "lint:scss": "sass-lint -i 'build/**, node_modules/**' '**/*.scss' -v -q",
     "test": "node scripts/test.js --env=jsdom"
   },
@@ -98,6 +98,41 @@
   "eslintConfig": {
     "extends": [
       "airbnb"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "config/*.*",
+          "scripts/*.*"
+        ],
+        "env": {
+          "node": true
+        },
+        "rules": {
+          "global-require": "off",
+          "no-console": "off",
+          "import/no-dynamic-require": "off"
+        }
+      },
+      {
+        "files": [
+          "src/**/*.*"
+        ],
+        "env": {
+          "browser": true,
+          "node": false
+        }
+      },
+      {
+        "files": [
+          "src/**/*.spec.*"
+        ],
+        "env": {
+          "browser": true,
+          "jest": true,
+          "node": false
+        }
+      }
     ]
   },
   "jest": {
