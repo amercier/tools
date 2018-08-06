@@ -41,13 +41,13 @@ export default class TiltShiftGenerator extends Component {
 
   onDragEnter() {
     this.setState({
-      dropzoneActive: true
+      dropzoneActive: true,
     });
   }
 
   onDragLeave() {
     this.setState({
-      dropzoneActive: false
+      dropzoneActive: false,
     });
   }
 
@@ -84,7 +84,7 @@ export default class TiltShiftGenerator extends Component {
       naturalWidth: imageWidth,
       naturalHeight: imageHeight,
     } = event.target;
-    const distance = round(imageHeight/2);
+    const distance = round(imageHeight / 2);
 
     this.createCanvas(imageWidth, imageHeight);
     this.setState({ imageWidth, imageHeight, distance });
@@ -180,7 +180,7 @@ export default class TiltShiftGenerator extends Component {
   updateImageDownload() {
     this.canvas.update(); // See https://stackoverflow.com/questions/26783586/canvas-todataurl-returns-blank-image-only-in-firefox/26790802#26790802
     this.setState({
-      downloadUrl: this.canvas.toDataURL('image/png')
+      downloadUrl: this.canvas.toDataURL('image/png'),
     });
   }
 
@@ -193,7 +193,9 @@ export default class TiltShiftGenerator extends Component {
       <div className={bem(classes.root, { 'has-image': !!this.state.image })}>
         <div className="tilt-shift-generator-position">
           <span className="tilt-shift-generator-position__label">
-            Position ({round(100 * this.state.position)}%)
+            Position (
+            {round(100 * this.state.position)}
+%)
           </span>
           <Slider
             min={0}
@@ -208,7 +210,9 @@ export default class TiltShiftGenerator extends Component {
         </div>
         <div className="tilt-shift-generator-blur">
           <span className="tilt-shift-generator-blur__label">
-            Blur ({this.state.blur}px)
+            Blur (
+            {this.state.blur}
+px)
           </span>
           <Slider
             min={0}
@@ -223,7 +227,9 @@ export default class TiltShiftGenerator extends Component {
         </div>
         <div className="tilt-shift-generator-distance">
           <span className="tilt-shift-generator-distance__label">
-            Distance ({this.state.distance}px)
+            Distance (
+            {this.state.distance}
+px)
           </span>
           <Slider
             min={0}
@@ -238,7 +244,9 @@ export default class TiltShiftGenerator extends Component {
         </div>
         <div className="tilt-shift-generator-perspective">
           <span className="tilt-shift-generator-perspective__label">
-            Perspective ({round(100 * this.state.perspective)}%)
+            Perspective (
+            {round(100 * this.state.perspective)}
+%)
           </span>
           <Slider
             min={0}
@@ -253,7 +261,14 @@ export default class TiltShiftGenerator extends Component {
         </div>
         <div className="tilt-shift-generator-zoom">
           <span className="tilt-shift-generator-zoom__label">
-            Zoom<sup>beta</sup> ({round(100 * this.state.zoom)}%)
+            Zoom
+            <sup>
+beta
+            </sup>
+            {' '}
+(
+            {round(100 * this.state.zoom)}
+%)
           </span>
           <Slider
             min={0}
@@ -268,7 +283,14 @@ export default class TiltShiftGenerator extends Component {
         </div>
         <div className="tilt-shift-generator-vignetting">
           <span className="tilt-shift-generator-vignetting__label">
-            Vignetting<sup>beta</sup> ({round(this.state.vignetting * 100)}%)
+            Vignetting
+            <sup>
+beta
+            </sup>
+            {' '}
+(
+            {round(this.state.vignetting * 100)}
+%)
           </span>
           <Slider
             min={0}
@@ -302,13 +324,17 @@ export default class TiltShiftGenerator extends Component {
               />
             </div>
           ) : (
-            <span className="tilt-shift-generator__placeholder">Drop an image here</span>
+            <span className="tilt-shift-generator__placeholder">
+Drop an image here
+            </span>
           )}
         </Dropzone>
 
         <div className="tool-toolbar">
           <a href={this.state.downloadUrl} download="tilt-shift">
-            <Button raised disabled={!this.state.downloadUrl}>Download</Button>
+            <Button raised disabled={!this.state.downloadUrl}>
+Download
+            </Button>
           </a>
         </div>
       </div>

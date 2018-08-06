@@ -9,8 +9,8 @@ export function base64EncodeUnicode(value) {
   return btoa(
     encodeURIComponent(value).replace(
       /%([0-9A-F]{2})/g,
-      (match, p1) => String.fromCharCode('0x' + p1)
-    )
+      (match, p1) => String.fromCharCode(`0x${p1}`),
+    ),
   );
 }
 
@@ -20,10 +20,10 @@ export function base64DecodeUnicode(value) {
     return decodeURIComponent(
       atob(value)
         .split('')
-        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
+        .map(c => `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`)
+        .join(''),
     );
-  } catch(e) {
+  } catch (e) {
     return null;
   }
 }
@@ -42,8 +42,12 @@ export default class Base64EncoderDecoder extends Component {
       <div>
         <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={this.state.input} />
         <div className="tool-toolbar">
-          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</Button>
-          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === '' || base64DecodeUnicode(input) === null}>Decode</Button>
+          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>
+Encode
+          </Button>
+          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === '' || base64DecodeUnicode(input) === null}>
+Decode
+          </Button>
         </div>
       </div>
     );

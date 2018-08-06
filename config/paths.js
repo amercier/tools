@@ -1,4 +1,4 @@
-'use strict';
+
 
 const path = require('path');
 const fs = require('fs');
@@ -16,15 +16,13 @@ function ensureSlash(inputPath, needsSlash) {
   const hasSlash = inputPath.endsWith('/');
   if (hasSlash && !needsSlash) {
     return inputPath.substr(0, inputPath.length - 1);
-  } else if (!hasSlash && needsSlash) {
+  } if (!hasSlash && needsSlash) {
     return `${inputPath}/`;
-  } else {
-    return inputPath;
   }
+  return inputPath;
 }
 
-const getPublicUrl = appPackageJson =>
-  envPublicUrl || require(appPackageJson).homepage;
+const getPublicUrl = appPackageJson => envPublicUrl || require(appPackageJson).homepage;
 
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.
@@ -34,8 +32,7 @@ const getPublicUrl = appPackageJson =>
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 function getServedPath(appPackageJson) {
   const publicUrl = getPublicUrl(appPackageJson);
-  const servedUrl =
-    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
+  const servedUrl = envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
   return ensureSlash(servedUrl, true);
 }
 
@@ -55,14 +52,13 @@ module.exports = {
   servedPath: getServedPath(resolveApp('package.json')),
 };
 
-let checkForMonorepo = true;
-
+const checkForMonorepo = true;
 
 
 module.exports.srcPaths = [module.exports.appSrc];
 
 module.exports.useYarn = fs.existsSync(
-  path.join(module.exports.appPath, 'yarn.lock')
+  path.join(module.exports.appPath, 'yarn.lock'),
 );
 
 if (checkForMonorepo) {

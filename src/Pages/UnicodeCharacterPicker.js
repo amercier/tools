@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Tab, TabBar, TabBarScroller, TabIcon, TabIconText } from 'rmwc/Tabs';
+import {
+  Tab, TabBar, TabBarScroller, TabIcon, TabIconText,
+} from 'rmwc/Tabs';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import './UnicodeCharacterPicker.scss';
@@ -8,7 +10,7 @@ const charactersMap = [
   {
     name: 'Our favorite set',
     icon: 'favorite_border',
-    characters: '⌘⌥⇧←→↑↓⬇⬆«»‹›✓✗✔✘▲▼◀▶▴▾◂▸⟵⟶⟳•⚑⚐★☆⚠█░'
+    characters: '⌘⌥⇧←→↑↓⬇⬆«»‹›✓✗✔✘▲▼◀▶▴▾◂▸⟵⟶⟳•⚑⚐★☆⚠█░',
   },
   {
     name: 'Arrows',
@@ -63,7 +65,7 @@ export default class UnicodeCharacterPicker extends Component {
     this.state = {
       copiedCharacter: null,
       activeTabIndex: 0,
-    }
+    };
   }
 
   render() {
@@ -83,14 +85,18 @@ export default class UnicodeCharacterPicker extends Component {
           </span>
         </CopyToClipboard>
       );
-    }
+    };
 
     const getCategoryId = name => name.replace(/\s+/, '-').toLowerCase();
 
     const tabs = charactersMap.map(({ name, icon }) => (
       <Tab key={`tab-${getCategoryId(name)}`}>
-        <TabIcon>{icon}</TabIcon>
-        <TabIconText>{name}</TabIconText>
+        <TabIcon>
+          {icon}
+        </TabIcon>
+        <TabIconText>
+          {name}
+        </TabIconText>
       </Tab>
     ));
 
@@ -102,7 +108,7 @@ export default class UnicodeCharacterPicker extends Component {
         <TabBarScroller className="unicode-characters-tabs">
           <TabBar
             activeTabIndex={this.state.activeTabIndex}
-            onChange={evt => this.setState({ 'activeTabIndex': evt.detail.activeTabIndex })}
+            onChange={evt => this.setState({ activeTabIndex: evt.detail.activeTabIndex })}
           >
             {tabs}
           </TabBar>

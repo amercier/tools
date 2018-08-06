@@ -53,7 +53,7 @@ export default [
     title: 'Travis.yml validator',
     icon: 'assignment_turned_in',
     component: TravisConfigValidator,
-    description: 'Travis CI Yaml config validator.'
+    description: 'Travis CI Yaml config validator.',
   },
   {
     id: 'password-generator',
@@ -75,5 +75,5 @@ export default [
     icon: 'blur_on',
     component: TiltShiftGenerator,
     description: 'Generate a screenshot from a website with a fancy tilt-shift effect.',
-  }
+  },
 ];

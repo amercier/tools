@@ -8,6 +8,7 @@ import fetchPonyfill from 'fetch-ponyfill';
 import filenamifyUrl from 'filenamify-url';
 
 import './WebsiteScreenshotGenerator.scss';
+
 const { fetch } = fetchPonyfill();
 
 function getScreenshotUrl(url, width, height) {
@@ -15,17 +16,16 @@ function getScreenshotUrl(url, width, height) {
     protocol: 'https',
     host: 'screenshot.amercier.com',
     pathname: '/screenshot',
-    query: { url, width, height }
+    query: { url, width, height },
   });
 }
 
 function getFilenameFromUrl(url, extension) {
-  const basename = filenamifyUrl(url, {replacement: '-'});
+  const basename = filenamifyUrl(url, { replacement: '-' });
   return `${basename}.${extension}`;
 }
 
 export default class WebsiteScreenshotGenerator extends Component {
-
   constructor() {
     super();
 
@@ -55,10 +55,12 @@ export default class WebsiteScreenshotGenerator extends Component {
     );
 
     const downloadButton = this.state.displayedUrl && (
-        <a href={this.state.blobUrl} download={getFilenameFromUrl(this.state.displayedUrl, 'jpg')}>
-          <Button raised disabled={!this.state.blobUrl}>Download</Button>
-        </a>
-      );
+    <a href={this.state.blobUrl} download={getFilenameFromUrl(this.state.displayedUrl, 'jpg')}>
+      <Button raised disabled={!this.state.blobUrl}>
+Download
+      </Button>
+    </a>
+    );
 
     return (
       <div>
@@ -68,9 +70,11 @@ export default class WebsiteScreenshotGenerator extends Component {
             value={this.state.resolution}
             onChange={e => this.setState({ resolution: e.target.value })}
             label="Resolution"
-            options={this.resolutions.map(resolution => ({label: resolution, value: resolution}))}
+            options={this.resolutions.map(resolution => ({ label: resolution, value: resolution }))}
           />
-          <Button raised disabled={!isUrl(this.state.url)} onClick={() => this.applyUrl(imageWidth, imageHeight)}>Go</Button>
+          <Button raised disabled={!isUrl(this.state.url)} onClick={() => this.applyUrl(imageWidth, imageHeight)}>
+Go
+          </Button>
         </div>
 
         <div
@@ -85,7 +89,7 @@ export default class WebsiteScreenshotGenerator extends Component {
 
           <div className="website-screenshot-image__progress">
             <svg className="mdc-circular-progress" viewBox="25 25 50 50">
-              <circle className="mdc-circular-progress__path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
+              <circle className="mdc-circular-progress__path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10" />
             </svg>
           </div>
         </div>
@@ -113,11 +117,11 @@ export default class WebsiteScreenshotGenerator extends Component {
 
     return fetch(actualUrl)
       .then(response => response.blob())
-      .then(blob => {
+      .then((blob) => {
         const blobUrl = URL.createObjectURL(blob);
         this.setState({
           blobUrl,
-          loadingState: 'loaded'
+          loadingState: 'loaded',
         });
       })
       .catch(() => {

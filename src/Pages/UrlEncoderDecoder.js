@@ -26,8 +26,12 @@ export default class UrlEncoderDecoder extends Component {
       <div>
         <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={this.state.input} />
         <div className="tool-toolbar">
-          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>Encode</Button>
-          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === decode(input)}>Decode</Button>
+          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>
+Encode
+          </Button>
+          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === decode(input)}>
+Decode
+          </Button>
         </div>
       </div>
     );
