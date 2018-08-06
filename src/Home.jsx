@@ -7,11 +7,16 @@ import pages from './Pages';
 
 import './Home.scss';
 
-export default () => (
-  <Grid className="home-tools-list">
-    {pages.map(({
-      id, title, icon, description, component,
-    }) => component && (
+function renderGridCell(page) {
+  const {
+    id, title, description, component,
+  } = page;
+
+  if (!component) {
+    return null;
+  }
+
+  return (
     <GridCell key={id} align="left" phone="4" tablet="4" desktop="3">
       <Card>
         <Link to={id}>
@@ -29,6 +34,11 @@ export default () => (
         </Link>
       </Card>
     </GridCell>
-    ))}
+  );
+}
+
+export default () => (
+  <Grid className="home-tools-list">
+    {pages.map(renderGridCell)}
   </Grid>
 );
