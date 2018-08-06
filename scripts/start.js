@@ -27,6 +27,11 @@ const {
   prepareUrls,
 } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
+
+// We require that you explictly set browsers and do not fall back to
+// browserslist defaults.
+const { checkBrowsers } = require('react-dev-utils/browsersHelper');
+
 const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 const createDevServerConfig = require('../config/webpackDevServer.config');
@@ -59,10 +64,6 @@ if (process.env.HOST) {
   console.log();
 }
 
-// We require that you explictly set browsers and do not fall back to
-// browserslist defaults.
-const { checkBrowsers } = require('react-dev-utils/browsersHelper');
-
 checkBrowsers(paths.appPath)
   .then(() => choosePort(HOST, DEFAULT_PORT))
   .then((port) => {
@@ -93,13 +94,14 @@ checkBrowsers(paths.appPath)
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, (err) => {
       if (err) {
-        return console.log(err);
+        console.log(err);
+      } else {
+        if (isInteractive) {
+          clearConsole();
+        }
+        console.log(chalk.cyan('Starting the development server...\n'));
+        openBrowser(urls.localUrlForBrowser);
       }
-      if (isInteractive) {
-        clearConsole();
-      }
-      console.log(chalk.cyan('Starting the development server...\n'));
-      openBrowser(urls.localUrlForBrowser);
     });
 
     ['SIGINT', 'SIGTERM'].forEach((sig) => {

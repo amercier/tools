@@ -15,6 +15,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+
 const packageManifest = require(paths.appPackageJson);
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -69,7 +70,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     },
   ];
   if (preProcessor) {
-    preProcessor.options.sourceMap = shouldUseSourceMap;
+    preProcessor.options.sourceMap = shouldUseSourceMap; // eslint-disable-line no-param-reassign
     loaders.push(preProcessor);
   }
   return loaders;
@@ -285,7 +286,8 @@ module.exports = {
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // `MiniCSSExtractPlugin` extracts styles into CSS
-          // files. If you use code splitting, async bundles will have their own separate CSS chunk file.
+          // files. If you use code splitting, async bundles will have their own separate CSS chunk
+          // file.
           // By default we support CSS Modules with the extension .module.css
           {
             test: cssRegex,
