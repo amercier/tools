@@ -30,6 +30,32 @@ export default class TravisConfigValidator extends Component {
     };
   }
 
+  onInputChange({ target }) {
+    this.setState({
+      validationResponse: null,
+      input: target.value,
+    });
+  }
+
+  onValidateButtonClick() {
+    this.setState({ loading: true });
+
+    const headers = new Headers();
+    const credentials = btoa(`${travisYmlParserAuthUsername}:${travisYmlParserAuthPassword}`);
+    headers.set('Authorization', `Basic ${credentials}`);
+
+    const { input } = this.state;
+    return fetch(travisYmlParserUrl, { method: 'POST', headers, body: input })
+      .then(response => response.json())
+      .catch(e => ({ error_message: `Error: ${e}` })) // Normalize HTTP errors
+      .then((validationResponse) => {
+        this.setState({
+          validationResponse,
+          loading: false,
+        });
+      });
+  }
+
   render() {
     const { input, loading, validationResponse } = this.state;
     const messageStyle = { fontWeight: 500 };
@@ -93,43 +119,18 @@ check
         <div className="tool-toolbar">
           {validationMessage}
           <Button raised onClick={() => this.onValidateButtonClick()} disabled={loading || validationResponse || input === ''}>
-Validate
+            Validate
           </Button>
         </div>
         {logs ? (
           <Typography tag="div" use="body1" theme="text-secondary-on-light">
             <Typography tag="h3" use="headline4">
-Log
+              Log
             </Typography>
             {logs}
           </Typography>
         ) : null}
       </div>
     );
-  }
-
-  onInputChange({ target }) {
-    this.setState({
-      validationResponse: null,
-      input: target.value,
-    });
-  }
-
-  onValidateButtonClick() {
-    this.setState({ loading: true });
-
-    const headers = new Headers();
-    const credentials = btoa(`${travisYmlParserAuthUsername}:${travisYmlParserAuthPassword}`);
-    headers.set('Authorization', `Basic ${credentials}`);
-
-    return fetch(travisYmlParserUrl, { method: 'POST', headers, body: this.state.input })
-      .then(response => response.json())
-      .catch(e => ({ error_message: `Error: ${e}` })) // Normalize HTTP errors
-      .then((validationResponse) => {
-        this.setState({
-          validationResponse,
-          loading: false,
-        });
-      });
   }
 }
