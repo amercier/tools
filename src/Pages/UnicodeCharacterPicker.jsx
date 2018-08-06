@@ -1,5 +1,8 @@
+import bem from 'bem-classnames';
 import React, { Component } from 'react';
-import { Tab, TabBar, TabBarScroller, TabIcon, TabIconText } from 'rmwc/Tabs';
+import {
+  Tab, TabBar, TabBarScroller, TabIcon, TabIconText,
+} from 'rmwc/Tabs';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import './UnicodeCharacterPicker.scss';
@@ -8,7 +11,7 @@ const charactersMap = [
   {
     name: 'Our favorite set',
     icon: 'favorite_border',
-    characters: '⌘⌥⇧←→↑↓⬇⬆«»‹›✓✗✔✘▲▼◀▶▴▾◂▸⟵⟶⟳•⚑⚐★☆⚠█░'
+    characters: '⌘⌥⇧←→↑↓⬇⬆«»‹›✓✗✔✘▲▼◀▶▴▾◂▸⟵⟶⟳•⚑⚐★☆⚠█░',
   },
   {
     name: 'Arrows',
@@ -63,62 +66,62 @@ export default class UnicodeCharacterPicker extends Component {
     this.state = {
       copiedCharacter: null,
       activeTabIndex: 0,
-    }
+    };
+  }
+
+  onCopy(id) {
+    this.setState({ copiedCharacter: id });
   }
 
   render() {
-    const characterToComponent = (categoryId, character) => {
-      const id = `character-${categoryId}-${character}`;
-      return (
-        <CopyToClipboard
-          key={id}
-          text={character}
-          onCopy={() => this.onCopy(id)}
-        >
-          <span
-            id={id}
-            className={`unicode-characters-character${id === this.state.copiedCharacter ? ' unicode-characters-character--copied' : ''}`}
-          >
-            {character}
-          </span>
-        </CopyToClipboard>
-      );
-    }
+    const { copiedCharacter, activeTabIndex } = this.state;
 
     const getCategoryId = name => name.replace(/\s+/, '-').toLowerCase();
 
     const tabs = charactersMap.map(({ name, icon }) => (
       <Tab key={`tab-${getCategoryId(name)}`}>
-        <TabIcon>{icon}</TabIcon>
-        <TabIconText>{name}</TabIconText>
+        <TabIcon>
+          {icon}
+        </TabIcon>
+        <TabIconText>
+          {name}
+        </TabIconText>
       </Tab>
     ));
 
-    const activeCategory = charactersMap[this.state.activeTabIndex];
+    const activeCategory = charactersMap[activeTabIndex];
     const activecategoryId = getCategoryId(activeCategory.name);
+
+    const renderCharacter = (character) => {
+      const id = `character-${activecategoryId}-${character}`;
+      const bemClass = {
+        name: 'unicode-characters-character',
+        modifiers: ['copied'],
+      };
+      return (
+        <CopyToClipboard key={id} text={character} onCopy={() => this.onCopy(id)}>
+          <span id={id} className={bem(bemClass, { copied: id === copiedCharacter })}>
+            {character}
+          </span>
+        </CopyToClipboard>
+      );
+    };
 
     return (
       <div>
         <TabBarScroller className="unicode-characters-tabs">
           <TabBar
-            activeTabIndex={this.state.activeTabIndex}
-            onChange={evt => this.setState({ 'activeTabIndex': evt.detail.activeTabIndex })}
+            activeTabIndex={activeTabIndex}
+            onChange={evt => this.setState({ activeTabIndex: evt.detail.activeTabIndex })}
           >
             {tabs}
           </TabBar>
         </TabBarScroller>
 
         <div className="unicode-characters-list">
-          {
-            Array.from(activeCategory.characters)
-              .map(c => characterToComponent(activecategoryId, c))
-          }
+          {Array.from(activeCategory.characters).map(renderCharacter)}
         </div>
       </div>
     );
-  }
-
-  onCopy(id) {
-    this.setState({ copiedCharacter: id });
   }
 }

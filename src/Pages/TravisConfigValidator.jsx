@@ -30,29 +30,59 @@ export default class TravisConfigValidator extends Component {
     };
   }
 
+  onInputChange({ target }) {
+    this.setState({
+      validationResponse: null,
+      input: target.value,
+    });
+  }
+
+  onValidateButtonClick() {
+    this.setState({ loading: true });
+
+    const headers = new Headers();
+    const credentials = btoa(`${travisYmlParserAuthUsername}:${travisYmlParserAuthPassword}`);
+    headers.set('Authorization', `Basic ${credentials}`);
+
+    const { input } = this.state;
+    return fetch(travisYmlParserUrl, { method: 'POST', headers, body: input })
+      .then(response => response.json())
+      .catch(e => ({ error_message: `Error: ${e}` })) // Normalize HTTP errors
+      .then((validationResponse) => {
+        this.setState({
+          validationResponse,
+          loading: false,
+        });
+      });
+  }
+
   render() {
     const { input, loading, validationResponse } = this.state;
     const messageStyle = { fontWeight: 500 };
-    const iconStyle = { verticalAlign: 'middle', marginRight: '0.2em', marginBottom: '4px'};
+    const iconStyle = { verticalAlign: 'middle', marginRight: '0.2em', marginBottom: '4px' };
 
     let validationMessage;
     if (loading) {
       validationMessage = (
         <svg className="mdc-circular-progress mdc-circular-progress--small" viewBox="25 25 50 50">
-          <circle className="mdc-circular-progress__path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
+          <circle className="mdc-circular-progress__path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10" />
         </svg>
       );
     } else if (validationResponse && validationResponse.error_message) {
       validationMessage = (
         <Typography use="body1" theme="secondary" style={messageStyle}>
-          <i class="material-icons" style={iconStyle}>error</i>
+          <i className="material-icons" style={iconStyle}>
+error
+          </i>
           {validationResponse.error_message}
         </Typography>
       );
     } else if (validationResponse) { // OK
       validationMessage = (
         <Typography use="body1" theme="primary" style={messageStyle}>
-          <i class="material-icons" style={iconStyle}>check</i>
+          <i className="material-icons" style={iconStyle}>
+check
+          </i>
           Valid!
         </Typography>
       );
@@ -66,7 +96,9 @@ export default class TravisConfigValidator extends Component {
         const icon = logIcons[validationResponse.messages[i].level] || 'message';
         return (
           <div>
-            <i class="material-icons" style={iconStyle}>{icon}</i>
+            <i className="material-icons" style={iconStyle}>
+              {icon}
+            </i>
             {text}
           </div>
         );
@@ -86,40 +118,19 @@ export default class TravisConfigValidator extends Component {
         />
         <div className="tool-toolbar">
           {validationMessage}
-          <Button raised onClick={() => this.onValidateButtonClick()} disabled={loading || validationResponse || input === ''}>Validate</Button>
+          <Button raised onClick={() => this.onValidateButtonClick()} disabled={loading || validationResponse || input === ''}>
+            Validate
+          </Button>
         </div>
         {logs ? (
           <Typography tag="div" use="body1" theme="text-secondary-on-light">
-            <Typography tag="h3" use="headline4">Log</Typography>
+            <Typography tag="h3" use="headline4">
+              Log
+            </Typography>
             {logs}
           </Typography>
         ) : null}
       </div>
     );
-  }
-
-  onInputChange({ target }) {
-    this.setState({
-      validationResponse: null,
-      input: target.value,
-    });
-  }
-
-  onValidateButtonClick() {
-    this.setState({ loading: true });
-
-    const headers = new Headers();
-    const credentials = btoa(`${travisYmlParserAuthUsername}:${travisYmlParserAuthPassword}`);
-    headers.set('Authorization', `Basic ${credentials}`);
-
-    return fetch(travisYmlParserUrl, { method: 'POST', headers, body: this.state.input })
-      .then(response => response.json())
-      .catch(e => ({ error_message: `Error: ${e}`})) // Normalize HTTP errors
-      .then(validationResponse => {
-        this.setState({
-          validationResponse,
-          loading: false
-        });
-      });
   }
 }
