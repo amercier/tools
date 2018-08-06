@@ -1,3 +1,4 @@
+import bem from 'bem-classnames';
 import React, { Component } from 'react';
 import {
   Tab, TabBar, TabBarScroller, TabIcon, TabIconText,
@@ -68,24 +69,12 @@ export default class UnicodeCharacterPicker extends Component {
     };
   }
 
+  onCopy(id) {
+    this.setState({ copiedCharacter: id });
+  }
+
   render() {
-    const characterToComponent = (categoryId, character) => {
-      const id = `character-${categoryId}-${character}`;
-      return (
-        <CopyToClipboard
-          key={id}
-          text={character}
-          onCopy={() => this.onCopy(id)}
-        >
-          <span
-            id={id}
-            className={`unicode-characters-character${id === this.state.copiedCharacter ? ' unicode-characters-character--copied' : ''}`}
-          >
-            {character}
-          </span>
-        </CopyToClipboard>
-      );
-    };
+    const { copiedCharacter, activeTabIndex } = this.state;
 
     const getCategoryId = name => name.replace(/\s+/, '-').toLowerCase();
 
@@ -100,14 +89,29 @@ export default class UnicodeCharacterPicker extends Component {
       </Tab>
     ));
 
-    const activeCategory = charactersMap[this.state.activeTabIndex];
+    const activeCategory = charactersMap[activeTabIndex];
     const activecategoryId = getCategoryId(activeCategory.name);
+
+    const renderCharacter = (character) => {
+      const id = `character-${activecategoryId}-${character}`;
+      const bemClass = {
+        name: 'unicode-characters-character',
+        modifiers: ['copied'],
+      };
+      return (
+        <CopyToClipboard key={id} text={character} onCopy={() => this.onCopy(id)}>
+          <span id={id} className={bem(bemClass, { copied: id === copiedCharacter })}>
+            {character}
+          </span>
+        </CopyToClipboard>
+      );
+    };
 
     return (
       <div>
         <TabBarScroller className="unicode-characters-tabs">
           <TabBar
-            activeTabIndex={this.state.activeTabIndex}
+            activeTabIndex={activeTabIndex}
             onChange={evt => this.setState({ activeTabIndex: evt.detail.activeTabIndex })}
           >
             {tabs}
@@ -115,16 +119,9 @@ export default class UnicodeCharacterPicker extends Component {
         </TabBarScroller>
 
         <div className="unicode-characters-list">
-          {
-            Array.from(activeCategory.characters)
-              .map(c => characterToComponent(activecategoryId, c))
-          }
+          {Array.from(activeCategory.characters).map(renderCharacter)}
         </div>
       </div>
     );
-  }
-
-  onCopy(id) {
-    this.setState({ copiedCharacter: id });
   }
 }
