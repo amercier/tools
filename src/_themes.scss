@@ -70,37 +70,25 @@ $teal-red-theme: (
   --mdc-theme-on-secondary: #{map-get($normalized-theme, on-secondary)};
 }
 
+$themes-by-path: (
+  '/': $green-pink-theme,
+  '/url-encoder': inverted-mdc-theme($green-pink-theme),
+  '/base64-encoder': $orange-light-blue-theme,
+  '/unicode-characters': inverted-mdc-theme($orange-light-blue-theme),
+  '/travis-validator': $deep-purple-yellow-theme,
+  '/password-generator': inverted-mdc-theme($deep-purple-yellow-theme),
+  '/website-screenshot': $teal-red-theme,
+  '/tilt-shift': inverted-mdc-theme($teal-red-theme)
+);
+
 .app__root {
-  @include apply-mdc-theme($green-pink-theme);
-
-  &[data-path='/base64-encoder'] {
-    @include apply-mdc-theme(inverted-mdc-theme($green-pink-theme));
-  }
-
-  &[data-path='/unicode-characters'] {
-    @include apply-mdc-theme($orange-light-blue-theme);
-  }
-
-  &[data-path='/travis-validator'] {
-    @include apply-mdc-theme(inverted-mdc-theme($orange-light-blue-theme));
-  }
-
-  &[data-path='/password-generator'] {
-    @include apply-mdc-theme($deep-purple-yellow-theme);
-  }
-
-  &[data-path='/website-screenshot'] {
-    @include apply-mdc-theme(inverted-mdc-theme($deep-purple-yellow-theme));
-  }
-
-  &[data-path='/tilt-shift'] {
-    @include apply-mdc-theme($teal-red-theme);
+  @each $path, $theme in $themes-by-path {
+    &[data-path='#{$path}'] {
+      @include apply-mdc-theme($theme);
+    }
   }
 
   .mdc-toolbar--waterfall {
-    transition:
-      color 750ms ease-out,
-      background-color 750ms ease-out,
-      box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    transition: color 750ms ease-out, background-color 750ms ease-out, box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
   }
 }
