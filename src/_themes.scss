@@ -1,17 +1,3 @@
-// Workaround for https://github.com/jamesmfriedman/rmwc/issues/276
-.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color: var(--mdc-theme-primary);
-}
-
-// Workaround for toolbar text and link text not using --mdc-theme-on-primary
-.mdc-toolbar {
-  color: var(--mdc-theme-on-primary, #fff);
-
-  .mdc-toolbar__icon {
-    color: inherit;
-  }
-}
-
 $green-pink-theme: (
   primary: #4caf50,
   primary-light: #80e27e,
