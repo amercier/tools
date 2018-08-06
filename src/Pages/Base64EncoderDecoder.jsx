@@ -36,32 +36,34 @@ export default class Base64EncoderDecoder extends Component {
     };
   }
 
-  render() {
-    const { input } = this.state;
-    return (
-      <div>
-        <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={this.state.input} />
-        <div className="tool-toolbar">
-          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>
-Encode
-          </Button>
-          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === '' || base64DecodeUnicode(input) === null}>
-Decode
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
   onInputChange({ target }) {
     this.setState({ input: target.value });
   }
 
   onEncodeButtonClick() {
-    this.setState({ input: base64EncodeUnicode(this.state.input) });
+    const { input } = this.state;
+    this.setState({ input: base64EncodeUnicode(input) });
   }
 
   onDecodeButtonClick() {
-    this.setState({ input: base64DecodeUnicode(this.state.input) });
+    const { input } = this.state;
+    this.setState({ input: base64DecodeUnicode(input) });
+  }
+
+  render() {
+    const { input } = this.state;
+    return (
+      <div>
+        <TextField textarea fullwidth label="Text to encode or decode" rows="12" onChange={e => this.onInputChange(e)} value={input} />
+        <div className="tool-toolbar">
+          <Button raised onClick={() => this.onEncodeButtonClick()} disabled={input === ''}>
+            Encode
+          </Button>
+          <Button unelevated onClick={() => this.onDecodeButtonClick()} disabled={input === '' || base64DecodeUnicode(input) === null}>
+            Decode
+          </Button>
+        </div>
+      </div>
+    );
   }
 }
