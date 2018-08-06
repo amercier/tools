@@ -3,6 +3,10 @@
 @import './themes';
 @import './tool';
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   font-family: sans-serif;
   margin: 0;
