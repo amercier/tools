@@ -42,22 +42,53 @@ export default class WebsiteScreenshotGenerator extends Component {
     };
   }
 
-  render() {
-    const [imageWidth, imageHeight] = this.state.resolution.split(' x ');
+  onUrlChange({ target }) {
+    this.setState({ url: target.value });
+  }
 
-    const image = this.state.displayedUrl && (
+  applyUrl(width, height) {
+    const { url } = this.state;
+    const actualUrl = getScreenshotUrl(url, width, height);
+
+    this.setState({
+      displayedUrl: url,
+      blobUrl: null,
+      loadingState: 'loading',
+    });
+
+    return fetch(actualUrl)
+      .then(response => response.blob())
+      .then((blob) => {
+        const blobUrl = URL.createObjectURL(blob);
+        this.setState({
+          blobUrl,
+          loadingState: 'loaded',
+        });
+      })
+      .catch(() => {
+        this.setState({ loadingState: 'failed' });
+      });
+  }
+
+  render() {
+    const {
+      resolution, displayedUrl, blobUrl, url, loadingState,
+    } = this.state;
+    const [imageWidth, imageHeight] = resolution.split(' x ');
+
+    const image = displayedUrl && (
       <img
-        src={this.state.blobUrl}
+        src={blobUrl}
         width={imageWidth}
         height={imageHeight}
-        alt={`Screenshot of ${this.state.displayedUrl} web page`}
+        alt={`Screenshot of ${displayedUrl} web page`}
       />
     );
 
-    const downloadButton = this.state.displayedUrl && (
-    <a href={this.state.blobUrl} download={getFilenameFromUrl(this.state.displayedUrl, 'jpg')}>
-      <Button raised disabled={!this.state.blobUrl}>
-Download
+    const downloadButton = displayedUrl && (
+    <a href={blobUrl} download={getFilenameFromUrl(displayedUrl, 'jpg')}>
+      <Button raised disabled={!blobUrl}>
+        Download
       </Button>
     </a>
     );
@@ -65,20 +96,24 @@ Download
     return (
       <div>
         <div className="website-screenshot-url">
-          <TextField label="Website URL" onChange={e => this.onUrlChange(e)} value={this.state.url} />
+          <TextField label="Website URL" onChange={e => this.onUrlChange(e)} value={url} />
           <Select
-            value={this.state.resolution}
+            value={resolution}
             onChange={e => this.setState({ resolution: e.target.value })}
             label="Resolution"
-            options={this.resolutions.map(resolution => ({ label: resolution, value: resolution }))}
+            options={this.resolutions.map(r => ({ label: r, value: r }))}
           />
-          <Button raised disabled={!isUrl(this.state.url)} onClick={() => this.applyUrl(imageWidth, imageHeight)}>
-Go
+          <Button
+            raised
+            disabled={!isUrl(url)}
+            onClick={() => this.applyUrl(imageWidth, imageHeight)}
+          >
+            Go
           </Button>
         </div>
 
         <div
-          className={`website-screenshot-image website-screenshot-image--${this.state.loadingState}`}
+          className={`website-screenshot-image website-screenshot-image--${loadingState}`}
           style={{
             width: '100%',
             height: 0,
@@ -99,33 +134,5 @@ Go
         </div>
       </div>
     );
-  }
-
-  onUrlChange({ target }) {
-    this.setState({ url: target.value });
-  }
-
-  applyUrl(width, height) {
-    const displayedUrl = this.state.url;
-    const actualUrl = getScreenshotUrl(displayedUrl, width, height);
-
-    this.setState({
-      displayedUrl,
-      blobUrl: null,
-      loadingState: 'loading',
-    });
-
-    return fetch(actualUrl)
-      .then(response => response.blob())
-      .then((blob) => {
-        const blobUrl = URL.createObjectURL(blob);
-        this.setState({
-          blobUrl,
-          loadingState: 'loaded',
-        });
-      })
-      .catch(() => {
-        this.setState({ loadingState: 'failed' });
-      });
   }
 }
