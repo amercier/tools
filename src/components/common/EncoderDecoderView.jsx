@@ -1,7 +1,7 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { Button } from 'rmwc/Button';
 import { TextField } from 'rmwc/TextField';
+import { string, func, bool } from './prop-types';
 
 const EncoderDecoderView = ({
   input, onInputChange, onEncode, onDecode, isDecodeDisabled, isEncodeDisabled,
@@ -20,12 +20,12 @@ const EncoderDecoderView = ({
 );
 
 EncoderDecoderView.propTypes = {
-  input: PropTypes.string.isRequired,
-  onInputChange: PropTypes.func.isRequired,
-  onEncode: PropTypes.func.isRequired,
-  onDecode: PropTypes.func.isRequired,
-  isEncodeDisabled: PropTypes.bool.isRequired,
-  isDecodeDisabled: PropTypes.bool.isRequired,
+  input: string.isRequired,
+  onInputChange: func.isRequired,
+  onEncode: func.isRequired,
+  onDecode: func.isRequired,
+  isEncodeDisabled: bool.isRequired,
+  isDecodeDisabled: bool.isRequired,
 };
 
 export default EncoderDecoderView;

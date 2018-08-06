@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'rmwc/Button';
-import UrlEncoderDecoder from './UrlEncoderDecoder';
+import UrlEncoderDecoder from '.';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
