@@ -1,4 +1,4 @@
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'rmwc/Button';
