@@ -3,12 +3,6 @@
 
   & > .mdc-text-field {
     flex-grow: 1;
-
-    &:not(.mdc-text-field--fullwidth):not(.mdc-text-field--box):not(.mdc-text-field--textarea):not(.mdc-text-field--outlined) {
-      margin-top: 0;
-      margin-bottom: 0;
-      height: 52px;
-    }
   }
 
   & > .mdc-select {

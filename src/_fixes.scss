@@ -18,3 +18,10 @@
 .mdc-select:not(.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-floating-label {
   color: var(--mdc-theme-primary, #000);
 }
+
+// Workaround for text field not aligned with other fields
+.mdc-text-field:not(.mdc-text-field--fullwidth):not(.mdc-text-field--box):not(.mdc-text-field--textarea):not(.mdc-text-field--outlined) {
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 52px;
+}
