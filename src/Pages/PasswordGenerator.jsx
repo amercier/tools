@@ -22,67 +22,8 @@ export default class PasswordGenerator extends Component {
     this.state.password = generatePassword(this.state);
   }
 
-  render() {
-    return (
-      <div className="password-generator">
-        <div className="password-generator-slider">
-          <span className="password-generator-slider__label">
-            Length (
-            {this.state.length}
-)
-          </span>
-          <Slider
-            min={4}
-            max={64}
-            step={1}
-            value={this.state.length}
-            onInput={e => this.setState({ length: e.detail.value })}
-            onChange={() => this.updatePassword()}
-            discrete
-          />
-        </div>
-
-        <div className="password-generator-switches">
-          <Switch checked={this.state.numbers} onChange={e => this.updatePassword({ numbers: e.target.checked })}>
-            {' '}
-Numbers
-          </Switch>
-          <Switch checked={this.state.symbols} onChange={e => this.updatePassword({ symbols: e.target.checked })}>
-            {' '}
-Symbols
-          </Switch>
-          <Switch checked={this.state.uppercase} onChange={e => this.updatePassword({ uppercase: e.target.checked })}>
-            {' '}
-Uppercase characters
-          </Switch>
-          <Switch checked={this.state.excludeSimilarCharacters} onChange={e => this.updatePassword({ excludeSimilarCharacters: e.target.checked })}>
-            {' '}
-Exclude similar characters
-          </Switch>
-        </div>
-
-        <div className="password-generator-password">
-          <pre className="password-generator-password__password">
-            {this.state.password}
-          </pre>
-          <Button onClick={() => this.updatePassword()}>
-            <ButtonIcon use="refresh" />
-          </Button>
-          <div />
-        </div>
-
-        <CopyToClipboard text={this.state.password} onCopy={() => this.onCopy()}>
-          <div className="password-generator-clipboard">
-            <Button unelevated className="password-generator-clipboard__button">
-Copy to clipboard
-            </Button>
-            <Typography use="body1" className="password-generator-clipboard__copied">
-              {this.state.copied ? 'Copied!' : null}
-            </Typography>
-          </div>
-        </CopyToClipboard>
-      </div>
-    );
+  onCopy() {
+    this.setState({ copied: true });
   }
 
   updatePassword(newOptions = {}) {
@@ -94,7 +35,68 @@ Copy to clipboard
     this.setState(newState);
   }
 
-  onCopy() {
-    this.setState({ copied: true });
+  renderSwitch(id, label, value) {
+    return (
+      <Switch
+        checked={value}
+        onChange={e => this.updatePassword({ [id]: e.target.checked })}
+      >
+        {label}
+      </Switch>
+    );
+  }
+
+  render() {
+    const {
+      length, numbers, symbols, uppercase, excludeSimilarCharacters, password, copied,
+    } = this.state;
+
+    return (
+      <div className="password-generator">
+        <div className="password-generator-slider">
+          <span className="password-generator-slider__label">
+            {/* TODO Remove exception after ESLint 5 upgrade */}
+            Length ({length /* eslint-disable-line react/jsx-one-expression-per-line */})
+          </span>
+          <Slider
+            min={4}
+            max={64}
+            step={1}
+            value={length}
+            discrete
+            onInput={e => this.setState({ length: e.detail.value })}
+            onChange={() => this.updatePassword()}
+          />
+        </div>
+
+        <div className="password-generator-switches">
+          {this.renderSwitch('numbers', 'Numbers', numbers)}
+          {this.renderSwitch('symbols', 'Symbols', symbols)}
+          {this.renderSwitch('uppercase', 'Uppercase characters', uppercase)}
+          {this.renderSwitch('excludeSimilarCharacters', 'Exclude similar characters', excludeSimilarCharacters)}
+        </div>
+
+        <div className="password-generator-password">
+          <pre className="password-generator-password__password">
+            {password}
+          </pre>
+          <Button onClick={() => this.updatePassword()}>
+            <ButtonIcon use="refresh" />
+          </Button>
+          <div />
+        </div>
+
+        <CopyToClipboard text={password} onCopy={() => this.onCopy()}>
+          <div className="password-generator-clipboard">
+            <Button unelevated className="password-generator-clipboard__button">
+              Copy to clipboard
+            </Button>
+            <Typography use="body1" className="password-generator-clipboard__copied">
+              {copied ? 'Copied!' : null}
+            </Typography>
+          </div>
+        </CopyToClipboard>
+      </div>
+    );
   }
 }
