@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'rmwc/Button';
-import Base64EncoderDecoder from './Base64EncoderDecoder';
+import Base64EncoderDecoder from '.';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

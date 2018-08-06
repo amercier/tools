@@ -1,4 +1,4 @@
-// sass-lint:disable force-element-nesting, force-pseudo-nesting, no-color-literals
+// sass-lint:disable force-element-nesting, force-pseudo-nesting, no-color-literals, no-important
 
 // Workaround for https://github.com/jamesmfriedman/rmwc/issues/276
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
@@ -24,4 +24,11 @@
   margin-top: 0;
   margin-bottom: 0;
   height: 52px;
+}
+
+// Fixes secondary buttons not diplaying disabled setState
+.mdc-button--raised:disabled,
+.mdc-button--unelevated:disabled {
+  background-color: rgba(0, 0, 0, .12) !important;
+  color: rgba(0, 0, 0, .37) !important;
 }
