@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import Base64EncoderDecoder from '../components/Base64EncoderDecoder';
-import PasswordGenerator from './PasswordGenerator';
+import PasswordGenerator from '../components/PasswordGenerator';
 import TiltShiftGenerator from './TiltShiftGenerator';
 import UrlEncoderDecoder from '../components/UrlEncoderDecoder';
 import UnicodeCharacterPicker from './UnicodeCharacterPicker';
