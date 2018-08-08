@@ -5,7 +5,7 @@ import PasswordGenerator from '../components/PasswordGenerator';
 import TiltShiftGenerator from './TiltShiftGenerator';
 import UrlEncoderDecoder from '../components/UrlEncoderDecoder';
 import UnicodeCharacterPicker from './UnicodeCharacterPicker';
-import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
+import WebsiteScreenshotGenerator from '../components/WebsiteScreenshotGenerator';
 import TravisConfigValidator from '../components/TravisConfigValidator';
 
 export default [

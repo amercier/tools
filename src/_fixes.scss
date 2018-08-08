@@ -19,11 +19,32 @@
   color: var(--mdc-theme-primary, #000);
 }
 
-// Workaround for text field not aligned with other fields
-.mdc-text-field:not(.mdc-text-field--fullwidth):not(.mdc-text-field--box):not(.mdc-text-field--textarea):not(.mdc-text-field--outlined) {
-  margin-top: 0;
+// Workaround for misaligned <Texfield> and <Select> input fields
+.mdc-text-field {
   margin-bottom: 0;
-  height: 52px;
+
+  &--upgraded:not(.mdc-text-field--fullwidth):not(.mdc-text-field--box) {
+    margin-top: 0;
+  }
+
+  &__input {
+    height: 26px;
+    padding: 19px 0 2px;
+  }
+}
+
+.mdc-select {
+  height: 48px;
+
+  &__native-control {
+    padding-bottom: 4px;
+  }
+}
+
+// Add .mdc-*--grow class to workaround unstylable <TextField> and <Select>
+.mdc-select--grow,
+.mdc-text-field--grow {
+  width: 100% !important;
 }
 
 // Fixes secondary buttons not diplaying disabled setState
