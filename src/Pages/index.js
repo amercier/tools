@@ -2,7 +2,7 @@
 
 import Base64EncoderDecoder from '../components/Base64EncoderDecoder';
 import PasswordGenerator from '../components/PasswordGenerator';
-import TiltShiftGenerator from './TiltShiftGenerator';
+import TiltShiftGenerator from '../components/TiltShiftGenerator';
 import UrlEncoderDecoder from '../components/UrlEncoderDecoder';
 import UnicodeCharacterPicker from './UnicodeCharacterPicker';
 import WebsiteScreenshotGenerator from '../components/WebsiteScreenshotGenerator';
