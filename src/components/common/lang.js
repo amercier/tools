@@ -3,6 +3,8 @@ import { between } from './math';
 export const noop = () => {};
 export const identity = value => value;
 
+export const nameToId = name => name.replace(/\s+/, '-').toLowerCase();
+
 // TODO Remove unused
 export function implode(separator, ...parts) {
   let result = '';

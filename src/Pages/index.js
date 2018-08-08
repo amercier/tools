@@ -4,7 +4,7 @@ import Base64EncoderDecoder from '../components/Base64EncoderDecoder';
 import PasswordGenerator from '../components/PasswordGenerator';
 import TiltShiftGenerator from '../components/TiltShiftGenerator';
 import UrlEncoderDecoder from '../components/UrlEncoderDecoder';
-import UnicodeCharacterPicker from './UnicodeCharacterPicker';
+import UnicodeCharacterPicker from '../components/UnicodeCharacterPicker';
 import WebsiteScreenshotGenerator from '../components/WebsiteScreenshotGenerator';
 import TravisConfigValidator from '../components/TravisConfigValidator';
 

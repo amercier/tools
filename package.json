@@ -2,7 +2,6 @@
   "name": "tools",
   "private": true,
   "dependencies": {
-    "bem-classnames": "^1.0.7",
     "fetch-ponyfill": "^6.0.2",
     "filenamify-url": "^1.0.0",
     "generate-password": "^1.4.0",
