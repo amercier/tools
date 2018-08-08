@@ -6,7 +6,7 @@ import TiltShiftGenerator from './TiltShiftGenerator';
 import UrlEncoderDecoder from '../components/UrlEncoderDecoder';
 import UnicodeCharacterPicker from './UnicodeCharacterPicker';
 import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
-import TravisConfigValidator from './TravisConfigValidator';
+import TravisConfigValidator from '../components/TravisConfigValidator';
 
 export default [
   {

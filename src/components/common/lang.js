@@ -1,7 +1,7 @@
-/* eslint-disable import/prefer-default-export */
+import { between } from './math';
 
-export function noop() {
-}
+export const noop = () => {};
+export const identity = value => value;
 
 export function implode(separator, ...parts) {
   let result = '';
@@ -18,4 +18,11 @@ export function combinePrefixes(prefixes, suffix, separator = ' ') {
     separator,
     prefixes.map(prefix => prefix && `${prefix}${suffix}`),
   );
+}
+
+export function auto(setting, minValue, maxValue) {
+  if (setting === 'auto') {
+    return between(minValue, maxValue);
+  }
+  return identity;
 }
