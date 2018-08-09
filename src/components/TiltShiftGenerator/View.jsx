@@ -1,11 +1,10 @@
 import React from 'react';
-import { Button } from 'rmwc/Button';
 import {
   number, string, object, func,
 } from '../common/prop-types';
 
 const View = ({
-  RenderOptions, RenderDroppableImage,
+  RenderOptions, RenderDroppableImage, RenderToolbar,
   image, imageHeight, imageRef, canvasRef, downloadUrl,
   onDrop, onOptionChange, onImageLoad,
   ...optionValues
@@ -29,19 +28,14 @@ const View = ({
       <div ref={canvasRef} />
     </RenderDroppableImage>
 
-    <div className="tool-toolbar">
-      <a href={downloadUrl} download="tilt-shift">
-        <Button raised disabled={!downloadUrl}>
-          Download
-        </Button>
-      </a>
-    </div>
+    <RenderToolbar downloadUrl={downloadUrl} />
   </div>
 );
 
 View.propTypes = {
   RenderOptions: func.isRequired,
   RenderDroppableImage: func.isRequired,
+  RenderToolbar: func.isRequired,
 
   image: string,
   imageHeight: number,

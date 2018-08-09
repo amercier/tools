@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 import React, { Component } from 'react';
 import DroppableImage from './DroppableImage';
 import Options from './Options';
+import Toolbar from './Toolbar';
 import View from './View';
 import { defaults } from './config';
 
@@ -149,13 +150,16 @@ export default class TiltShiftGenerator extends Component {
       <View
         RenderDroppableImage={DroppableImage}
         RenderOptions={Options}
+        RenderToolbar={Toolbar}
+
         canvasRef={this.canvasRef}
         imageRef={this.imageRef}
         onDrop={this.onDrop}
-        onOptionChange={this.onOptionChange}
-        onImageLoad={this.onImageLoad}
         {...this.props}
         {...this.state}
+
+        onOptionChange={this.onOptionChange}
+        onImageLoad={this.onImageLoad}
       />
     );
   }
