@@ -5,11 +5,15 @@ amercier/tools
 > https://tools.amercier.com
 
 [![Build Status](https://travis-ci.org/amercier/tools.svg?branch=master)](https://travis-ci.org/amercier/tools)
+[![Technical Debt](https://img.shields.io/codeclimate/tech-debt/amercier/tools.svg)](https://codeclimate.com/github/amercier/tools)
 
 Development
 ===========
 
 This project is developped using [React](https://reactjs.org/).
+
+[![dependencies Status](https://david-dm.org/amercier/tools/status.svg)](https://david-dm.org/amercier/tools)
+[![devDependencies Status](https://david-dm.org/amercier/tools/dev-status.svg)](https://david-dm.org/amercier/tools?type=dev)
 
 Setup
 -----
