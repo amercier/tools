@@ -5,6 +5,7 @@ amercier/tools
 > https://tools.amercier.com
 
 [![Build Status](https://travis-ci.org/amercier/tools.svg?branch=master)](https://travis-ci.org/amercier/tools)
+[![Test Coverage](https://img.shields.io/codecov/c/github/amercier/tools/master.svg)](https://codecov.io/github/amercier/tools?branch=master)
 [![Technical Debt](https://img.shields.io/codeclimate/tech-debt/amercier/tools.svg)](https://codeclimate.com/github/amercier/tools)
 
 Development
