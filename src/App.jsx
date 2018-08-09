@@ -19,7 +19,7 @@ import {
 import { Typography } from 'rmwc/Typography';
 
 import './App.scss';
-import Home from './Home';
+import Home from './components/Home';
 import { modules } from './config';
 
 function isWindowNarrow({ innerWidth }) {
