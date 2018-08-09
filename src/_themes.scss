@@ -81,14 +81,16 @@ $themes-by-path: (
   '/tilt-shift': inverted-mdc-theme($teal-red-theme)
 );
 
-.app__root {
-  @each $path, $theme in $themes-by-path {
-    &[data-path='#{$path}'] {
-      @include apply-mdc-theme($theme);
-    }
+@each $path, $theme in $themes-by-path {
+  [data-path='#{$path}'] {
+    @include apply-mdc-theme($theme);
   }
+}
 
-  .mdc-toolbar--waterfall {
+.mdc-toolbar--waterfall {
+  transition: color 750ms ease-out, background-color 750ms ease-out;
+
+  &.mdc-toolbar--fixed {
     transition: color 750ms ease-out, background-color 750ms ease-out, box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
   }
 }

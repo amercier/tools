@@ -1,10 +1,10 @@
-import Base64EncoderDecoder from './components/Base64EncoderDecoder';
-import PasswordGenerator from './components/PasswordGenerator';
-import TiltShiftGenerator from './components/TiltShiftGenerator';
-import UrlEncoderDecoder from './components/UrlEncoderDecoder';
-import UnicodeCharacterPicker from './components/UnicodeCharacterPicker';
-import WebsiteScreenshotGenerator from './components/WebsiteScreenshotGenerator';
-import TravisConfigValidator from './components/TravisConfigValidator';
+import Base64EncoderDecoder from './Base64EncoderDecoder';
+import PasswordGenerator from './PasswordGenerator';
+import TiltShiftGenerator from './TiltShiftGenerator';
+import UrlEncoderDecoder from './UrlEncoderDecoder';
+import UnicodeCharacterPicker from './UnicodeCharacterPicker';
+import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
+import TravisConfigValidator from './TravisConfigValidator';
 
 export const modules = [ // eslint-disable-line import/prefer-default-export
   {

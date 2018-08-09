@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from 'rmwc/Grid';
 import Cell from './Cell';
-import { modules } from '../../config';
+import { modules } from '../config';
 
 export default () => (
   <Grid className="home-tools-list">

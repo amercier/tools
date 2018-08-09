@@ -1,5 +1,10 @@
 // sass-lint:disable force-element-nesting, force-pseudo-nesting, no-color-literals, no-important
 
+// Fixes button icon having margin even without text
+.mdc-button .mdc-button__icon:only-child {
+  margin-right: 0;
+}
+
 // Workaround for https://github.com/jamesmfriedman/rmwc/issues/276
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: var(--mdc-theme-primary);
