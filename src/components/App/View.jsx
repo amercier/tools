@@ -1,18 +1,13 @@
 import React from 'react';
-import { BrowserRouter, withRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Theme } from 'rmwc/Theme';
 import { func } from '../common/prop-types';
 
-const LocationAwareTheme = withRouter(({
-  location, match, history, staticContext, ...props
-}) => <Theme {...props} data-path={location.pathname} />);
-
 const View = ({
-  RenderHeader, RenderBody, onMenuToggle, ...bodyProps
+  RenderTheme, RenderHeader, RenderBody, onMenuToggle, ...bodyProps
 }) => (
   <BrowserRouter>
-    <LocationAwareTheme tag="div">
+    <RenderTheme tag="div" modules={bodyProps.modules}>
       <Helmet>
         <title>
           WebDev Tools
@@ -22,11 +17,12 @@ const View = ({
 
       <RenderHeader title="Web Tools" onMenuToggle={onMenuToggle} />
       <RenderBody {...bodyProps} />
-    </LocationAwareTheme>
+    </RenderTheme>
   </BrowserRouter>
 );
 
 View.propTypes = {
+  RenderTheme: func.isRequired,
   RenderHeader: func.isRequired,
   RenderBody: func.isRequired,
   onMenuToggle: func.isRequired,

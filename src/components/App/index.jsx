@@ -4,6 +4,7 @@ import Header from './Header';
 import Menu from './Menu';
 import MenuItem from './MenuItem';
 import Page from './Page';
+import Theme from './Theme';
 import View from './View';
 import Home from '../Home';
 import { modules } from '../config';
@@ -67,6 +68,7 @@ class App extends Component {
         RenderMenu={Menu}
         RenderMenuItem={MenuItem}
         RenderPage={Page}
+        RenderTheme={Theme}
         RenderView={View}
         RenderHome={Home}
 

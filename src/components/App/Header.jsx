@@ -11,8 +11,10 @@ import {
 import { string, func } from '../common/prop-types';
 import GithubToolbarIcon from './GithubToolbarIcon';
 
+import './Header.scss';
+
 const Header = ({ title, onMenuToggle }) => (
-  <header>
+  <div>
     <Toolbar fixed waterfall>
       <ToolbarRow>
         <ToolbarSection alignStart>
@@ -30,7 +32,7 @@ const Header = ({ title, onMenuToggle }) => (
     </Toolbar>
 
     <ToolbarFixedAdjust />
-  </header>
+  </div>
 );
 
 Header.propTypes = {

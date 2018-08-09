@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
-  string, func, arrayOf, shape,
+  bool, string, func, arrayOf, shape,
 } from '../common/prop-types';
 
 const Body = ({
   RenderMenu, RenderMenuItem, RenderHome, RenderPage,
-  modules, ...menuProps
+  modules, isNarrow, ...menuProps
 }) => {
   const styles = {
     container: {
@@ -14,7 +14,7 @@ const Body = ({
     },
     main: {
       flex: '1 1 auto',
-      padding: '1rem 2rem',
+      padding: isNarrow ? '1rem' : '1rem 2rem',
       overflowX: 'hidden',
     },
   };
@@ -23,6 +23,7 @@ const Body = ({
       <RenderMenu
         RenderMenuItem={RenderMenuItem}
         modules={modules}
+        isNarrow={isNarrow}
         {...menuProps}
       />
 
@@ -45,6 +46,7 @@ Body.propTypes = {
   RenderMenuItem: func.isRequired,
   RenderHome: func.isRequired,
   RenderPage: func.isRequired,
+  isNarrow: bool.isRequired,
   modules: arrayOf(shape({
     id: string,
   })).isRequired,
