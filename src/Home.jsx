@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { Card, CardPrimaryAction, CardMedia } from 'rmwc/Card';
 import { Grid, GridCell } from 'rmwc/Grid';
 import { Typography } from 'rmwc/Typography';
-import pages from './Pages';
+import { modules } from './config';
 
 import './Home.scss';
 
-function renderGridCell(page) {
+function renderGridCell(module) {
   const {
     id, title, description, component,
-  } = page;
+  } = module;
 
   if (!component) {
     return null;
@@ -39,6 +39,6 @@ function renderGridCell(page) {
 
 export default () => (
   <Grid className="home-tools-list">
-    {pages.map(renderGridCell)}
+    {modules.map(renderGridCell)}
   </Grid>
 );

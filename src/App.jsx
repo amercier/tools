@@ -20,7 +20,7 @@ import { Typography } from 'rmwc/Typography';
 
 import './App.scss';
 import Home from './Home';
-import pages from './Pages';
+import { modules } from './config';
 
 function isWindowNarrow({ innerWidth }) {
   return innerWidth < 1000;
@@ -33,10 +33,10 @@ const LocationAwareTheme = withRouter((props) => {
   return <Theme {...otherProps} data-path={location.pathname} />;
 });
 
-function renderPage(page) {
+function renderPage(module) {
   const {
     id, title, description, component,
-  } = page;
+  } = module;
 
   if (!component) {
     return null;
@@ -107,10 +107,10 @@ class App extends Component {
     this.setState({ isMenuOpen: !isMenuOpen });
   }
 
-  renderMenuItem(page) {
+  renderMenuItem(module) {
     const {
       id, title, icon, component,
-    } = page;
+    } = module;
     if (component) {
       // Inspired from NavLink implementation
       // https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/modules/NavLink.js
@@ -200,13 +200,13 @@ class App extends Component {
               onClose={() => this.setState({ isMenuOpen: false })}
             >
               <DrawerContent>
-                {pages.map(page => this.renderMenuItem(page))}
+                {modules.map(module => this.renderMenuItem(module))}
               </DrawerContent>
             </Drawer>
 
             <main className="app__content-main">
               <Route exact path="/" component={Home} />
-              {pages.map(page => renderPage(page))}
+              {modules.map(module => renderPage(module))}
             </main>
           </div>
 

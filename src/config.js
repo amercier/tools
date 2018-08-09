@@ -1,14 +1,12 @@
-/* eslint-disable */
+import Base64EncoderDecoder from './components/Base64EncoderDecoder';
+import PasswordGenerator from './components/PasswordGenerator';
+import TiltShiftGenerator from './components/TiltShiftGenerator';
+import UrlEncoderDecoder from './components/UrlEncoderDecoder';
+import UnicodeCharacterPicker from './components/UnicodeCharacterPicker';
+import WebsiteScreenshotGenerator from './components/WebsiteScreenshotGenerator';
+import TravisConfigValidator from './components/TravisConfigValidator';
 
-import Base64EncoderDecoder from '../components/Base64EncoderDecoder';
-import PasswordGenerator from '../components/PasswordGenerator';
-import TiltShiftGenerator from '../components/TiltShiftGenerator';
-import UrlEncoderDecoder from '../components/UrlEncoderDecoder';
-import UnicodeCharacterPicker from '../components/UnicodeCharacterPicker';
-import WebsiteScreenshotGenerator from '../components/WebsiteScreenshotGenerator';
-import TravisConfigValidator from '../components/TravisConfigValidator';
-
-export default [
+export const modules = [ // eslint-disable-line import/prefer-default-export
   {
     id: 'url-encoder',
     title: 'URL encoder/decoder',
