@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import {
-  string, node, object, func,
-} from '../../lib/prop-types';
+import { string, node, object, func } from 'prop-types';
 
 const supportedTypes = [
   'image/jpeg',
@@ -29,31 +27,23 @@ export default class DroppableImage extends Component {
     children: null,
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      dropzoneActive: false,
-    };
-
-    this.onDragEnter = this.onDragEnter.bind(this);
-    this.onDragLeave = this.onDragLeave.bind(this);
-    this.onDropAccepted = this.onDropAccepted.bind(this);
-    this.onDropRejected = this.onDropRejected.bind(this);
+  state = {
+    dropzoneActive: false,
   }
 
-  onDragEnter() {
+  onDragEnter = () => {
     this.setState({
       dropzoneActive: true,
     });
   }
 
-  onDragLeave() {
+  onDragLeave = () => {
     this.setState({
       dropzoneActive: false,
     });
   }
 
-  onDropAccepted(files) {
+  onDropAccepted = (files) => {
     this.setState({
       dropzoneActive: false,
     });
@@ -62,7 +52,7 @@ export default class DroppableImage extends Component {
     onDrop(files[0].preview);
   }
 
-  onDropRejected(rejectedFiles) { // eslint-disable-line class-methods-use-this, no-unused-vars
+  onDropRejected = (rejectedFiles) => { // eslint-disable-line no-unused-vars
     // TODO Implement
   }
 

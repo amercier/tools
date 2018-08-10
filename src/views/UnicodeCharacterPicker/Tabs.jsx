@@ -1,17 +1,12 @@
 import React from 'react';
-import {
-  TabBar, TabBarScroller, Tab, TabIcon, TabIconText,
-} from 'rmwc/Tabs';
+import { TabBar, TabBarScroller, Tab, TabIcon, TabIconText } from 'rmwc/Tabs';
+import { number, string, func, arrayOf, shape } from 'prop-types';
 import { nameToId } from '../../lib/lang';
-import {
-  number, string, func, arrayOf, shape,
-} from '../../lib/prop-types';
+import { eventDetailProperty } from '../../lib/dom';
 
 const Tabs = ({
   charactersMap, activeTabIndex, onChange,
 }) => {
-  const onChangeEvent = ({ detail }) => onChange(detail.activeTabIndex);
-
   const styles = {
     tabBar: {
       marginBottom: '2rem',
@@ -22,7 +17,7 @@ const Tabs = ({
   };
   return (
     <TabBarScroller style={styles.tabBar}>
-      <TabBar activeTabIndex={activeTabIndex} onChange={onChangeEvent}>
+      <TabBar activeTabIndex={activeTabIndex} onChange={eventDetailProperty(onChange, 'activeTabIndex')}>
         {charactersMap.map(({ name, icon }) => (
           <Tab key={`tab-${nameToId(name)}`} style={styles.tab}>
             <TabIcon>

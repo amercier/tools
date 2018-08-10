@@ -1,9 +1,7 @@
 import React from 'react';
 import Typography from 'rmwc/Typography';
+import { bool, number, string, object, node, oneOfType, arrayOf } from 'prop-types';
 import Slider from './Slider';
-import {
-  bool, number, string, object, node, oneOfType, arrayOf,
-} from '../lib/prop-types';
 
 const LabeledSlider = ({
   labelWidth, children, minWidth, disabled, style, ...props

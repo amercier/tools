@@ -5,22 +5,16 @@ import View from './View';
 import { charactersMap } from './config';
 
 export default class UnicodeCharacterPicker extends Component {
-  constructor() {
-    super();
-    this.state = {
-      copiedCharacter: null,
-      activeTabIndex: 0,
-    };
-
-    this.onCopy = this.onCopy.bind(this);
-    this.onTabChange = this.onTabChange.bind(this);
+  state = {
+    copiedCharacter: null,
+    activeTabIndex: 0,
   }
 
-  onCopy(copiedCharacter) {
+  onCopy = (copiedCharacter) => {
     this.setState({ copiedCharacter });
   }
 
-  onTabChange(activeTabIndex) {
+  onTabChange = (activeTabIndex) => {
     this.setState({ activeTabIndex });
   }
 

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  number, string, object, func,
-} from '../../lib/prop-types';
+import { number, string, object, func } from 'prop-types';
 
 const View = ({
   RenderOptions, RenderDroppableImage, RenderToolbar,

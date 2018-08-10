@@ -1,9 +1,7 @@
 import React from 'react';
 import { Typography } from 'rmwc/Typography';
+import { string, func, arrayOf, shape } from 'prop-types';
 import LogEntry from './LogEntry';
-import {
-  string, func, arrayOf, shape,
-} from '../../lib/prop-types';
 
 const Log = ({ messages, RenderEntry }) => {
   if (!messages.length) {

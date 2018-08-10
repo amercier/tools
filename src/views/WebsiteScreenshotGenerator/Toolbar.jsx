@@ -3,7 +3,8 @@ import React from 'react';
 import { Button } from 'rmwc/Button';
 import { Select } from 'rmwc/Select';
 import { TextField } from 'rmwc/TextField';
-import { string, func, arrayOf } from '../../lib/prop-types';
+import { string, func, arrayOf } from 'prop-types';
+import { eventTargetProperty } from '../../lib/dom';
 
 const Toolbar = ({
   url, resolution, resolutions, blobUrl, filename,
@@ -31,14 +32,10 @@ const Toolbar = ({
       marginLeft: '1rem',
     },
   };
-
-  const onUrlValueChange = ({ target }) => onUrlChange(target.value);
-  const onResolutionValueChange = ({ target }) => onResolutionChange(target.value);
-
   return (
     <div className="website-screenshot-toolbar" style={styles.container}>
       <div style={styles.group1}>
-        <TextField label="Website URL" onChange={onUrlValueChange} value={url} className="mdc-text-field--grow" />
+        <TextField label="Website URL" onChange={eventTargetProperty(onUrlChange)} value={url} className="mdc-text-field--grow" />
       </div>
 
       <div style={styles.group2}>
@@ -46,7 +43,7 @@ const Toolbar = ({
           <Select
             value={resolution}
             options={resolutions.map(value => ({ value, label: value }))}
-            onChange={onResolutionValueChange}
+            onChange={eventTargetProperty(onResolutionChange)}
             label="Resolution"
           />
         </div>

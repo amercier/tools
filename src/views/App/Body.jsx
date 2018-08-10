@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import {
-  bool, string, func, arrayOf, shape,
-} from '../../lib/prop-types';
+import { bool, string, func, arrayOf, shape } from 'prop-types';
 
 const Body = ({
   RenderMenu, RenderMenuItem, RenderHome, RenderPage,

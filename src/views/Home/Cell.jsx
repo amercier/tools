@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardPrimaryAction, CardMedia } from 'rmwc/Card';
 import { GridCell } from 'rmwc/Grid';
 import { Typography } from 'rmwc/Typography';
-import { string, shape } from '../../lib/prop-types';
+import { string, shape } from 'prop-types';
 
 const Cell = ({ module }) => {
   const {

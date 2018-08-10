@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, ButtonIcon } from 'rmwc/Button';
-import { string, func } from '../../lib/prop-types';
+import { string, func } from 'prop-types';
 
 import './Password.scss';
 

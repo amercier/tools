@@ -1,9 +1,7 @@
 import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { Drawer, DrawerContent } from 'rmwc/Drawer';
-import {
-  bool, string, func, arrayOf, shape,
-} from '../../lib/prop-types';
+import { bool, string, func, arrayOf, shape } from 'prop-types';
 
 import './Menu.scss';
 

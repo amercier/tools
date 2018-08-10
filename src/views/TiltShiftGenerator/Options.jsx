@@ -3,10 +3,8 @@
 
 import React from 'react';
 import { Grid, GridCell } from 'rmwc/Grid';
+import { bool, number, func, node } from 'prop-types';
 import LabeledSlider from '../../shared/LabeledSlider';
-import {
-  bool, number, func, node,
-} from '../../lib/prop-types';
 
 const SliderCell = ({ children, ...props }) => (
   <GridCell span="4">

@@ -1,6 +1,6 @@
 import * as fx from 'glfx-es6';
 import debounce from 'lodash.debounce';
-import React, { Component } from 'react';
+import React, { createRef, Component } from 'react';
 import DroppableImage from './DroppableImage';
 import Options from './Options';
 import Toolbar from './Toolbar';
@@ -10,34 +10,33 @@ import { defaults } from './config';
 const { round } = Math;
 
 export default class TiltShiftGenerator extends Component {
-  constructor() {
-    super();
-    this.canvasRef = React.createRef();
-    this.imageRef = React.createRef();
+  canvasRef = createRef()
 
-    this.state = {
-      image: null,
-      imageWidth: 0,
-      imageHeight: 0,
-      ...defaults,
-      downloadUrl: null,
-    };
+  imageRef = createRef()
 
-    this.onOptionChange = this.onOptionChange.bind(this);
-    this.onDrop = this.onDrop.bind(this);
-    this.onImageLoad = this.onImageLoad.bind(this);
-    this.updateImageDownload = this.updateImageDownload.bind(this);
-    this.updateImageDownloadDebounced = debounce(this.updateImageDownload, 500);
+  updateImageDownload = debounce(() => {
+    this.canvas.update(); // See https://stackoverflow.com/questions/26783586/canvas-todataurl-returns-blank-image-only-in-firefox/26790802#26790802
+    this.setState({
+      downloadUrl: this.canvas.toDataURL('image/png'),
+    });
+  }, 500);
+
+  state = {
+    image: null,
+    imageWidth: 0,
+    imageHeight: 0,
+    ...defaults,
+    downloadUrl: null,
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.canvas && this.canvasNeedsUpdate(prevState)) {
       this.updateCanvas();
-      this.updateImageDownloadDebounced();
+      this.updateImageDownload();
     }
   }
 
-  onDrop(preview) {
+  onDrop = (preview) => {
     const { image } = this.state;
     if (image) {
       window.URL.revokeObjectURL(image);
@@ -62,11 +61,11 @@ export default class TiltShiftGenerator extends Component {
     });
   }
 
-  onDropRejected(rejectedFiles) { // eslint-disable-line class-methods-use-this, no-unused-vars
+  onDropRejected = (rejectedFiles) => { // eslint-disable-line no-unused-vars
     // TODO Implement
   }
 
-  onImageLoad({ target }) {
+  onImageLoad = ({ target }) => {
     const {
       naturalWidth: imageWidth,
       naturalHeight: imageHeight,
@@ -76,7 +75,7 @@ export default class TiltShiftGenerator extends Component {
     this.createCanvas(imageWidth, imageHeight);
   }
 
-  onOptionChange(name, value) {
+  onOptionChange = (name, value) => {
     this.setState({ [name]: value });
   }
 
@@ -136,13 +135,6 @@ export default class TiltShiftGenerator extends Component {
     );
     this.canvas.vignette(0.5, vignetting / 100);
     this.canvas.update();
-  }
-
-  updateImageDownload() {
-    this.canvas.update(); // See https://stackoverflow.com/questions/26783586/canvas-todataurl-returns-blank-image-only-in-firefox/26790802#26790802
-    this.setState({
-      downloadUrl: this.canvas.toDataURL('image/png'),
-    });
   }
 
   render() {
