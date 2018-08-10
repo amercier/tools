@@ -1,6 +1,6 @@
 import React from 'react';
-import LabeledSlider from '../common/LabeledSlider';
-import Switch from '../common/Switch';
+import LabeledSlider from '../../shared/LabeledSlider';
+import Switch from '../../shared/Switch';
 import { number, bool, func } from '../../lib/prop-types';
 import { minLength, maxLength } from './config';
 

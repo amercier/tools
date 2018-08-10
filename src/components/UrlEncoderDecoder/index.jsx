@@ -1,5 +1,5 @@
 import { urlEncode, urlDecode } from './url';
-import AbstactEncoderDecoder from '../common/EncoderDecoder/Abstract';
+import AbstactEncoderDecoder from '../../shared/EncoderDecoder/Abstract';
 
 export default class Base64EncoderDecoder extends AbstactEncoderDecoder {
   static encode = urlEncode;

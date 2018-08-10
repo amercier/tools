@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from '../common/Spinner';
+import Spinner from '../../shared/Spinner';
 import { bool, number, string } from '../../lib/prop-types';
 
 const ImageLoader = ({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'rmwc/Button';
 import { TextField } from 'rmwc/TextField';
-import { string, func, bool } from '../../../lib/prop-types';
+import { string, func, bool } from '../../lib/prop-types';
 
 const EncoderDecoderView = ({
   input, onInputChange, onEncode, onDecode, isDecodeDisabled, isEncodeDisabled,

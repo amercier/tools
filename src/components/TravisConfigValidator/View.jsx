@@ -1,7 +1,7 @@
 import React from 'react';
-import ActionBar from '../common/ActionBar';
+import ActionBar from '../../shared/ActionBar';
 import Textarea from './Textarea';
-import ValidationStatus from '../common/ValidationStatus';
+import ValidationStatus from '../../shared/ValidationStatus';
 import {
   bool, string, func, arrayOf, shape,
 } from '../../lib/prop-types';

@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AbstractEncoderDecoder from './Abstract';
-import { identity } from '../../../lib/lang';
+import { identity } from '../../lib/lang';
 
 class ConcreteEncoderDecoder extends AbstractEncoderDecoder {
   get isEncodeDisabled() { return true; }
