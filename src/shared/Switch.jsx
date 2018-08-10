@@ -4,7 +4,7 @@ import { func, node, oneOfType, arrayOf } from 'prop-types';
 import { eventTargetProperty } from '../lib/dom';
 
 const Switch = ({ onChange, children, ...props }) => (
-  <RmwcSwitch onChange={eventTargetProperty(onChange)} {...props}>
+  <RmwcSwitch onChange={eventTargetProperty(onChange, 'checked')} {...props}>
     {children}
   </RmwcSwitch>
 );
