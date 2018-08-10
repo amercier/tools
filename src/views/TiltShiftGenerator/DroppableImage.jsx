@@ -10,6 +10,14 @@ const supportedTypes = [
   'image/png',
 ];
 
+const absoluteCover = {
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  bottom: '0',
+  left: '0',
+};
+
 export default class DroppableImage extends Component {
   static propTypes = {
     image: string,
@@ -56,14 +64,10 @@ export default class DroppableImage extends Component {
     // TODO Implement
   }
 
-  render() {
-    const {
-      image, imageStyle, imageRef, placeholder, children, ...props
-    } = this.props;
+  getStyles(image, imageStyle) {
     const { dropzoneActive } = this.state;
-
     const inactiveBorderColor = image ? 'transparent' : '#ccc';
-    const styles = {
+    return {
       dropZone: {
         marginTop: '2rem',
         minHeight: '25vh',
@@ -73,11 +77,7 @@ export default class DroppableImage extends Component {
         cursor: 'pointer',
       },
       placeholder: {
-        position: 'absolute',
-        top: '0',
-        right: '0',
-        bottom: '0',
-        left: '0',
+        ...absoluteCover,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -89,7 +89,13 @@ export default class DroppableImage extends Component {
         ...imageStyle,
       },
     };
+  }
 
+  render() {
+    const {
+      image, imageStyle, imageRef, placeholder, children, ...props
+    } = this.props;
+    const styles = this.getStyles(image, imageStyle);
     return (
       <Dropzone
         accept={supportedTypes.join(',')}

@@ -37,20 +37,8 @@ export default class TiltShiftGenerator extends Component {
   }
 
   onDrop = (preview) => {
-    const { image } = this.state;
-    if (image) {
-      window.URL.revokeObjectURL(image);
-    }
-
-    if (this.texture) {
-      this.texture.destroy();
-      delete this.texture;
-    }
-
-    if (this.canvas) {
-      this.canvas.parentNode.removeChild(this.canvas);
-      delete this.canvas;
-    }
+    this.freeImageResource();
+    this.deleteCanvas();
 
     this.setState({
       dropzoneActive: false,
@@ -79,6 +67,31 @@ export default class TiltShiftGenerator extends Component {
     this.setState({ [name]: value });
   }
 
+  createCanvas(width, height) {
+    this.canvas = fx.canvas();
+    this.canvas.style.width = '100%';
+    this.canvasRef.current.appendChild(this.canvas);
+    this.texture = this.canvas.texture(this.imageRef.current, width, height);
+  }
+
+  deleteCanvas() {
+    if (this.texture) {
+      this.texture.destroy();
+      delete this.texture;
+    }
+    if (this.canvas) {
+      this.canvas.parentNode.removeChild(this.canvas);
+      delete this.canvas;
+    }
+  }
+
+  freeImageResource() {
+    const { image } = this.state;
+    if (image) {
+      window.URL.revokeObjectURL(image);
+    }
+  }
+
   canvasNeedsUpdate(prevState) {
     return [
       'imageWidth',
@@ -94,30 +107,8 @@ export default class TiltShiftGenerator extends Component {
     );
   }
 
-  createCanvas(width, height) {
-    this.canvas = fx.canvas();
-    this.canvas.style.width = '100%';
-    this.canvasRef.current.appendChild(this.canvas);
-    this.texture = this.canvas.texture(this.imageRef.current, width, height);
-  }
-
-  updateCanvas() {
-    this.canvas.draw(this.texture);
-
-    const {
-      imageWidth: width, imageHeight: height, position,
-      blur, distance, perspective, zoom, vignetting,
-    } = this.state;
-
-    this.canvas.tiltShift(
-      0,
-      round(position * height / 100),
-      width,
-      round(position * height / 100),
-      blur,
-      distance,
-    );
-
+  updatePerspective() {
+    const { imageWidth: width, imageHeight: height, perspective, zoom } = this.state;
     const delta = round(perspective * width / 100);
     this.canvas.perspective(
       [
@@ -133,7 +124,30 @@ export default class TiltShiftGenerator extends Component {
         ...[width + round(zoom * delta / 100), height],
       ],
     );
+  }
+
+  updateTiltShift() {
+    const { imageWidth: width, imageHeight: height, position, blur, distance } = this.state;
+    this.canvas.tiltShift(
+      0,
+      round(position * height / 100),
+      width,
+      round(position * height / 100),
+      blur,
+      distance,
+    );
+  }
+
+  updateVignette() {
+    const { vignetting } = this.state;
     this.canvas.vignette(0.5, vignetting / 100);
+  }
+
+  updateCanvas() {
+    this.canvas.draw(this.texture);
+    this.updateTiltShift();
+    this.updatePerspective();
+    this.updateVignette();
     this.canvas.update();
   }
 
