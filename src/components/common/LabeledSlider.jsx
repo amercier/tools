@@ -1,16 +1,12 @@
 import React from 'react';
 import Typography from 'rmwc/Typography';
 import Slider from './Slider';
-import { implode } from './lang';
-import namespace from './namespace';
 import {
   bool, number, string, object, node, oneOfType, arrayOf,
 } from './prop-types';
 
-const baseClassName = `${namespace}-labeled-slider`;
-
 const LabeledSlider = ({
-  labelWidth, className, children, minWidth, disabled, style, ...props
+  labelWidth, children, minWidth, disabled, style, ...props
 }) => {
   const styles = {
     container: {
@@ -30,7 +26,7 @@ const LabeledSlider = ({
   };
 
   return (
-    <div style={{ ...style, ...styles.container }} className={implode(' ', baseClassName, className)}>
+    <div style={{ ...style, ...styles.container }}>
       <Typography tag="span" use="body2" theme={disabled && 'text-disabled-on-background'} style={styles.label}>
         {children}
       </Typography>
