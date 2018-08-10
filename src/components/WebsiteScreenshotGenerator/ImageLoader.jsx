@@ -1,6 +1,6 @@
 import React from 'react';
 import Spinner from '../common/Spinner';
-import { bool, number, string } from '../common/prop-types';
+import { bool, number, string } from '../../lib/prop-types';
 
 const ImageLoader = ({
   width, height, loading, blobUrl, alt,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { func } from '../common/prop-types';
+import { func } from '../../lib/prop-types';
 
 const View = ({
   RenderTheme, RenderHeader, RenderBody, onMenuToggle, ...bodyProps

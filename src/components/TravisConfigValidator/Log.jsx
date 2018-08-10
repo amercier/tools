@@ -3,7 +3,7 @@ import { Typography } from 'rmwc/Typography';
 import LogEntry from './LogEntry';
 import {
   string, func, arrayOf, shape,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const Log = ({ messages, RenderEntry }) => {
   if (!messages.length) {

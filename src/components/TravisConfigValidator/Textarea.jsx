@@ -1,9 +1,9 @@
 import React from 'react';
 import { TextField } from 'rmwc/TextField';
-import { auto } from '../common/lang';
+import { auto } from '../../lib/lang';
 import {
   bool, number, string, func, oneOfType,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const Textarea = ({
   value, rows, minRows, maxRows, onChange, ...props

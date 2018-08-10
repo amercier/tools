@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch as RmwcSwitch } from 'rmwc/Switch';
 import {
   func, node, oneOfType, arrayOf,
-} from './prop-types';
+} from '../../lib/prop-types';
 
 const Switch = ({ onChange, children, ...props }) => {
   const onValueChange = ({ target }) => onChange(target.checked);

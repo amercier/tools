@@ -8,7 +8,7 @@ import {
   ToolbarSection,
   ToolbarTitle,
 } from 'rmwc/Toolbar';
-import { string, func } from '../common/prop-types';
+import { string, func } from '../../lib/prop-types';
 import GithubToolbarIcon from './GithubToolbarIcon';
 
 import './Header.scss';

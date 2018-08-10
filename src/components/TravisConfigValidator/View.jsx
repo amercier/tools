@@ -4,7 +4,7 @@ import Textarea from './Textarea';
 import ValidationStatus from '../common/ValidationStatus';
 import {
   bool, string, func, arrayOf, shape,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 import { textarea as textareaProps } from './config';
 
 const View = ({

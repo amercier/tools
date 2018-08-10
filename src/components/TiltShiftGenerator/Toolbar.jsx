@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'rmwc/Button';
-import { string } from '../common/prop-types';
+import { string } from '../../lib/prop-types';
 
 const Toolbar = ({ downloadUrl }) => (
   <div style={{ margin: '1rem 0', textAlign: 'right' }}>

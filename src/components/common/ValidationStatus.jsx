@@ -1,7 +1,7 @@
 import React from 'react';
 import Spinner from './Spinner';
 import ValidationMessage from './ValidationMessage';
-import { bool, string } from './prop-types';
+import { bool, string } from '../../lib/prop-types';
 
 const ValidationStatus = ({ loading, success, message }) => {
   if (loading) {

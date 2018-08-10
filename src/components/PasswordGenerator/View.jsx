@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   bool, number, string, func,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const View = ({
   RenderOptions, RenderPassword, RenderCopyToClipboard,

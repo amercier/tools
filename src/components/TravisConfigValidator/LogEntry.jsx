@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'rmwc/Icon';
-import { string } from '../common/prop-types';
+import { string } from '../../lib/prop-types';
 
 const logIcons = {
   info: 'info',

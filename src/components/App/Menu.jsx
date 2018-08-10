@@ -3,7 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 import { Drawer, DrawerContent } from 'rmwc/Drawer';
 import {
   bool, string, func, arrayOf, shape,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 import './Menu.scss';
 

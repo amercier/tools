@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   number, string, object, func,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const View = ({
   RenderOptions, RenderDroppableImage, RenderToolbar,

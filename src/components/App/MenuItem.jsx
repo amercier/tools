@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SimpleListItem } from 'rmwc/List';
 import {
   bool, string, func, shape,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const MenuItem = ({ active, module, onClick }) => {
   const {

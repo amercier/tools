@@ -2,10 +2,10 @@ import React from 'react';
 import {
   TabBar, TabBarScroller, Tab, TabIcon, TabIconText,
 } from 'rmwc/Tabs';
-import { nameToId } from '../common/lang';
+import { nameToId } from '../../lib/lang';
 import {
   number, string, func, arrayOf, shape,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const Tabs = ({
   charactersMap, activeTabIndex, onChange,

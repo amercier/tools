@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
   bool, string, func, arrayOf, shape,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const Body = ({
   RenderMenu, RenderMenuItem, RenderHome, RenderPage,

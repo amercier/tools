@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'rmwc/Button';
-import { noop } from './lang';
+import { noop } from '../../lib/lang';
 import {
   bool, string, func, node,
-} from './prop-types';
+} from '../../lib/prop-types';
 
 const ActionBar = ({
   children,

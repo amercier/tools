@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Character from './Character';
-import { noop } from '../common/lang';
+import { noop } from '../../lib/lang';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

@@ -3,7 +3,7 @@ import Typography from 'rmwc/Typography';
 import Slider from './Slider';
 import {
   bool, number, string, object, node, oneOfType, arrayOf,
-} from './prop-types';
+} from '../../lib/prop-types';
 
 const LabeledSlider = ({
   labelWidth, children, minWidth, disabled, style, ...props

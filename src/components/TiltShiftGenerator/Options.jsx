@@ -6,7 +6,7 @@ import { Grid, GridCell } from 'rmwc/Grid';
 import LabeledSlider from '../common/LabeledSlider';
 import {
   bool, number, func, node,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const SliderCell = ({ children, ...props }) => (
   <GridCell span="4">

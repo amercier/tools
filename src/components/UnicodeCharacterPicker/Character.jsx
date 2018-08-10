@@ -1,6 +1,6 @@
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { bool, string, func } from '../common/prop-types';
+import { bool, string, func } from '../../lib/prop-types';
 
 import './Character.scss';
 

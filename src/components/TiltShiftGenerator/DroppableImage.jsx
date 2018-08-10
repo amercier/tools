@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import {
   string, node, object, func,
-} from '../common/prop-types';
+} from '../../lib/prop-types';
 
 const supportedTypes = [
   'image/jpeg',

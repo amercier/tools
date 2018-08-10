@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from 'rmwc/Typography';
-import { bool, string } from './prop-types';
+import { bool, string } from '../../lib/prop-types';
 
 const ValidationMessage = ({ success, message }) => {
   const icon = success ? 'check' : 'error';
