@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button, ButtonIcon } from 'rmwc/Button';
 import { Typography } from 'rmwc/Typography';
-import { string, func, shape } from '../../lib/prop-types';
+import { string, func, shape } from 'prop-types';
 
 const Page = ({ module }) => {
   const { title, description, component } = module;

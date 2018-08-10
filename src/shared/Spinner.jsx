@@ -1,5 +1,5 @@
 import React from 'react';
-import { number } from '../lib/prop-types';
+import { number } from 'prop-types';
 
 const Spinner = ({ size, thickness }) => {
   const styles = {

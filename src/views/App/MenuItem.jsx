@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SimpleListItem } from 'rmwc/List';
-import {
-  bool, string, func, shape,
-} from '../../lib/prop-types';
+import { bool, string, func, shape } from 'prop-types';
 
 const MenuItem = ({ active, module, onClick }) => {
   const {

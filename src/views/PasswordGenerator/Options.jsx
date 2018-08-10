@@ -1,7 +1,7 @@
 import React from 'react';
+import { number, bool, func } from 'prop-types';
 import LabeledSlider from '../../shared/LabeledSlider';
 import Switch from '../../shared/Switch';
-import { number, bool, func } from '../../lib/prop-types';
 import { minLength, maxLength } from './config';
 
 const Options = ({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slider as RmwcSlider } from 'rmwc/Slider';
+import { func } from 'prop-types';
 import { noop } from '../lib/lang';
-import { func } from '../lib/prop-types';
 
 const Slider = ({ onInput, onChange, ...props }) => {
   const onValueInput = ({ detail }) => onInput(detail.value);

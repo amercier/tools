@@ -1,8 +1,6 @@
 import React from 'react';
 import filenamifyUrl from 'filenamify-url';
-import {
-  bool, string, func, arrayOf,
-} from '../../lib/prop-types';
+import { bool, string, func, arrayOf } from 'prop-types';
 
 function getFilenameFromUrl(url, extension) {
   const basename = filenamifyUrl(url, { replacement: '-' });

@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from 'rmwc/Button';
 import { Select } from 'rmwc/Select';
 import { TextField } from 'rmwc/TextField';
-import { string, func, arrayOf } from '../../lib/prop-types';
+import { string, func, arrayOf } from 'prop-types';
 
 const Toolbar = ({
   url, resolution, resolutions, blobUrl, filename,

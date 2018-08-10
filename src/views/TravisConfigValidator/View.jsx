@@ -1,10 +1,8 @@
 import React from 'react';
+import { bool, string, func, arrayOf, shape } from 'prop-types';
 import ActionBar from '../../shared/ActionBar';
 import Textarea from './Textarea';
 import ValidationStatus from '../../shared/ValidationStatus';
-import {
-  bool, string, func, arrayOf, shape,
-} from '../../lib/prop-types';
 import { textarea as textareaProps } from './config';
 
 const View = ({

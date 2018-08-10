@@ -2,7 +2,7 @@ import React from 'react';
 import Copy from 'react-copy-to-clipboard';
 import { Button } from 'rmwc/Button';
 import { Typography } from 'rmwc/Typography';
-import { bool, string, func } from '../../lib/prop-types';
+import { bool, string, func } from 'prop-types';
 
 const CopyToClipboard = ({ password, copied, onCopy }) => (
   <Copy text={password} onCopy={onCopy}>

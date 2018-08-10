@@ -1,8 +1,6 @@
 import React from 'react';
+import { number, string, func, arrayOf, shape } from 'prop-types';
 import { nameToId } from '../../lib/lang';
-import {
-  number, string, func, arrayOf, shape,
-} from '../../lib/prop-types';
 
 const View = ({
   RenderTabs, RenderCharacter,
