@@ -1,15 +1,13 @@
 import React from 'react';
 import { Switch as RmwcSwitch } from 'rmwc/Switch';
 import { func, node, oneOfType, arrayOf } from 'prop-types';
+import { eventTargetProperty } from '../lib/dom';
 
-const Switch = ({ onChange, children, ...props }) => {
-  const onValueChange = ({ target }) => onChange(target.checked);
-  return (
-    <RmwcSwitch onChange={onValueChange} {...props}>
-      {children}
-    </RmwcSwitch>
-  );
-};
+const Switch = ({ onChange, children, ...props }) => (
+  <RmwcSwitch onChange={eventTargetProperty(onChange)} {...props}>
+    {children}
+  </RmwcSwitch>
+);
 
 Switch.propTypes = {
   onChange: func.isRequired,

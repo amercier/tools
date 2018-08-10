@@ -2,11 +2,11 @@ import React from 'react';
 import { TextField } from 'rmwc/TextField';
 import { bool, number, string, func, oneOfType } from 'prop-types';
 import { auto } from '../../lib/lang';
+import { eventTargetProperty } from '../../lib/dom';
 
 const Textarea = ({
   value, rows, minRows, maxRows, onChange, ...props
 }) => {
-  const onValueChange = ({ target }) => onChange(target.value);
   const actualRows = auto(rows, minRows, maxRows)(value.split(/\n/).length);
   const style = {
     fontFamily: 'monospace',
@@ -20,7 +20,7 @@ const Textarea = ({
       value={value}
       rows={actualRows}
       style={style}
-      onChange={onValueChange}
+      onChange={eventTargetProperty(onChange)}
       {...props}
     />
   );

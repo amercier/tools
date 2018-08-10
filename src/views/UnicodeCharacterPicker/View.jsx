@@ -8,6 +8,7 @@ const View = ({
   onTabChange, onCopy,
 }) => {
   const activeCategory = charactersMap[activeTabIndex];
+  const getOnCopy = character => (() => onCopy(character));
   return (
     <div>
       <RenderTabs
@@ -22,7 +23,7 @@ const View = ({
             key={`character-${nameToId(activeCategory.name)}-${character}`}
             character={character}
             copied={character === copiedCharacter}
-            onCopy={() => onCopy(character)}
+            onCopy={getOnCopy(character)}
           />
         ))}
       </div>

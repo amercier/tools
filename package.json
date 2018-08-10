@@ -123,6 +123,14 @@
             "consistent": true
           }
         }
+      ],
+      "react/jsx-no-bind": [
+        "error",
+        {
+          "ignoreRefs": true,
+          "allowArrowFunctions": false,
+          "allowBind": false
+        }
       ]
     },
     "overrides": [

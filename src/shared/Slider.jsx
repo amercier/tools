@@ -2,12 +2,15 @@ import React from 'react';
 import { Slider as RmwcSlider } from 'rmwc/Slider';
 import { func } from 'prop-types';
 import { noop } from '../lib/lang';
+import { eventDetailProperty } from '../lib/dom';
 
-const Slider = ({ onInput, onChange, ...props }) => {
-  const onValueInput = ({ detail }) => onInput(detail.value);
-  const onValueChange = ({ detail }) => onChange(detail.value);
-  return <RmwcSlider onInput={onValueInput} onChange={onValueChange} {...props} />;
-};
+const Slider = ({ onInput, onChange, ...props }) => (
+  <RmwcSlider
+    onInput={eventDetailProperty(onInput)}
+    onChange={eventDetailProperty(onChange)}
+    {...props}
+  />
+);
 
 Slider.propTypes = {
   onInput: func,
