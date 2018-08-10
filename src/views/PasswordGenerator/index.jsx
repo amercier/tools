@@ -8,28 +8,21 @@ import View from './View';
 import './index.scss';
 
 export default class PasswordGenerator extends Component {
-  constructor() {
-    super();
-    this.state = {
-      password: null,
-      length: 32,
-      numbers: true,
-      symbols: true,
-      uppercase: true,
-      excludeSimilarCharacters: true,
-      copied: false,
-    };
+  state = {
+    password: null,
+    length: 32,
+    numbers: true,
+    symbols: true,
+    uppercase: true,
+    excludeSimilarCharacters: true,
+    copied: false,
+  };
 
-    this.onCopy = this.onCopy.bind(this);
-    this.updatePassword = this.updatePassword.bind(this);
-    this.onOptionChange = this.onOptionChange.bind(this);
-  }
-
-  onCopy() {
+  onCopy = () => {
     this.setState({ copied: true });
   }
 
-  onOptionChange(name, value, triggerUpdate) {
+  onOptionChange = (name, value, triggerUpdate) => {
     this.setState({ [name]: value });
     if (triggerUpdate) {
       this.updatePassword();
@@ -44,7 +37,7 @@ export default class PasswordGenerator extends Component {
     return { password };
   }
 
-  updatePassword() {
+  updatePassword = () => {
     this.setState({
       password: null,
       copied: false,

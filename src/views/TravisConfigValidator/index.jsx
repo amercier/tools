@@ -5,29 +5,24 @@ import TravisYmlValidator from './validator';
 import * as config from './config';
 
 export default class TravisConfigValidator extends Component {
-  constructor() {
-    super();
-    this.validator = new TravisYmlValidator(config);
-    this.state = {
-      input: '',
-      loading: false,
-      success: false,
-      status: null,
-      messages: [],
-    };
+  validator = new TravisYmlValidator(config)
 
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onValidate = this.onValidate.bind(this);
+  state = {
+    input: '',
+    loading: false,
+    success: false,
+    status: null,
+    messages: [],
   }
 
-  onInputChange(input) {
+  onInputChange = (input) => {
     this.setState({
       status: null,
       input,
     });
   }
 
-  onValidate() {
+  onValidate = () => {
     this.setState({
       status: null,
       loading: true,

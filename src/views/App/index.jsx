@@ -14,18 +14,9 @@ function isWindowNarrow({ innerWidth }) {
 }
 
 class App extends Component {
-  constructor() {
-    super();
-    const isNarrow = isWindowNarrow(window);
-    this.state = {
-      isNarrow,
-      isMenuOpen: !isNarrow,
-    };
-
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
-    this.onMenuClick = this.onMenuClick.bind(this);
-    this.onWindowResize = this.onWindowResize.bind(this);
+  state = {
+    isNarrow: isWindowNarrow(window),
+    isMenuOpen: !isWindowNarrow(window),
   }
 
   componentDidMount() {
@@ -36,26 +27,26 @@ class App extends Component {
     window.removeEventListener('resize', this.onWindowResize);
   }
 
-  onMenuClick() {
+  onMenuClick = () => {
     const { isNarrow } = this.state;
     if (isNarrow) {
       this.setState({ isMenuOpen: false });
     }
   }
 
-  onWindowResize() {
+  onWindowResize = () => {
     const { isNarrow } = this.state;
     if (isNarrow !== isWindowNarrow(window)) {
       this.setState({ isNarrow: !isNarrow });
     }
   }
 
-  toggleMenu() {
+  toggleMenu = () => {
     const { isMenuOpen } = this.state;
     this.setState({ isMenuOpen: !isMenuOpen });
   }
 
-  closeMenu() {
+  closeMenu = () => {
     this.setState({ isMenuOpen: false });
   }
 

@@ -16,25 +16,17 @@ export function getScreenshotUrl(url, width, height) {
 }
 
 export default class WebsiteScreenshotGenerator extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      url: 'https://google.com/',
-      resolution: resolutions[2],
-      loading: false,
-    };
-
-    this.onUrlChange = this.onUrlChange.bind(this);
-    this.onResolutionChange = this.onResolutionChange.bind(this);
-    this.go = this.go.bind(this);
+  state = {
+    url: 'https://google.com/',
+    resolution: resolutions[2],
+    loading: false,
   }
 
-  onUrlChange(url) {
+  onUrlChange = (url) => {
     this.setState({ url });
   }
 
-  onResolutionChange(resolution) {
+  onResolutionChange = (resolution) => {
     this.setState({ resolution });
   }
 
