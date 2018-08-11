@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from 'rmwc/Button';
+import Button from '@material-ui/core/Button';
 import UrlEncoderDecoder from '.';
 
 it('renders without crashing', () => {
@@ -14,13 +14,13 @@ describe('input field', () => {
   it('starts with an empty input', () => {
     const wrapper = mount(<UrlEncoderDecoder />);
     expect(wrapper.state('input')).toBe('');
-    expect(wrapper.find('textarea').instance().value).toBe('');
+    expect(wrapper.find('textarea').last().instance().value).toBe('');
   });
 
   it('displays the new input on state change', () => {
     const wrapper = mount(<UrlEncoderDecoder />);
     wrapper.setState({ input: 'http://localhost/' });
-    expect(wrapper.find('textarea').instance().value).toBe('http://localhost/');
+    expect(wrapper.find('textarea').last().instance().value).toBe('http://localhost/');
   });
 });
 

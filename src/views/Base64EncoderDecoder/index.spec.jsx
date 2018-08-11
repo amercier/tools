@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from 'rmwc/Button';
+import Button from '@material-ui/core/Button';
 import Base64EncoderDecoder from '.';
 
 it('renders without crashing', () => {
@@ -15,13 +15,13 @@ describe('input field', () => {
   it('starts with an empty input', () => {
     const wrapper = mount(<Base64EncoderDecoder />);
     expect(wrapper.state('input')).toBe('');
-    expect(wrapper.find('textarea').instance().value).toBe('');
+    expect(wrapper.find('textarea').last().instance().value).toBe('');
   });
 
   it('displays the new input on state change', () => {
     const wrapper = mount(<Base64EncoderDecoder />);
     wrapper.setState({ input: '✓ à la mode' });
-    expect(wrapper.find('textarea').instance().value).toBe('✓ à la mode');
+    expect(wrapper.find('textarea').last().instance().value).toBe('✓ à la mode');
   });
 });
 
