@@ -2,6 +2,8 @@
   "name": "tools",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.4.3",
+    "@material-ui/icons": "^2.0.1",
     "fetch-ponyfill": "^6.0.2",
     "filenamify-url": "^1.0.0",
     "generate-password": "^1.4.0",
