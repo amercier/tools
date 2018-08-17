@@ -2,7 +2,7 @@ import React from 'react';
 import { bool, number, string, func } from 'prop-types';
 
 const View = ({
-  RenderOptions, RenderPassword, RenderCopyToClipboard, RenderNotifications,
+  RenderOptions, RenderPassword, RenderCopyToClipboard, RenderNotification,
   password, onPasswordUpdateRequested, onCopy, copied, showCopyMessage, onCopyMessageClose,
   onOptionChange, ...optionsProps
 }) => (
@@ -10,7 +10,7 @@ const View = ({
     <RenderOptions onChange={onOptionChange} {...optionsProps} />
     <RenderPassword password={password} onPasswordUpdateRequested={onPasswordUpdateRequested} />
     <RenderCopyToClipboard password={password} copied={copied} onCopy={onCopy} />
-    <RenderNotifications showCopyMessage={showCopyMessage} onClose={onCopyMessageClose} />
+    <RenderNotification showCopyMessage={showCopyMessage} onClose={onCopyMessageClose} />
   </div>
 );
 
@@ -18,7 +18,7 @@ View.propTypes = {
   RenderOptions: func.isRequired,
   RenderPassword: func.isRequired,
   RenderCopyToClipboard: func.isRequired,
-  RenderNotifications: func.isRequired,
+  RenderNotification: func.isRequired,
 
   password: string.isRequired,
   onPasswordUpdateRequested: func.isRequired,

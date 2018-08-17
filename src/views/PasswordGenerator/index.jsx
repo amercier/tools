@@ -1,7 +1,7 @@
 import { generate as generatePassword } from 'generate-password';
 import React, { Component } from 'react';
 import CopyToClipboard from './CopyToClipboard';
-import Notifications from './Notifications';
+import Notification from './Notification';
 import Options from './Options';
 import Password from './Password';
 import View from './View';
@@ -64,7 +64,7 @@ export default class PasswordGenerator extends Component {
         RenderOptions={Options}
         RenderPassword={Password}
         RenderCopyToClipboard={CopyToClipboard}
-        RenderNotifications={Notifications}
+        RenderNotification={Notification}
 
         password={password}
         onPasswordUpdateRequested={this.handlePasswordUpdateRequested}

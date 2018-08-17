@@ -12,7 +12,7 @@ const styles = theme => ({
   },
 });
 
-const Notifications = ({ showCopyMessage, onClose, classes }) => (
+const Notification = ({ showCopyMessage, onClose, classes }) => (
   <Snackbar
     anchorOrigin={{
       vertical: 'bottom',
@@ -30,10 +30,10 @@ const Notifications = ({ showCopyMessage, onClose, classes }) => (
   />
 );
 
-Notifications.propTypes = {
+Notification.propTypes = {
   classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
   showCopyMessage: bool.isRequired,
   onClose: func.isRequired,
 };
 
-export default withStyles(styles)(Notifications);
+export default withStyles(styles)(Notification);

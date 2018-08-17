@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Cell from './Cell';
+import { BrowserRouter } from 'react-router-dom';
+import Item from './Item';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Cell module={{}} />, div);
+  ReactDOM.render((
+    <BrowserRouter>
+      <Item module={{ id: '' }} />
+    </BrowserRouter>
+  ), div);
   ReactDOM.unmountComponentAtNode(div);
 });

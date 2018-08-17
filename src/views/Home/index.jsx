@@ -1,4 +1,9 @@
+import React from 'react';
 import View from './View';
+import Panel from './Panel';
+import Item from './Item';
+import { modules } from '../config';
 
-// No state, export as-is
-export default View;
+const implementedModules = modules.filter(m => m.component);
+
+export default () => <View modules={implementedModules} RenderPanel={Panel} RenderItem={Item} />;
