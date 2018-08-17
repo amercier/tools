@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LabeledSlider from './LabeledSlider';
-import { noop } from '../lib/lang';
+import LabeledSliderCompat from './LabeledSliderCompat';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<LabeledSlider name="test" label="Test" value={0} onChange={noop} />, div);
+  ReactDOM.render((
+    <LabeledSliderCompat>
+      Test
+    </LabeledSliderCompat>
+  ), div);
   ReactDOM.unmountComponentAtNode(div);
 });

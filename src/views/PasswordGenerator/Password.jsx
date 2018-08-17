@@ -1,24 +1,47 @@
 import React from 'react';
-import { Button, ButtonIcon } from 'rmwc/Button';
-import { string, func } from 'prop-types';
+import { string, func, object } from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
-import './Password.scss';
+const styles = ({ spacing }) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 6 * spacing.unit,
+    marginBottom: 6 * spacing.unit,
+    justifyContent: 'center',
+  },
+  password: {
+    // TODO Set in theme
+    fontFamily: 'Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+    fontSize: '1.2rem',
+  },
+  button: {
+    marginLeft: 2 * spacing.unit,
+  },
+});
 
-const Password = ({ password, updatePassword }) => (
-  <div className="password-generator-password">
-    <pre className="password-generator-password__password">
+const Password = ({ password, onPasswordUpdateRequested, classes }) => (
+  <div className={classes.root}>
+    <Typography noWrap component="span" className={classes.password}>
       {password}
-    </pre>
-    <Button raised onClick={updatePassword}>
-      <ButtonIcon use="refresh" />
-    </Button>
+    </Typography>
+    <Tooltip disableFocusListener title="Regenerate">
+      <IconButton aria-label="Regenerate" variant="contained" color="secondary" onClick={onPasswordUpdateRequested} className={classes.button}>
+        <RefreshIcon />
+      </IconButton>
+    </Tooltip>
     <div />
   </div>
 );
 
 Password.propTypes = {
+  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
   password: string.isRequired,
-  updatePassword: func.isRequired,
+  onPasswordUpdateRequested: func.isRequired,
 };
 
-export default Password;
+export default withStyles(styles)(Password);

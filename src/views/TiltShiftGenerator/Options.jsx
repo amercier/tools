@@ -4,13 +4,13 @@
 import React from 'react';
 import { Grid, GridCell } from 'rmwc/Grid';
 import { bool, number, func, node } from 'prop-types';
-import LabeledSlider from '../../shared/LabeledSlider';
+import LabeledSliderCompat from '../../shared/LabeledSliderCompat';
 
 const SliderCell = ({ children, ...props }) => (
   <GridCell span="4">
-    <LabeledSlider {...props}>
+    <LabeledSliderCompat {...props}>
       {children}
-    </LabeledSlider>
+    </LabeledSliderCompat>
   </GridCell>
 );
 SliderCell.propTypes = {

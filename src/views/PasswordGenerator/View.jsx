@@ -2,13 +2,15 @@ import React from 'react';
 import { bool, number, string, func } from 'prop-types';
 
 const View = ({
-  RenderOptions, RenderPassword, RenderCopyToClipboard,
-  password, updatePassword, onCopy, copied, ...optionsProps
+  RenderOptions, RenderPassword, RenderCopyToClipboard, RenderNotifications,
+  password, onPasswordUpdateRequested, onCopy, copied, showCopyMessage, onCopyMessageClose,
+  onOptionChange, ...optionsProps
 }) => (
   <div className="password-generator">
-    <RenderOptions {...optionsProps} />
-    <RenderPassword password={password} updatePassword={updatePassword} />
+    <RenderOptions onChange={onOptionChange} {...optionsProps} />
+    <RenderPassword password={password} onPasswordUpdateRequested={onPasswordUpdateRequested} />
     <RenderCopyToClipboard password={password} copied={copied} onCopy={onCopy} />
+    <RenderNotifications showCopyMessage={showCopyMessage} onClose={onCopyMessageClose} />
   </div>
 );
 
@@ -16,17 +18,20 @@ View.propTypes = {
   RenderOptions: func.isRequired,
   RenderPassword: func.isRequired,
   RenderCopyToClipboard: func.isRequired,
+  RenderNotifications: func.isRequired,
 
   password: string.isRequired,
-  updatePassword: func.isRequired,
+  onPasswordUpdateRequested: func.isRequired,
   onCopy: func.isRequired,
   copied: bool.isRequired,
+  showCopyMessage: bool.isRequired,
+  onCopyMessageClose: func.isRequired,
 
   length: number.isRequired,
   numbers: bool.isRequired,
   symbols: bool.isRequired,
   uppercase: bool.isRequired,
-  excludeSimilarCharacters: bool.isRequired,
+  excludeSimilar: bool.isRequired,
   onOptionChange: func.isRequired,
 };
 

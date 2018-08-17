@@ -1,53 +1,33 @@
 import React from 'react';
-import Typography from 'rmwc/Typography';
-import { bool, number, string, object, node, oneOfType, arrayOf } from 'prop-types';
-import Slider from './Slider';
+import { string, object } from 'prop-types';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles } from '@material-ui/core/styles';
+import NamedSlider from './NamedSlider';
 
-const LabeledSlider = ({
-  labelWidth, children, minWidth, disabled, style, ...props
-}) => {
-  const styles = {
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      alignItems: 'center',
-    },
-    label: {
-      minWidth: `${labelWidth}em`,
-    },
-    slider: {
-      flexGrow: 1,
-      width: 'auto',
-      minWidth: `${minWidth}em`,
-      maxWidth: '100%',
-    },
-  };
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexGrow: 1,
+    marginLeft: 0,
+  },
+  label: {
+    flexShrink: 0,
+    marginRight: theme.spacing.unit,
+  },
+});
 
-  return (
-    <div style={{ ...style, ...styles.container }}>
-      <Typography tag="span" use="body2" theme={disabled && 'text-disabled-on-background'} style={styles.label}>
-        {children}
-      </Typography>
-      <Slider style={styles.slider} disabled={disabled} {...props} />
-    </div>
-  );
-};
+const LabeledSlider = ({ label, classes, ...props }) => (
+  <FormControlLabel
+    classes={classes}
+    label={label}
+    labelPlacement="start"
+    control={<NamedSlider className={classes.control} {...props} />}
+  />
+);
 
 LabeledSlider.propTypes = {
-  disabled: bool,
-  style: object, // eslint-disable-line react/forbid-prop-types
-  minWidth: number,
-  labelWidth: number,
-  className: string,
-  children: oneOfType([arrayOf(node), node]).isRequired,
+  label: string.isRequired,
+  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-LabeledSlider.defaultProps = {
-  disabled: false,
-  style: null,
-  minWidth: 20,
-  labelWidth: 10,
-  className: '',
-};
-
-export default LabeledSlider;
+export default withStyles(styles)(LabeledSlider);

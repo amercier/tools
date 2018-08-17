@@ -1,26 +1,33 @@
 import React from 'react';
+import { string, func, object } from 'prop-types';
 import Copy from 'react-copy-to-clipboard';
-import { Button } from 'rmwc/Button';
-import { Typography } from 'rmwc/Typography';
-import { bool, string, func } from 'prop-types';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
-const CopyToClipboard = ({ password, copied, onCopy }) => (
-  <Copy text={password} onCopy={onCopy}>
-    <div className="password-generator-clipboard">
-      <Button raised className="password-generator-clipboard__button">
+const styles = () => ({
+  root: {
+    textAlign: 'center',
+  },
+  button: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+});
+
+const CopyToClipboard = ({ password, onCopy, classes }) => (
+  <div className={classes.root}>
+    <Copy text={password} onCopy={onCopy}>
+      <Button variant="contained" color="primary" className={classes.button}>
         Copy to clipboard
       </Button>
-      <Typography use="body1" theme="secondary" className="password-generator-clipboard__copied">
-        {copied ? 'Copied!' : null}
-      </Typography>
-    </div>
-  </Copy>
+    </Copy>
+  </div>
 );
 
 CopyToClipboard.propTypes = {
+  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
   password: string.isRequired,
-  copied: bool.isRequired,
   onCopy: func.isRequired,
 };
 
-export default CopyToClipboard;
+export default withStyles(styles)(CopyToClipboard);

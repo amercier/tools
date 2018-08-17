@@ -12,15 +12,18 @@ it('renders without crashing', () => {
       RenderOptions={Noop}
       RenderPassword={Noop}
       RenderCopyToClipboard={Noop}
+      RenderNotifications={Noop}
       password=""
-      updatePassword={noop}
+      onPasswordUpdateRequested={noop}
       onCopy={noop}
       copied
+      showCopyMessage
+      onCopyMessageClose={noop}
       length={32}
       numbers
       symbols
       uppercase
-      excludeSimilarCharacters
+      excludeSimilar
       onOptionChange={noop}
     />
   ), div);
