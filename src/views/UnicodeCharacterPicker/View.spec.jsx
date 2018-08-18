@@ -9,11 +9,15 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render((
     <View
-      RenderTabs={Noop}
+      RenderNav={Noop}
       RenderCharacter={Noop}
+      RenderNotification={Noop}
+      RenderKbd={Noop}
       charactersMap={[{ characters: '' }]}
       activeTabIndex={0}
+      isNotificationClosed={false}
       onTabChange={noop}
+      onNotificationClose={noop}
       onCopy={noop}
     />
   ), div);
