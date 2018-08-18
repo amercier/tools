@@ -15,7 +15,7 @@ it('renders without crashing', () => {
       position={0}
       vignetting={0}
       zoom={0}
-      onOptionChange={noop}
+      onChange={noop}
     />
   ), div);
   ReactDOM.unmountComponentAtNode(div);

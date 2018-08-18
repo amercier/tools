@@ -11,7 +11,7 @@ const View = ({
     <RenderOptions
       disabled={!imageHeight}
       maxDistance={2 * imageHeight}
-      onOptionChange={onOptionChange}
+      onChange={onOptionChange}
       {...optionValues}
     />
 

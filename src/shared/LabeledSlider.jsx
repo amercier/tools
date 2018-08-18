@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, object } from 'prop-types';
+import { node, object, oneOfType, arrayOf } from 'prop-types';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 import NamedSlider from './NamedSlider';
@@ -26,7 +26,7 @@ const LabeledSlider = ({ label, classes, ...props }) => (
 );
 
 LabeledSlider.propTypes = {
-  label: string.isRequired,
+  label: oneOfType([arrayOf(node), node]).isRequired,
   classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
