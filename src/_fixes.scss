@@ -1,5 +1,10 @@
 // sass-lint:disable force-element-nesting, force-pseudo-nesting, no-color-literals, no-important
 
+// Workaround for https://github.com/mui-org/material-ui/issues/10000
+body {
+  padding: 0 !important;
+}
+
 // Fixes button icon having margin even without text
 .mdc-button .mdc-button__icon:only-child {
   margin-right: 0;
@@ -17,44 +22,4 @@
   .mdc-toolbar__icon {
     color: inherit;
   }
-}
-
-// Workaround for focused select labels not using --mdc-theme-primary
-.mdc-select:not(.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-floating-label {
-  color: var(--mdc-theme-primary, #000);
-}
-
-// Workaround for misaligned <Texfield> and <Select> input fields
-.mdc-text-field {
-  margin-bottom: 0;
-
-  &--upgraded:not(.mdc-text-field--fullwidth):not(.mdc-text-field--box) {
-    margin-top: 0;
-  }
-
-  &__input {
-    height: 26px;
-    padding: 19px 0 2px;
-  }
-}
-
-.mdc-select {
-  height: 48px;
-
-  &__native-control {
-    padding-bottom: 4px;
-  }
-}
-
-// Add .mdc-*--grow class to workaround unstylable <TextField> and <Select>
-.mdc-select--grow,
-.mdc-text-field--grow {
-  width: 100% !important;
-}
-
-// Fixes secondary buttons not diplaying disabled setState
-.mdc-button--raised:disabled,
-.mdc-button--unelevated:disabled {
-  background-color: rgba(0, 0, 0, .12) !important;
-  color: rgba(0, 0, 0, .37) !important;
 }
