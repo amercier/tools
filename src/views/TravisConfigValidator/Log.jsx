@@ -1,24 +1,16 @@
 import React from 'react';
-import { Typography } from 'rmwc/Typography';
 import { string, func, arrayOf, shape } from 'prop-types';
 import LogEntry from './LogEntry';
 
-const Log = ({ messages, RenderEntry }) => {
-  if (!messages.length) {
-    return null;
-  }
+const messageKey = ({ message, level }) => `log-${level}-${message.replace(/ /g, '-').toLowerCase()}`;
 
-  const entries = messages.map(({ level, message }, i) => {
-    const id = `travis-validator-message-${i}`;
-    return <RenderEntry key={id} {...{ level, message }} />;
-  });
-
-  return (
-    <Typography tag="div" use="body1">
-      {entries}
-    </Typography>
-  );
-};
+const Log = ({ messages, RenderEntry }) => (
+  messages.length ? (
+    <div>
+      {messages.map(message => <RenderEntry key={messageKey(message)} {...message} />)}
+    </div>
+  ) : null
+);
 
 Log.propTypes = {
   messages: arrayOf(shape({
