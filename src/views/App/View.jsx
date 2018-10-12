@@ -7,7 +7,7 @@ const View = ({
   RenderTheme, RenderHeader, RenderBody, onMenuToggle, ...bodyProps
 }) => (
   <BrowserRouter>
-    <RenderTheme tag="div" modules={bodyProps.modules}>
+    <RenderTheme modules={bodyProps.modules} defaultTheme={bodyProps.defaultTheme}>
       <Helmet>
         <title>
           WebDev Tools

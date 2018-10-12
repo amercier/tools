@@ -7,7 +7,7 @@ import Page from './Page';
 import Theme from './Theme';
 import View from './View';
 import Home from '../Home';
-import { modules } from '../config';
+import { modules, defaultTheme } from '../config';
 
 function isWindowNarrow({ innerWidth }) {
   return innerWidth < 1000;
@@ -64,6 +64,7 @@ class App extends Component {
         RenderHome={Home}
 
         modules={modules}
+        defaultTheme={defaultTheme}
         isNarrow={isNarrow}
         isMenuOpen={isMenuOpen}
 

@@ -1,23 +1,34 @@
 import React from 'react';
+import { string, node, object, arrayOf, shape } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Theme } from 'rmwc/Theme';
-import { defaultTheme } from '../config';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
-export default withRouter(({
-  modules, location, match, history, staticContext, ...props
+const Theme = ({
+  modules, defaultTheme, match, location, history, staticContext, children, ...props
 }) => {
   const module = modules.find(({ id }) => `/${id}` === location.pathname);
-  const theme = module ? module.theme : defaultTheme;
-  const [primary, secondary] = theme;
-  const style = {
-    '--mdc-theme-primary': primary.value,
-    '--mdc-theme-primary-light': primary.lightValue,
-    '--mdc-theme-primary-dark': primary.darkValue,
-    '--mdc-theme-on-primary': primary.isDark ? '#fff' : '000',
-    '--mdc-theme-secondary': secondary.value,
-    '--mdc-theme-secondary-light': secondary.lightValue,
-    '--mdc-theme-secondary-dark': secondary.darkValue,
-    '--mdc-theme-on-secondary': secondary.isDark ? '#fff' : '000',
-  };
-  return <Theme style={style} data-path={location.pathname} {...props} />;
-});
+  return (
+    <MuiThemeProvider theme={module ? module.theme : defaultTheme} {...props}>
+      {children}
+    </MuiThemeProvider>
+  );
+};
+
+Theme.propTypes = {
+  modules: arrayOf(shape({
+    id: string.isRequired,
+    theme: object,
+  })).isRequired,
+  defaultTheme: object.isRequired, // eslint-disable-line react/forbid-prop-types
+  match: object.isRequired, // eslint-disable-line react/forbid-prop-types
+  location: object.isRequired, // eslint-disable-line react/forbid-prop-types
+  history: object.isRequired, // eslint-disable-line react/forbid-prop-types
+  staticContext: object, // eslint-disable-line react/forbid-prop-types
+  children: node.isRequired,
+};
+
+Theme.defaultProps = {
+  staticContext: null,
+};
+
+export default withRouter(Theme);

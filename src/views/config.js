@@ -1,4 +1,13 @@
-import materialColors from 'material-colors-object';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+import green from '@material-ui/core/colors/green';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+import orange from '@material-ui/core/colors/orange';
+import pink from '@material-ui/core/colors/pink';
+import red from '@material-ui/core/colors/red';
+import teal from '@material-ui/core/colors/teal';
+import yellow from '@material-ui/core/colors/yellow';
+import { createMuiTheme } from '@material-ui/core/styles';
+
 import Base64EncoderDecoder from './Base64EncoderDecoder';
 import PasswordGenerator from './PasswordGenerator';
 import TiltShiftGenerator from './TiltShiftGenerator';
@@ -7,18 +16,14 @@ import UnicodeCharacterPicker from './UnicodeCharacterPicker';
 import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
 import TravisConfigValidator from './TravisConfigValidator';
 
-export const colors = {
-  green: materialColors.green.shades[500],
-  pink: materialColors.pink.shades[600],
-  orange: materialColors.orange.shades[700],
-  lightBlue: materialColors['light-blue'].shades[500],
-  deepPurple: materialColors['deep-purple'].shades[500],
-  yellow: materialColors.yellow.shades[600],
-  teal: materialColors.teal.shades[500],
-  red: materialColors.red.shades[500],
-};
+const createTheme = (primary, secondary) => createMuiTheme({
+  palette: { primary, secondary },
+  typography: {
+    useNextVariants: true,
+  },
+});
 
-export const defaultTheme = [colors.green, colors.pink];
+export const defaultTheme = createTheme(green, pink);
 
 export const modules = [ // eslint-disable-line import/prefer-default-export
   {
@@ -27,7 +32,7 @@ export const modules = [ // eslint-disable-line import/prefer-default-export
     icon: 'compare_arrows',
     component: UrlEncoderDecoder,
     description: 'Encode or decode text using percent (URL) encoding.',
-    theme: [colors.pink, colors.green],
+    theme: createTheme(pink, green),
   },
   {
     id: 'json-validator',
@@ -40,7 +45,7 @@ export const modules = [ // eslint-disable-line import/prefer-default-export
     icon: 'code',
     component: Base64EncoderDecoder,
     description: 'Encode or decode text using base64 encoding.',
-    theme: [colors.orange, colors.lightBlue],
+    theme: createTheme(orange, lightBlue),
   },
   {
     id: 'base64-image',
@@ -53,7 +58,7 @@ export const modules = [ // eslint-disable-line import/prefer-default-export
     icon: 'colorize',
     component: UnicodeCharacterPicker,
     description: 'Copy fancy unicode characters to your clipboard.',
-    theme: [colors.lightBlue, colors.orange],
+    theme: createTheme(lightBlue, orange),
   },
   {
     id: 'css-minifier',
@@ -71,7 +76,7 @@ export const modules = [ // eslint-disable-line import/prefer-default-export
     icon: 'assignment_turned_in',
     component: TravisConfigValidator,
     description: 'Travis CI Yaml config validator.',
-    theme: [colors.deepPurple, colors.yellow],
+    theme: createTheme(deepPurple, yellow),
   },
   {
     id: 'password-generator',
@@ -79,7 +84,7 @@ export const modules = [ // eslint-disable-line import/prefer-default-export
     icon: 'visibility_off',
     component: PasswordGenerator,
     description: 'Generate a strong password and copy it to your clipboard.',
-    theme: [colors.yellow, colors.deepPurple],
+    theme: createTheme(yellow, deepPurple),
   },
   {
     id: 'website-screenshot',
@@ -87,7 +92,7 @@ export const modules = [ // eslint-disable-line import/prefer-default-export
     icon: 'camera_alt',
     component: WebsiteScreenshotGenerator,
     description: 'Generate a screenshot from a website.',
-    theme: [colors.teal, colors.red],
+    theme: createTheme(teal, red),
   },
   {
     id: 'tilt-shift',
@@ -95,6 +100,6 @@ export const modules = [ // eslint-disable-line import/prefer-default-export
     icon: 'blur_on',
     component: TiltShiftGenerator,
     description: 'Generate a screenshot from a website with a fancy tilt-shift effect.',
-    theme: [colors.red, colors.teal],
+    theme: createTheme(red, teal),
   },
 ];
