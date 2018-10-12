@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button, ButtonIcon } from 'rmwc/Button';
-import { Typography } from 'rmwc/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
 import { string, func, shape } from 'prop-types';
 
 const Page = ({ module }) => {
@@ -34,13 +35,13 @@ const Page = ({ module }) => {
       </Helmet>
 
       <div style={styles.titleContainer}>
-        <Typography tag="h1" use="display1" style={styles.title}>
+        <Typography tag="h1" variant="h4" style={styles.title}>
           {title}
         </Typography>
         <Link to="/">
-          <Button dense theme="background text-primary-on-background" style={styles.close}>
-            <ButtonIcon use="close" />
-          </Button>
+          <IconButton>
+            <CloseIcon />
+          </IconButton>
         </Link>
       </div>
 
