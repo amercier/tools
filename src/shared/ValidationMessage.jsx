@@ -21,7 +21,7 @@ const ValidationMessage = ({ success, message, classes }) => {
   const icon = success ? 'check' : 'error';
   const color = success ? 'primary' : 'error';
   return (
-    <Typography color={color} variant="body2" component="span" className={classes.root}>
+    <Typography color={color} variant="body1" component="span" className={classes.root}>
       <Icon className={classes.icon}>
         {icon}
       </Icon>

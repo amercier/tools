@@ -40,7 +40,7 @@ const Item = ({ module, classes }) => {
         <Link to={id} title={title} className={classes.link}>
           <CardMedia title={title} image={`${id}-preview.png`} className={classes.media} />
           <CardContent>
-            <Typography gutterBottom variant="headline" component="h2" className={classes.title}>
+            <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
               {title}
             </Typography>
             <Typography component="p">
