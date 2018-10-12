@@ -10,11 +10,6 @@ body {
   margin-right: 0;
 }
 
-// Workaround for https://github.com/jamesmfriedman/rmwc/issues/276
-.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color: var(--mdc-theme-primary);
-}
-
 // Workaround for toolbar text and link text not using --mdc-theme-on-primary
 .mdc-toolbar {
   color: var(--mdc-theme-on-primary, #fff);
