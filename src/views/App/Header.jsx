@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Toolbar, ToolbarFixedAdjust, ToolbarMenuIcon, ToolbarRow, ToolbarSection, ToolbarTitle } from 'rmwc/Toolbar';
 import { string, func } from 'prop-types';
-import GithubToolbarIcon from './GithubToolbarIcon';
+import GithubToolbarIcon from '../../shared/GithubToolbarIcon';
 
 import './Header.scss';
 
