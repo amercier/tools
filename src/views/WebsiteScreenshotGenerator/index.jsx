@@ -30,7 +30,7 @@ export default class WebsiteScreenshotGenerator extends Component {
     this.setState({ resolution });
   }
 
-  async go() {
+  go = async () => {
     const { url, resolution } = this.state;
     const [width, height] = resolution.split(' x ');
     const actualUrl = getScreenshotUrl(url, width, height);

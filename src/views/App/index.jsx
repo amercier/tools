@@ -1,78 +1,32 @@
-import React, { Component } from 'react';
-import Body from './Body';
-import Header from './Header';
-import Menu from './Menu';
-import MenuItem from './MenuItem';
-import Page from './Page';
-import Theme from './Theme';
+import React from 'react';
+import { modules, defaultTheme } from '../config';
+
 import View from './View';
-import Home from '../Home';
-import { modules } from '../config';
 
-function isWindowNarrow({ innerWidth }) {
-  return innerWidth < 1000;
-}
-
-class App extends Component {
+class App extends React.Component {
   state = {
-    isNarrow: isWindowNarrow(window),
-    isMenuOpen: !isWindowNarrow(window),
-  }
+    desktopOpen: false,
+    mobileOpen: false,
+  };
 
-  componentDidMount() {
-    window.addEventListener('resize', this.onWindowResize);
-  }
+  handleMobileDrawerToggle = () => {
+    this.setState(prevState => ({ mobileOpen: !prevState.mobileOpen }));
+  };
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.onWindowResize);
-  }
-
-  onMenuClick = () => {
-    const { isNarrow } = this.state;
-    if (isNarrow) {
-      this.setState({ isMenuOpen: false });
-    }
-  }
-
-  onWindowResize = () => {
-    const { isNarrow } = this.state;
-    if (isNarrow !== isWindowNarrow(window)) {
-      this.setState({ isNarrow: !isNarrow });
-    }
-  }
-
-  toggleMenu = () => {
-    const { isMenuOpen } = this.state;
-    this.setState({ isMenuOpen: !isMenuOpen });
-  }
-
-  closeMenu = () => {
-    this.setState({ isMenuOpen: false });
-  }
+  handleDesktopDrawerToggle = () => {
+    this.setState(prevState => ({ desktopOpen: !prevState.desktopOpen }));
+  };
 
   render() {
-    const { isNarrow, isMenuOpen } = this.state;
     return (
       <View
-        RenderBody={Body}
-        RenderHeader={Header}
-        RenderMenu={Menu}
-        RenderMenuItem={MenuItem}
-        RenderPage={Page}
-        RenderTheme={Theme}
-        RenderView={View}
-        RenderHome={Home}
-
-        modules={modules}
-        isNarrow={isNarrow}
-        isMenuOpen={isMenuOpen}
-
-        onMenuToggle={this.toggleMenu}
-        onMenuClick={this.onMenuClick}
-        onMenuClose={this.closeMenu}
+        {...{ modules, defaultTheme }}
+        onMobileDrawerToggle={this.handleMobileDrawerToggle}
+        onDesktopDrawerToggle={this.handleDesktopDrawerToggle}
+        {...this.state}
       />
     );
   }
 }
 
-export default App;
+export default (App);

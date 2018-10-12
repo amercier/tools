@@ -1,59 +1,59 @@
 import React from 'react';
-import { number, bool, func } from 'prop-types';
+import { number, bool, object, func } from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import LabeledSlider from '../../shared/LabeledSlider';
-import Switch from '../../shared/Switch';
+import NamedSwitch from '../../shared/NamedSwitch';
 import { minLength, maxLength } from './config';
 
-const Options = ({
-  length, numbers, symbols, uppercase, excludeSimilarCharacters,
-  onOptionChange,
-}) => {
-  function getOnOptionChange(name, triggerUpdate = true) {
-    return value => onOptionChange(name, value, triggerUpdate);
-  }
+const styles = () => ({
+  switchGroup: {
+    justifyContent: 'space-evenly',
+  },
+  sliderLabel: {
+    minWidth: '5.5em',
+  },
+});
 
-  return (
-    <div>
-      <LabeledSlider
-        className="password-generator-slider"
-        value={length}
-        min={minLength}
-        max={maxLength}
-        step={1}
-        discrete
-        labelWidth={6.5}
-        onInput={getOnOptionChange('length', false)}
-        onChange={getOnOptionChange('length')}
-      >
-        {/* TODO Remove exception after ESLint 5 upgrade */}
-        Length ({length /* eslint-disable-line react/jsx-one-expression-per-line */})
-      </LabeledSlider>
+const Options = ({ classes, onChange, length, ...switches }) => (
+  <div>
+    <LabeledSlider
+      label={`Length (${length})`}
+      name="length"
+      value={length}
+      min={minLength}
+      max={maxLength}
+      step={1}
+      onChange={onChange}
+      classes={{ label: classes.sliderLabel }}
+    />
 
-      <div className="password-generator-switches">
-        <Switch checked={numbers} onChange={getOnOptionChange('numbers')}>
-          Numbers
-        </Switch>
-        <Switch checked={symbols} onChange={getOnOptionChange('symbols')}>
-          Symbols
-        </Switch>
-        <Switch checked={uppercase} onChange={getOnOptionChange('uppercase')}>
-          Uppercase characters
-        </Switch>
-        <Switch checked={excludeSimilarCharacters} onChange={getOnOptionChange('excludeSimilarCharacters')}>
-          Exclude similar characters
-        </Switch>
-      </div>
-    </div>
-  );
-};
+    <FormGroup row className={classes.switchGroup}>
+      {(Object.entries(switches).map(([name, checked]) => (
+        <FormControlLabel
+          key={`password-generator-switch-${name}`}
+          label={{
+            numbers: 'Numbers',
+            symbols: 'Symbols',
+            uppercase: 'Uppercase characters',
+            excludeSimilar: 'Exclude similar characters',
+          }[name]}
+          control={<NamedSwitch {...{ name, checked, onChange }} />}
+        />
+      )))}
+    </FormGroup>
+  </div>
+);
 
 Options.propTypes = {
+  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
   length: number.isRequired,
   numbers: bool.isRequired,
   symbols: bool.isRequired,
   uppercase: bool.isRequired,
-  excludeSimilarCharacters: bool.isRequired,
-  onOptionChange: func.isRequired,
+  excludeSimilar: bool.isRequired,
+  onChange: func.isRequired,
 };
 
-export default Options;
+export default withStyles(styles)(Options);

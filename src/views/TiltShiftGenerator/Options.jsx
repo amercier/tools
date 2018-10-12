@@ -1,67 +1,62 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 // TODO Remove exception after ESLint 5 upgrade
-
 import React from 'react';
-import { Grid, GridCell } from 'rmwc/Grid';
-import { bool, number, func, node } from 'prop-types';
+import { bool, number, func, node, object } from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import LabeledSlider from '../../shared/LabeledSlider';
 
-const SliderCell = ({ children, ...props }) => (
-  <GridCell span="4">
-    <LabeledSlider {...props}>
-      {children}
-    </LabeledSlider>
-  </GridCell>
+const GridItem = ({ children, ...props }) => (
+  <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+    <LabeledSlider label={children} {...props} />
+  </Grid>
 );
-SliderCell.propTypes = {
+GridItem.propTypes = {
   children: node.isRequired,
 };
 
+const styles = () => ({
+  sliderLabel: {
+    minWidth: '9em',
+  },
+});
+
 const Options = ({
   disabled,
-  onOptionChange,
+  onChange,
   blur, distance, maxDistance, perspective, position, vignetting, zoom,
+  classes,
 }) => {
-  function onInput(name) {
-    return value => onOptionChange(name, value);
-  }
-
-  const gridStyle = {
-    '--mdc-layout-grid-gutter-desktop': '0 24px',
-    '--mdc-layout-grid-gutter-tablet': '0 16px',
-    '--mdc-layout-grid-gutter-phone': '0 16px',
-  };
   const labelProps = {
-    min: 0,
     step: 1,
     disabled,
-    discrete: true,
-    labelWidth: 10,
-    minWidth: 8,
-    style: {
-      margin: '0 0.5rem',
+    onChange,
+    classes: {
+      label: classes.sliderLabel,
     },
   };
+  const beta = <sup>beta</sup>;
+
   return (
-    <Grid style={gridStyle}>
-      <SliderCell value={position} onInput={onInput('position')} max={100} {...labelProps}>
+    <Grid container spacing={24} alignItems="stretch">
+      <GridItem name="position" value={position} {...labelProps}>
         Position ({position}%)
-      </SliderCell>
-      <SliderCell value={blur} onInput={onInput('blur')} max={200} {...labelProps}>
+      </GridItem>
+      <GridItem name="blur" value={blur} {...labelProps} max={200}>
         Blur ({blur}px)
-      </SliderCell>
-      <SliderCell value={distance} onInput={onInput('distance')} max={maxDistance} {...labelProps}>
+      </GridItem>
+      <GridItem name="distance" value={distance} {...labelProps} max={maxDistance}>
         Distance ({distance}px)
-      </SliderCell>
-      <SliderCell value={perspective} onInput={onInput('perspective')} max={100} {...labelProps}>
+      </GridItem>
+      <GridItem name="perspective" value={perspective} {...labelProps}>
         Perspective ({perspective}%)
-      </SliderCell>
-      <SliderCell value={zoom} onInput={onInput('zoom')} max={100} {...labelProps}>
-        Zoom ({zoom}%)
-      </SliderCell>
-      <SliderCell value={vignetting} onInput={onInput('vignetting')} max={100} {...labelProps}>
-        Vignetting ({vignetting}%)
-      </SliderCell>
+      </GridItem>
+      <GridItem name="zoom" value={zoom} {...labelProps}>
+        Zoom{beta} ({zoom}%)
+      </GridItem>
+      <GridItem name="vignetting" value={vignetting} {...labelProps}>
+        Vignetting{beta} ({vignetting}%)
+      </GridItem>
     </Grid>
   );
 };
@@ -77,7 +72,9 @@ Options.propTypes = {
   vignetting: number.isRequired,
   zoom: number.isRequired,
 
-  onOptionChange: func.isRequired,
+  onChange: func.isRequired,
+
+  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default Options;
+export default withStyles(styles)(Options);

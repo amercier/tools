@@ -1,42 +1,41 @@
 import React from 'react';
-import { Button } from 'rmwc/Button';
-import { bool, string, func, node } from 'prop-types';
+import { bool, string, func, node, object } from 'prop-types';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 import { noop } from '../lib/lang';
+
+const styles = ({ spacing }) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: '2rem',
+  },
+  button: {
+    marginLeft: 2 * spacing.unit,
+  },
+});
 
 const ActionBar = ({
   children,
   primary, primaryDisabled, onPrimaryClick,
   secondary, secondaryDisabled, onSecondaryClick,
-}) => {
-  const styles = {
-    container: {
-      marginTop: '2rem',
-      textAlign: 'right',
-    },
-    button: {
-      marginLeft: '1rem',
-    },
-  };
-
-  const primaryButton = primary && (
-    <Button raised disabled={primaryDisabled} onClick={onPrimaryClick} style={styles.button}>
-      {primary}
-    </Button>
-  );
-  const secondaryButton = secondary && (
-    <Button disabled={secondaryDisabled} onClick={onSecondaryClick} style={styles.button}>
-      {secondary}
-    </Button>
-  );
-
-  return (
-    <div style={styles.container}>
-      {children}
-      {primaryButton}
-      {secondaryButton}
-    </div>
-  );
-};
+  classes,
+}) => (
+  <div className={classes.root}>
+    {children}
+    {primary && (
+      <Button variant="contained" color="primary" disabled={primaryDisabled} onClick={onPrimaryClick} className={classes.button}>
+        {primary}
+      </Button>
+    )}
+    {secondary && (
+      <Button disabled={secondaryDisabled} onClick={onSecondaryClick} className={classes.button}>
+        {secondary}
+      </Button>
+    )}
+  </div>
+);
 
 ActionBar.propTypes = {
   children: node,
@@ -46,6 +45,7 @@ ActionBar.propTypes = {
   secondary: string,
   secondaryDisabled: bool,
   onSecondaryClick: func,
+  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 ActionBar.defaultProps = {
@@ -58,4 +58,4 @@ ActionBar.defaultProps = {
   onSecondaryClick: noop,
 };
 
-export default ActionBar;
+export default withStyles(styles)(ActionBar);

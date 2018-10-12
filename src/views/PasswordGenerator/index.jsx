@@ -1,11 +1,10 @@
 import { generate as generatePassword } from 'generate-password';
 import React, { Component } from 'react';
 import CopyToClipboard from './CopyToClipboard';
+import Notification from './Notification';
 import Options from './Options';
 import Password from './Password';
 import View from './View';
-
-import './index.scss';
 
 export default class PasswordGenerator extends Component {
   state = {
@@ -14,19 +13,16 @@ export default class PasswordGenerator extends Component {
     numbers: true,
     symbols: true,
     uppercase: true,
-    excludeSimilarCharacters: true,
+    excludeSimilar: true,
     copied: false,
+    showCopyMessage: false,
   };
 
   onCopy = () => {
-    this.setState({ copied: true });
-  }
-
-  onOptionChange = (name, value, triggerUpdate) => {
-    this.setState({ [name]: value });
-    if (triggerUpdate) {
-      this.updatePassword();
-    }
+    this.setState({
+      copied: true,
+      showCopyMessage: true,
+    });
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -37,7 +33,20 @@ export default class PasswordGenerator extends Component {
     return { password };
   }
 
-  updatePassword = () => {
+  handleOptionChange = (name, value) => {
+    this.setState({ [name]: value });
+    this.updatePassword();
+  }
+
+  handlePasswordUpdateRequested = () => {
+    this.updatePassword();
+  }
+
+  handleCopyMessageClose = () => {
+    this.setState({ showCopyMessage: false });
+  }
+
+  updatePassword() {
     this.setState({
       password: null,
       copied: false,
@@ -46,7 +55,8 @@ export default class PasswordGenerator extends Component {
 
   render() {
     const {
-      length, numbers, symbols, uppercase, excludeSimilarCharacters, password, copied,
+      length, numbers, symbols, uppercase, excludeSimilar,
+      password, copied, showCopyMessage,
     } = this.state;
 
     return (
@@ -54,19 +64,22 @@ export default class PasswordGenerator extends Component {
         RenderOptions={Options}
         RenderPassword={Password}
         RenderCopyToClipboard={CopyToClipboard}
+        RenderNotification={Notification}
 
         password={password}
-        updatePassword={this.updatePassword}
+        onPasswordUpdateRequested={this.handlePasswordUpdateRequested}
 
         copied={copied}
         onCopy={this.onCopy}
+        showCopyMessage={showCopyMessage}
+        onCopyMessageClose={this.handleCopyMessageClose}
 
         length={length}
         numbers={numbers}
         symbols={symbols}
         uppercase={uppercase}
-        excludeSimilarCharacters={excludeSimilarCharacters}
-        onOptionChange={this.onOptionChange}
+        excludeSimilar={excludeSimilar}
+        onOptionChange={this.handleOptionChange}
       />
     );
   }

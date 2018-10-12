@@ -1,17 +1,17 @@
 import React from 'react';
-import { number, string, func, arrayOf, shape } from 'prop-types';
+import { bool, number, string, func, arrayOf, shape } from 'prop-types';
 import { nameToId } from '../../lib/lang';
 
 const View = ({
-  RenderTabs, RenderCharacter,
-  charactersMap, copiedCharacter, activeTabIndex,
-  onTabChange, onCopy,
+  RenderNav, RenderCharacter, RenderNotification, RenderKbd,
+  charactersMap, copiedCharacter, activeTabIndex, isNotificationClosed,
+  onTabChange, onCopy, onNotificationClose,
 }) => {
   const activeCategory = charactersMap[activeTabIndex];
   const getOnCopy = character => (() => onCopy(character));
   return (
     <div>
-      <RenderTabs
+      <RenderNav
         charactersMap={charactersMap}
         activeTabIndex={activeTabIndex}
         onChange={onTabChange}
@@ -27,20 +27,31 @@ const View = ({
           />
         ))}
       </div>
+
+      <RenderNotification
+        RenderKbd={RenderKbd}
+        copiedCharacter={copiedCharacter}
+        closed={isNotificationClosed}
+        onClose={onNotificationClose}
+      />
     </div>
   );
 };
 
 View.propTypes = {
-  RenderTabs: func.isRequired,
+  RenderNav: func.isRequired,
   RenderCharacter: func.isRequired,
+  RenderNotification: func.isRequired,
+  RenderKbd: func.isRequired,
 
   charactersMap: arrayOf(shape({ name: string, icon: string, characters: string })).isRequired,
   copiedCharacter: string,
   activeTabIndex: number.isRequired,
+  isNotificationClosed: bool.isRequired,
 
   onTabChange: func.isRequired,
   onCopy: func.isRequired,
+  onNotificationClose: func.isRequired,
 };
 
 View.defaultProps = {

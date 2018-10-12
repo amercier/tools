@@ -1,30 +1,35 @@
 import React from 'react';
-import { TextField } from 'rmwc/TextField';
-import { bool, number, string, func, oneOfType } from 'prop-types';
+import { bool, number, string, func, object, oneOfType } from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import { auto } from '../../lib/lang';
 import { eventTargetProperty } from '../../lib/dom';
 
-const Textarea = ({
-  value, rows, minRows, maxRows, onChange, ...props
-}) => {
-  const actualRows = auto(rows, minRows, maxRows)(value.split(/\n/).length);
-  const style = {
-    fontFamily: 'monospace',
+const styles = {
+  input: {
+    // TODO Set in theme
+    fontFamily: 'Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+    fontSize: '0.8rem',
     lineHeight: 1.2,
-  };
-  return (
-    <TextField
-      textarea
-      fullwidth
-      label="Paste .travis.yml here"
-      value={value}
-      rows={actualRows}
-      style={style}
-      onChange={eventTargetProperty(onChange)}
-      {...props}
-    />
-  );
+  },
 };
+
+const Textarea = ({
+  value, rows, minRows, maxRows, onChange, classes, ...props
+}) => (
+  // TODO: add outlined text field once available
+  // See https://github.com/mui-org/material-ui/issues/11962
+  <TextField
+    multiline
+    fullWidth
+    label="Paste .travis.yml here"
+    rows={auto(rows, minRows, maxRows)(value.split(/\n/).length)}
+    value={value}
+    onChange={eventTargetProperty(onChange)}
+    inputProps={{ className: classes.input }}
+    {...props}
+  />
+);
 
 Textarea.propTypes = {
   value: string.isRequired,
@@ -33,6 +38,7 @@ Textarea.propTypes = {
   rows: oneOfType([number, string]),
   minRows: number,
   maxRows: number,
+  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 Textarea.defaultProps = {
@@ -41,4 +47,4 @@ Textarea.defaultProps = {
   maxRows: +Infinity,
 };
 
-export default Textarea;
+export default withStyles(styles)(Textarea);

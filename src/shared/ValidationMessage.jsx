@@ -1,27 +1,30 @@
 import React from 'react';
-import { Typography } from 'rmwc/Typography';
-import { bool, string } from 'prop-types';
+import { bool, string, object } from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
+import Typography from '@material-ui/core/Typography';
 
-const ValidationMessage = ({ success, message }) => {
+const styles = ({ spacing }) => ({
+  root: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    fontSize: '1rem',
+    height: 4 * spacing.unit,
+    marginLeft: 2 * spacing.unit,
+  },
+  icon: {
+    marginRight: spacing.unit,
+  },
+});
+
+const ValidationMessage = ({ success, message, classes }) => {
   const icon = success ? 'check' : 'error';
-  const theme = success ? 'primary' : null;
-  const styles = {
-    message: {
-      color: success ? 'var(--mdc-theme-primary, #6200ee)' : '#b00020',
-      fontWeight: 500,
-    },
-    icon: {
-      verticalAlign: 'middle',
-      marginRight: '0.2em',
-      marginBottom: '4px',
-    },
-  };
-
+  const color = success ? 'primary' : 'error';
   return (
-    <Typography use="body1" theme={theme} style={styles.message}>
-      <i className="material-icons" style={styles.icon}>
+    <Typography color={color} variant="body1" component="span" className={classes.root}>
+      <Icon className={classes.icon}>
         {icon}
-      </i>
+      </Icon>
       {message}
     </Typography>
   );
@@ -30,6 +33,7 @@ const ValidationMessage = ({ success, message }) => {
 ValidationMessage.propTypes = {
   success: bool.isRequired,
   message: string.isRequired,
+  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default ValidationMessage;
+export default withStyles(styles)(ValidationMessage);
