@@ -1,4 +1,4 @@
-// sass-lint:disable force-element-nesting, force-pseudo-nesting, no-color-literals, no-important
+/* stylelint-disable selector-class-pattern, color-format/format */
 
 // Workaround for https://github.com/mui-org/material-ui/issues/10000
 body {
@@ -12,7 +12,7 @@ body {
 
 // Workaround for toolbar text and link text not using --mdc-theme-on-primary
 .mdc-toolbar {
-  color: var(--mdc-theme-on-primary, #fff);
+  color: var(--mdc-theme-on-primary, #ffffff);
 
   .mdc-toolbar__icon {
     color: inherit;
