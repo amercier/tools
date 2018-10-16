@@ -95,6 +95,15 @@
     "overrides": [
       {
         "files": [
+          "src/**/*.js"
+        ],
+        "rules": {
+          "import/prefer-default-export": "off",
+          "import/no-default-export": "error"
+        }
+      },
+      {
+        "files": [
           "src/setupTests.js",
           "src/**/*.spec.*"
         ],
