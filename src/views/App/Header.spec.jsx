@@ -8,7 +8,13 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render((
     <BrowserRouter>
-      <Header title="" onMenuToggle={noop} />
+      <Header
+        title=""
+        mobileOpen={false}
+        desktopOpen={false}
+        onMobileDrawerToggle={noop}
+        onDesktopDrawerToggle={noop}
+      />
     </BrowserRouter>
   ), div);
   ReactDOM.unmountComponentAtNode(div);
