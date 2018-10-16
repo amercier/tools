@@ -18,7 +18,7 @@ const View = ({
       />
 
       <div>
-        {Array.from(activeCategory.characters).map(character => (
+        {[...activeCategory.characters].map(character => (
           <RenderCharacter
             key={`character-${nameToId(activeCategory.name)}-${character}`}
             character={character}

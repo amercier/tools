@@ -6,4 +6,6 @@ import { modules } from '../config';
 
 const implementedModules = modules.filter(m => m.component);
 
-export default () => <View modules={implementedModules} RenderPanel={Panel} RenderItem={Item} />;
+const Home = () => <View modules={implementedModules} RenderPanel={Panel} RenderItem={Item} />;
+
+export default Home;
