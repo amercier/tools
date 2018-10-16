@@ -1,4 +1,4 @@
-export const charactersMap = [ // eslint-disable-line import/prefer-default-export
+export const charactersMap = [
   {
     name: 'Our favorite set',
     icon: 'favorite_border',

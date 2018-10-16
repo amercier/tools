@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Log from './Log';
 import View from './View';
-import TravisYmlValidator from './validator';
+import { TravisYmlValidator } from './validator';
 import * as config from './config';
 
 export default class TravisConfigValidator extends Component {
