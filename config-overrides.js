@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-param-reassign, import/no-extraneous-dependencies */
 
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
@@ -8,6 +8,15 @@ module.exports = {
     if (env === 'development') {
       config.plugins.push(new StylelintPlugin());
     }
+
+    return config;
+  },
+
+  jest(config) {
+    if (!config.setupFiles) {
+      config.setupFiles = [];
+    }
+    config.setupFiles.push('jest-prop-type-error');
 
     return config;
   },
