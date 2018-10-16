@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-// TODO Remove exception after ESLint 5 upgrade
 import React from 'react';
 import { bool, number, func, node, object } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
