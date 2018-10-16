@@ -5,7 +5,7 @@ import LogEntry from './LogEntry';
 const messageKey = ({ message, level }) => `log-${level}-${message.replace(/ /g, '-').toLowerCase()}`;
 
 const Log = ({ messages, RenderEntry }) => (
-  messages.length ? (
+  messages.length > 0 ? (
     <div>
       {messages.map(message => <RenderEntry key={messageKey(message)} {...message} />)}
     </div>

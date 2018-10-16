@@ -39,7 +39,7 @@ const Nav = ({
     {charactersMap.map(({ name, icon }) => (
       <Tab
         key={`tab-${nameToId(name)}`}
-        icon={<Icon>{icon /* eslint-disable-line */}</Icon>}
+        icon={<Icon>{icon}</Icon>}
         label={name}
         classes={{
           root: classes.tab,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => (
+const GithubToolbarIcon = () => (
   <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24" fill="currentColor">
     <path
       fill="inherit"
@@ -8,3 +8,5 @@ export default () => (
     />
   </svg>
 );
+
+export default GithubToolbarIcon;
