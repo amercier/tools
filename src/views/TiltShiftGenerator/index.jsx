@@ -49,11 +49,6 @@ export default class TiltShiftGenerator extends Component {
     });
   };
 
-  onDropRejected = rejectedFiles => {
-    // eslint-disable-line no-unused-vars
-    // TODO Implement
-  };
-
   onImageLoad = ({ target }) => {
     const { naturalWidth: imageWidth, naturalHeight: imageHeight } = target;
     const distance = round(imageHeight / 2);
@@ -101,7 +96,7 @@ export default class TiltShiftGenerator extends Component {
       'zoom',
       'vignetting',
     ].some(
-      key => prevState[key] !== this.state[key], // eslint-disable-line
+      key => prevState[key] !== this.state[key], // eslint-disable-line react/destructuring-assignment, max-len
     );
   }
 

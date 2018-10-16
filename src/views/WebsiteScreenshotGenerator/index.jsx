@@ -49,7 +49,7 @@ export default class WebsiteScreenshotGenerator extends Component {
         blobUrl,
         loading: false,
       });
-    } catch (e) {
+    } catch (error) {
       this.setState({ loading: false });
     }
   };

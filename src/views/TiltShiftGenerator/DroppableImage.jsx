@@ -54,11 +54,6 @@ export default class DroppableImage extends Component {
     onDrop(files[0].preview);
   };
 
-  onDropRejected = rejectedFiles => {
-    // eslint-disable-line no-unused-vars
-    // TODO Implement
-  };
-
   getStyles(image, imageStyle) {
     const { dropzoneActive } = this.state;
     const inactiveBorderColor = image ? 'transparent' : '#ccc';

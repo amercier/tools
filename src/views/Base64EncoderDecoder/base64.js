@@ -18,7 +18,7 @@ export function base64DecodeUnicode(value) {
         .map(c => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
         .join(''),
     );
-  } catch (e) {
+  } catch (error) {
     return null;
   }
 }

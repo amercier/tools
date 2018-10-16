@@ -1,5 +1,5 @@
 /* global process */
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-param-reassign */
 
 // In production, we register a service worker to serve assets from local cache.
 
@@ -24,7 +24,6 @@ function registerValidSW(swUrl) {
     .register(swUrl)
     .then(registration => {
       registration.onupdatefound = () => {
-        // eslint-disable-line no-param-reassign
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
