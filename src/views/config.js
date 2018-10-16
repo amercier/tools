@@ -25,7 +25,7 @@ const createTheme = (primary, secondary) => createMuiTheme({
 
 export const defaultTheme = createTheme(green, pink);
 
-export const modules = [ // eslint-disable-line import/prefer-default-export
+export const modules = [
   {
     id: 'url-encoder',
     title: 'URL encoder/decoder',

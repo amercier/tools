@@ -19,7 +19,7 @@ export function normalize(jsonResponse) {
   return { success: true, messages };
 }
 
-export default class TravisYmlValidator {
+export class TravisYmlValidator {
   constructor(config) {
     this.config = config;
 
