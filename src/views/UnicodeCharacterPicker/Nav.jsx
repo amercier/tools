@@ -23,9 +23,7 @@ const styles = theme => ({
   },
 });
 
-const Nav = ({
-  charactersMap, activeTabIndex, onChange, classes,
-}) => (
+const Nav = ({ charactersMap, activeTabIndex, onChange, classes }) => (
   <Tabs
     value={activeTabIndex}
     onChange={(e, value) => onChange(value)}
@@ -39,7 +37,7 @@ const Nav = ({
     {charactersMap.map(({ name, icon }) => (
       <Tab
         key={`tab-${nameToId(name)}`}
-        icon={<Icon>{icon /* eslint-disable-line */}</Icon>}
+        icon={<Icon>{icon}</Icon>}
         label={name}
         classes={{
           root: classes.tab,

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Log from './Log';
 import View from './View';
-import TravisYmlValidator from './validator';
+import { TravisYmlValidator } from './validator';
 import * as config from './config';
 
 export default class TravisConfigValidator extends Component {
-  validator = new TravisYmlValidator(config)
+  validator = new TravisYmlValidator(config);
 
   state = {
     input: '',
@@ -13,14 +13,14 @@ export default class TravisConfigValidator extends Component {
     success: false,
     status: null,
     messages: [],
-  }
+  };
 
-  onInputChange = (input) => {
+  onInputChange = input => {
     this.setState({
       status: null,
       input,
     });
-  }
+  };
 
   onValidate = () => {
     this.setState({
@@ -29,15 +29,15 @@ export default class TravisConfigValidator extends Component {
     });
 
     const { input } = this.state;
-    return this.validator.validate(input).then(
-      ({ success, error, messages }) => this.setState({
+    return this.validator.validate(input).then(({ success, error, messages }) =>
+      this.setState({
         loading: false,
         success,
         status: success ? 'Valid!' : error,
         messages,
       }),
     );
-  }
+  };
 
   render() {
     return (

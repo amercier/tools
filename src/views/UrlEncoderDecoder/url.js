@@ -7,7 +7,7 @@ export function urlEncode(value) {
 export function urlDecode(value) {
   try {
     return decodeURIComponent(value.replace(/\+/g, ' '));
-  } catch (e) {
+  } catch (error) {
     return value;
   }
 }

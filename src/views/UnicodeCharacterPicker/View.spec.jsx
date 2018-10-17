@@ -7,7 +7,7 @@ const Noop = () => <div />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <View
       RenderNav={Noop}
       RenderCharacter={Noop}
@@ -19,7 +19,8 @@ it('renders without crashing', () => {
       onTabChange={noop}
       onNotificationClose={noop}
       onCopy={noop}
-    />
-  ), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

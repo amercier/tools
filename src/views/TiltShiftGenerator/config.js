@@ -1,4 +1,4 @@
-export const defaults = { // eslint-disable-line import/prefer-default-export
+export const defaults = {
   position: 50,
   perspective: 10,
   zoom: 50,

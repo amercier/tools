@@ -31,12 +31,12 @@ export default class Base64EncoderDecoder extends Component {
   encode = () => {
     const { input } = this.state;
     this.setState({ input: this.constructor.encode(input) });
-  }
+  };
 
   decode = () => {
     const { input } = this.state;
     this.setState({ input: this.constructor.decode(input) });
-  }
+  };
 
   render() {
     return (

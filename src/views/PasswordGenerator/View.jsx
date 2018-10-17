@@ -2,9 +2,18 @@ import React from 'react';
 import { bool, number, string, func } from 'prop-types';
 
 const View = ({
-  RenderOptions, RenderPassword, RenderCopyToClipboard, RenderNotification,
-  password, onPasswordUpdateRequested, onCopy, copied, showCopyMessage, onCopyMessageClose,
-  onOptionChange, ...optionsProps
+  RenderOptions,
+  RenderPassword,
+  RenderCopyToClipboard,
+  RenderNotification,
+  password,
+  onPasswordUpdateRequested,
+  onCopy,
+  copied,
+  showCopyMessage,
+  onCopyMessageClose,
+  onOptionChange,
+  ...optionsProps
 }) => (
   <div className="password-generator">
     <RenderOptions onChange={onOptionChange} {...optionsProps} />

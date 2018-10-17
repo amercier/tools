@@ -15,10 +15,7 @@ const styles = ({ spacing }) => ({
   },
 });
 
-const Notification = ({
-  RenderKbd,
-  copiedCharacter, closed, onClose, classes,
-}) => (
+const Notification = ({ RenderKbd, copiedCharacter, closed, onClose, classes }) => (
   <Snackbar
     anchorOrigin={{
       vertical: 'bottom',
@@ -26,18 +23,18 @@ const Notification = ({
     }}
     open={copiedCharacter && !closed}
     autoHideDuration={2000}
-    message={(
+    message={
       <span>
         Copied character
         {<RenderKbd char={copiedCharacter} classes={{ root: classes.kbd }} />}
       </span>
-    )}
+    }
     onClose={onClose}
-    action={(
+    action={
       <IconButton aria-label="Close" color="inherit" className={classes.close} onClick={onClose}>
         <CloseIcon />
       </IconButton>
-    )}
+    }
   />
 );
 

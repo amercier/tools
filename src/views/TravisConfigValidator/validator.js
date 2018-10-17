@@ -19,7 +19,7 @@ export function normalize(jsonResponse) {
   return { success: true, messages };
 }
 
-export default class TravisYmlValidator {
+export class TravisYmlValidator {
   constructor(config) {
     this.config = config;
 
@@ -40,9 +40,9 @@ export default class TravisYmlValidator {
         body: input,
       });
       jsonResponse = await validationResponse.json();
-    } catch (e) {
+    } catch (error) {
       // Normalize HTTP errors
-      jsonResponse = { error_message: `Error: ${e}` };
+      jsonResponse = { error_message: `Error: ${error}` };
     }
     return normal ? normalize(jsonResponse) : jsonResponse;
   }

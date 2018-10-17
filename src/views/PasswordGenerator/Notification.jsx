@@ -22,11 +22,11 @@ const Notification = ({ showCopyMessage, onClose, classes }) => (
     autoHideDuration={2000}
     message="✓ Copied!"
     onClose={onClose}
-    action={(
+    action={
       <IconButton aria-label="Close" color="inherit" className={classes.close} onClick={onClose}>
         <CloseIcon />
       </IconButton>
-    )}
+    }
   />
 );
 

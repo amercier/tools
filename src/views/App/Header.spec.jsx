@@ -6,7 +6,7 @@ import { noop } from '../../lib/lang';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <BrowserRouter>
       <Header
         title=""
@@ -15,7 +15,8 @@ it('renders without crashing', () => {
         onMobileDrawerToggle={noop}
         onDesktopDrawerToggle={noop}
       />
-    </BrowserRouter>
-  ), div);
+    </BrowserRouter>,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

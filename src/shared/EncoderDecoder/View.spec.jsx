@@ -5,7 +5,7 @@ import { noop } from '../../lib/lang';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <View
       input=""
       onInputChange={noop}
@@ -13,7 +13,8 @@ it('renders without crashing', () => {
       onDecode={noop}
       isEncodeDisabled={false}
       isDecodeDisabled={false}
-    />
-  ), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

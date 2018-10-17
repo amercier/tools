@@ -9,7 +9,7 @@ const Noop = () => <div />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <View
       modules={[]}
       defaultTheme={defaultTheme}
@@ -17,13 +17,13 @@ it('renders without crashing', () => {
       desktopOpen={false}
       onMobileDrawerToggle={noop}
       onDesktopDrawerToggle={noop}
-
       RenderHeader={Noop}
       RenderMenu={Noop}
       RenderHome={Noop}
       RenderTheme={Noop}
       RenderPage={Noop}
-    />
-  ), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

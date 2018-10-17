@@ -7,7 +7,7 @@ const Noop = () => <div />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <View
       RenderLog={Noop}
       input=""
@@ -16,7 +16,8 @@ it('renders without crashing', () => {
       loading
       success
       messages={[]}
-    />
-  ), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

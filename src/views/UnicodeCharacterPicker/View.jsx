@@ -3,12 +3,20 @@ import { bool, number, string, func, arrayOf, shape } from 'prop-types';
 import { nameToId } from '../../lib/lang';
 
 const View = ({
-  RenderNav, RenderCharacter, RenderNotification, RenderKbd,
-  charactersMap, copiedCharacter, activeTabIndex, isNotificationClosed,
-  onTabChange, onCopy, onNotificationClose,
+  RenderNav,
+  RenderCharacter,
+  RenderNotification,
+  RenderKbd,
+  charactersMap,
+  copiedCharacter,
+  activeTabIndex,
+  isNotificationClosed,
+  onTabChange,
+  onCopy,
+  onNotificationClose,
 }) => {
   const activeCategory = charactersMap[activeTabIndex];
-  const getOnCopy = character => (() => onCopy(character));
+  const getOnCopy = character => () => onCopy(character);
   return (
     <div>
       <RenderNav
@@ -18,7 +26,7 @@ const View = ({
       />
 
       <div>
-        {Array.from(activeCategory.characters).map(character => (
+        {[...activeCategory.characters].map(character => (
           <RenderCharacter
             key={`character-${nameToId(activeCategory.name)}-${character}`}
             character={character}

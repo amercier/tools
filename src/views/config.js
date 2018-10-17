@@ -16,16 +16,17 @@ import UnicodeCharacterPicker from './UnicodeCharacterPicker';
 import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
 import TravisConfigValidator from './TravisConfigValidator';
 
-const createTheme = (primary, secondary) => createMuiTheme({
-  palette: { primary, secondary },
-  typography: {
-    useNextVariants: true,
-  },
-});
+const createTheme = (primary, secondary) =>
+  createMuiTheme({
+    palette: { primary, secondary },
+    typography: {
+      useNextVariants: true,
+    },
+  });
 
 export const defaultTheme = createTheme(green, pink);
 
-export const modules = [ // eslint-disable-line import/prefer-default-export
+export const modules = [
   {
     id: 'url-encoder',
     title: 'URL encoder/decoder',

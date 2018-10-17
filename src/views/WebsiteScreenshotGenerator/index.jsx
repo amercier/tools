@@ -20,15 +20,15 @@ export default class WebsiteScreenshotGenerator extends Component {
     url: 'https://google.com/',
     resolution: resolutions[2],
     loading: false,
-  }
+  };
 
-  onUrlChange = (url) => {
+  onUrlChange = url => {
     this.setState({ url });
-  }
+  };
 
-  onResolutionChange = (resolution) => {
+  onResolutionChange = resolution => {
     this.setState({ resolution });
-  }
+  };
 
   go = async () => {
     const { url, resolution } = this.state;
@@ -49,10 +49,10 @@ export default class WebsiteScreenshotGenerator extends Component {
         blobUrl,
         loading: false,
       });
-    } catch (e) {
+    } catch (error) {
       this.setState({ loading: false });
     }
-  }
+  };
 
   render() {
     return (

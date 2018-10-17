@@ -8,9 +8,17 @@ function getFilenameFromUrl(url, extension) {
 }
 
 const View = ({
-  RenderToolbar, RenderImageLoader,
-  url, resolution, resolutions, displayedUrl, blobUrl, loading,
-  onUrlChange, onResolutionChange, onGo,
+  RenderToolbar,
+  RenderImageLoader,
+  url,
+  resolution,
+  resolutions,
+  displayedUrl,
+  blobUrl,
+  loading,
+  onUrlChange,
+  onResolutionChange,
+  onGo,
 }) => {
   const [imageWidth, imageHeight] = resolution.split(' x ').map(x => +x);
   return (

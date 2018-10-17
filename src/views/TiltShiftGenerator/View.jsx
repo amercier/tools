@@ -2,9 +2,17 @@ import React from 'react';
 import { number, string, object, func } from 'prop-types';
 
 const View = ({
-  RenderOptions, RenderDroppableImage, RenderToolbar,
-  image, imageHeight, imageRef, canvasRef, downloadUrl,
-  onDrop, onOptionChange, onImageLoad,
+  RenderOptions,
+  RenderDroppableImage,
+  RenderToolbar,
+  image,
+  imageHeight,
+  imageRef,
+  canvasRef,
+  downloadUrl,
+  onDrop,
+  onOptionChange,
+  onImageLoad,
   ...optionValues
 }) => (
   <div>

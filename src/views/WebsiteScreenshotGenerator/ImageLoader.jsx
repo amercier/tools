@@ -2,9 +2,7 @@ import React from 'react';
 import { bool, number, string } from 'prop-types';
 import Spinner from '../../shared/Spinner';
 
-const ImageLoader = ({
-  width, height, loading, blobUrl, alt,
-}) => {
+const ImageLoader = ({ width, height, loading, blobUrl, alt }) => {
   const styles = {
     container: {
       height: 0,

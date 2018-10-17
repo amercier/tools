@@ -10,9 +10,9 @@ import { defaults } from './config';
 const { round } = Math;
 
 export default class TiltShiftGenerator extends Component {
-  canvasRef = createRef()
+  canvasRef = createRef();
 
-  imageRef = createRef()
+  imageRef = createRef();
 
   updateImageDownload = debounce(() => {
     this.canvas.update(); // See https://stackoverflow.com/questions/26783586/canvas-todataurl-returns-blank-image-only-in-firefox/26790802#26790802
@@ -27,7 +27,7 @@ export default class TiltShiftGenerator extends Component {
     imageHeight: 0,
     ...defaults,
     downloadUrl: null,
-  }
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.canvas && this.canvasNeedsUpdate(prevState)) {
@@ -36,7 +36,7 @@ export default class TiltShiftGenerator extends Component {
     }
   }
 
-  onDrop = (preview) => {
+  onDrop = preview => {
     this.freeImageResource();
     this.deleteCanvas();
 
@@ -47,25 +47,18 @@ export default class TiltShiftGenerator extends Component {
       imageHeight: 0,
       downloadUrl: null,
     });
-  }
-
-  onDropRejected = (rejectedFiles) => { // eslint-disable-line no-unused-vars
-    // TODO Implement
-  }
+  };
 
   onImageLoad = ({ target }) => {
-    const {
-      naturalWidth: imageWidth,
-      naturalHeight: imageHeight,
-    } = target;
+    const { naturalWidth: imageWidth, naturalHeight: imageHeight } = target;
     const distance = round(imageHeight / 2);
     this.setState({ imageWidth, imageHeight, distance });
     this.createCanvas(imageWidth, imageHeight);
-  }
+  };
 
   onOptionChange = (name, value) => {
     this.setState({ [name]: value });
-  }
+  };
 
   createCanvas(width, height) {
     this.canvas = fx.canvas();
@@ -103,25 +96,20 @@ export default class TiltShiftGenerator extends Component {
       'zoom',
       'vignetting',
     ].some(
-      key => prevState[key] !== this.state[key], // eslint-disable-line
+      key => prevState[key] !== this.state[key], // eslint-disable-line react/destructuring-assignment, max-len
     );
   }
 
   updatePerspective() {
     const { imageWidth: width, imageHeight: height, perspective, zoom } = this.state;
-    const delta = round(perspective * width / 100);
+    const delta = round((perspective * width) / 100);
     this.canvas.perspective(
+      [...[0, 0], ...[width, 0], ...[0, height], ...[width, height]],
       [
-        ...[0, 0],
-        ...[width, 0],
-        ...[0, height],
-        ...[width, height],
-      ],
-      [
-        ...[delta - round(zoom * delta / 100), 0],
-        ...[width - delta + round(zoom * delta / 100), 0],
-        ...[-round(zoom * delta / 100), height],
-        ...[width + round(zoom * delta / 100), height],
+        ...[delta - round((zoom * delta) / 100), 0],
+        ...[width - delta + round((zoom * delta) / 100), 0],
+        ...[-round((zoom * delta) / 100), height],
+        ...[width + round((zoom * delta) / 100), height],
       ],
     );
   }
@@ -130,9 +118,9 @@ export default class TiltShiftGenerator extends Component {
     const { imageWidth: width, imageHeight: height, position, blur, distance } = this.state;
     this.canvas.tiltShift(
       0,
-      round(position * height / 100),
+      round((position * height) / 100),
       width,
-      round(position * height / 100),
+      round((position * height) / 100),
       blur,
       distance,
     );
@@ -157,13 +145,11 @@ export default class TiltShiftGenerator extends Component {
         RenderDroppableImage={DroppableImage}
         RenderOptions={Options}
         RenderToolbar={Toolbar}
-
         canvasRef={this.canvasRef}
         imageRef={this.imageRef}
         onDrop={this.onDrop}
         {...this.props}
         {...this.state}
-
         onOptionChange={this.onOptionChange}
         onImageLoad={this.onImageLoad}
       />

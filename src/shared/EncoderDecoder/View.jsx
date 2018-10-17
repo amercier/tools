@@ -15,7 +15,13 @@ const styles = theme => ({
 });
 
 function EncoderDecoderView({
-  classes, input, onInputChange, onEncode, onDecode, isDecodeDisabled, isEncodeDisabled,
+  classes,
+  input,
+  onInputChange,
+  onEncode,
+  onDecode,
+  isDecodeDisabled,
+  isEncodeDisabled,
 }) {
   const { toolbar, button } = classes;
   const buttonProps = { variant: 'contained', className: button };

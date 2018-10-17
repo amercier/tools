@@ -7,7 +7,7 @@ const Noop = () => <div />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <View
       RenderOptions={Noop}
       RenderDroppableImage={Noop}
@@ -17,7 +17,8 @@ it('renders without crashing', () => {
       onDrop={noop}
       onOptionChange={noop}
       onImageLoad={noop}
-    />
-  ), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -23,7 +23,7 @@ export default class PasswordGenerator extends Component {
       copied: true,
       showCopyMessage: true,
     });
-  }
+  };
 
   static getDerivedStateFromProps(props, state) {
     if (state.password !== null) {
@@ -36,15 +36,15 @@ export default class PasswordGenerator extends Component {
   handleOptionChange = (name, value) => {
     this.setState({ [name]: value });
     this.updatePassword();
-  }
+  };
 
   handlePasswordUpdateRequested = () => {
     this.updatePassword();
-  }
+  };
 
   handleCopyMessageClose = () => {
     this.setState({ showCopyMessage: false });
-  }
+  };
 
   updatePassword() {
     this.setState({
@@ -55,8 +55,14 @@ export default class PasswordGenerator extends Component {
 
   render() {
     const {
-      length, numbers, symbols, uppercase, excludeSimilar,
-      password, copied, showCopyMessage,
+      length,
+      numbers,
+      symbols,
+      uppercase,
+      excludeSimilar,
+      password,
+      copied,
+      showCopyMessage,
     } = this.state;
 
     return (
@@ -65,15 +71,12 @@ export default class PasswordGenerator extends Component {
         RenderPassword={Password}
         RenderCopyToClipboard={CopyToClipboard}
         RenderNotification={Notification}
-
         password={password}
         onPasswordUpdateRequested={this.handlePasswordUpdateRequested}
-
         copied={copied}
         onCopy={this.onCopy}
         showCopyMessage={showCopyMessage}
         onCopyMessageClose={this.handleCopyMessageClose}
-
         length={length}
         numbers={numbers}
         symbols={symbols}

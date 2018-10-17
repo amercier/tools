@@ -7,15 +7,16 @@ import { textarea as textareaProps } from './config';
 
 const View = ({
   RenderLog,
-  input, onInputChange, onValidate, loading, success, status, messages,
+  input,
+  onInputChange,
+  onValidate,
+  loading,
+  success,
+  status,
+  messages,
 }) => (
   <div>
-    <Textarea
-      value={input}
-      disabled={loading}
-      onChange={onInputChange}
-      {...textareaProps}
-    />
+    <Textarea value={input} disabled={loading} onChange={onInputChange} {...textareaProps} />
 
     <ActionBar
       primary="Validate"
@@ -37,10 +38,12 @@ View.propTypes = {
   loading: bool.isRequired,
   success: bool.isRequired,
   status: string,
-  messages: arrayOf(shape({
-    level: string.isRequired,
-    message: string.isRequired,
-  })).isRequired,
+  messages: arrayOf(
+    shape({
+      level: string.isRequired,
+      message: string.isRequired,
+    }),
+  ).isRequired,
 };
 
 View.defaultProps = {
