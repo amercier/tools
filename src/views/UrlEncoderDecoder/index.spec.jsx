@@ -14,13 +14,23 @@ describe('input field', () => {
   it('starts with an empty input', () => {
     const wrapper = mount(<UrlEncoderDecoder />);
     expect(wrapper.state('input')).toBe('');
-    expect(wrapper.find('textarea').last().instance().value).toBe('');
+    expect(
+      wrapper
+        .find('textarea')
+        .last()
+        .instance().value,
+    ).toBe('');
   });
 
   it('displays the new input on state change', () => {
     const wrapper = mount(<UrlEncoderDecoder />);
     wrapper.setState({ input: 'http://localhost/' });
-    expect(wrapper.find('textarea').last().instance().value).toBe('http://localhost/');
+    expect(
+      wrapper
+        .find('textarea')
+        .last()
+        .instance().value,
+    ).toBe('http://localhost/');
   });
 });
 

@@ -65,7 +65,13 @@ const styles = ({ breakpoints, mixins, spacing, transitions, zIndex }) => ({
 });
 
 const Header = ({
-  title, desktopOpen, mobileOpen, onMobileDrawerToggle, onDesktopDrawerToggle, location, classes,
+  title,
+  desktopOpen,
+  mobileOpen,
+  onMobileDrawerToggle,
+  onDesktopDrawerToggle,
+  location,
+  classes,
 }) => (
   <AppBar
     position="absolute"
@@ -100,7 +106,11 @@ const Header = ({
       >
         <Link to="/" className={classes.titleLink} tabIndex={-1}>
           <Tooltip title="Home page">
-            <Button aria-label="Home" className={classes.titleButton} tabIndex={location.pathname === '/' ? -1 : 0}>
+            <Button
+              aria-label="Home"
+              className={classes.titleButton}
+              tabIndex={location.pathname === '/' ? -1 : 0}
+            >
               {title}
             </Button>
           </Tooltip>
@@ -108,7 +118,13 @@ const Header = ({
       </Typography>
 
       <Tooltip title="See the source on GitHub">
-        <a href={githubUrl} rel="noopener noreferrer" target="_blank" className={classes.titleLink} tabIndex={-1}>
+        <a
+          href={githubUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+          className={classes.titleLink}
+          tabIndex={-1}
+        >
           <IconButton color="inherit">
             <GithubToolbarIcon />
           </IconButton>

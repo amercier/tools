@@ -10,21 +10,29 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-
 describe('input field', () => {
   it('starts with an empty input', () => {
     const wrapper = mount(<Base64EncoderDecoder />);
     expect(wrapper.state('input')).toBe('');
-    expect(wrapper.find('textarea').last().instance().value).toBe('');
+    expect(
+      wrapper
+        .find('textarea')
+        .last()
+        .instance().value,
+    ).toBe('');
   });
 
   it('displays the new input on state change', () => {
     const wrapper = mount(<Base64EncoderDecoder />);
     wrapper.setState({ input: '✓ à la mode' });
-    expect(wrapper.find('textarea').last().instance().value).toBe('✓ à la mode');
+    expect(
+      wrapper
+        .find('textarea')
+        .last()
+        .instance().value,
+    ).toBe('✓ à la mode');
   });
 });
-
 
 describe('"Encode" button', () => {
   it('disables "Encode" button when input is empty', () => {
@@ -46,7 +54,6 @@ describe('"Encode" button', () => {
     expect(wrapper.state('input')).toBe('4pyTIMOgIGxhIG1vZGU=');
   });
 });
-
 
 describe('"Decode" button', () => {
   it('disables "Decode" button when input is empty', () => {

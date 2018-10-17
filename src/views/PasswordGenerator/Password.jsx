@@ -30,7 +30,13 @@ const Password = ({ password, onPasswordUpdateRequested, classes }) => (
       {password}
     </Typography>
     <Tooltip disableFocusListener title="Regenerate">
-      <IconButton aria-label="Regenerate" variant="contained" color="secondary" onClick={onPasswordUpdateRequested} className={classes.button}>
+      <IconButton
+        aria-label="Regenerate"
+        variant="contained"
+        color="secondary"
+        onClick={onPasswordUpdateRequested}
+        className={classes.button}
+      >
         <RefreshIcon />
       </IconButton>
     </Tooltip>

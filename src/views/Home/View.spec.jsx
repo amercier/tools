@@ -7,10 +7,11 @@ const Noop = () => <div />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <BrowserRouter>
       <View modules={[]} RenderPanel={Noop} RenderItem={Noop} />
-    </BrowserRouter>
-  ), div);
+    </BrowserRouter>,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -24,7 +24,13 @@ const styles = () => ({
 const Options = ({
   disabled,
   onChange,
-  blur, distance, maxDistance, perspective, position, vignetting, zoom,
+  blur,
+  distance,
+  maxDistance,
+  perspective,
+  position,
+  vignetting,
+  zoom,
   classes,
 }) => {
   const labelProps = {
@@ -40,22 +46,30 @@ const Options = ({
   return (
     <Grid container spacing={24} alignItems="stretch">
       <GridItem name="position" value={position} {...labelProps}>
-        Position ({position}%)
+        Position ({position}
+        %)
       </GridItem>
       <GridItem name="blur" value={blur} {...labelProps} max={200}>
-        Blur ({blur}px)
+        Blur ({blur}
+        px)
       </GridItem>
       <GridItem name="distance" value={distance} {...labelProps} max={maxDistance}>
-        Distance ({distance}px)
+        Distance ({distance}
+        px)
       </GridItem>
       <GridItem name="perspective" value={perspective} {...labelProps}>
-        Perspective ({perspective}%)
+        Perspective ({perspective}
+        %)
       </GridItem>
       <GridItem name="zoom" value={zoom} {...labelProps}>
-        Zoom{beta} ({zoom}%)
+        Zoom
+        {beta} ({zoom}
+        %)
       </GridItem>
       <GridItem name="vignetting" value={vignetting} {...labelProps}>
-        Vignetting{beta} ({vignetting}%)
+        Vignetting
+        {beta} ({vignetting}
+        %)
       </GridItem>
     </Grid>
   );

@@ -47,16 +47,20 @@ const styles = ({ breakpoints, mixins, spacing, transitions }) => ({
 });
 
 const Menu = ({
-  theme, classes, modules, mobileOpen, desktopOpen, onMobileDrawerToggle, onDesktopDrawerToggle,
+  theme,
+  classes,
+  modules,
+  mobileOpen,
+  desktopOpen,
+  onMobileDrawerToggle,
+  onDesktopDrawerToggle,
 }) => {
   const menuItems = (
     <List>
       {modules.map(module => (
         <LinkListItem key={`menu-item-${module.id}`} to={module.id} disabled={!module.component}>
           <ListItemIcon>
-            <Icon>
-              {module.icon}
-            </Icon>
+            <Icon>{module.icon}</Icon>
           </ListItemIcon>
           <ListItemText primary={module.title} />
         </LinkListItem>
@@ -65,46 +69,43 @@ const Menu = ({
   );
 
   return [
-    (
-      <Hidden mdUp key="menu-mobile">
-        <Drawer
-          variant="temporary"
-          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-          open={mobileOpen}
-          onClose={onMobileDrawerToggle}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-        >
-          <div>
-            <div className={classes.toolbar} />
-            <Divider />
-            {menuItems}
-          </div>
-        </Drawer>
-      </Hidden>
-    ), (
-      <Hidden smDown key="menu-desktop">
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !desktopOpen && classes.drawerPaperClose),
-          }}
-          open={desktopOpen}
-        >
-          <div className={classes.toolbar}>
-            <IconButton onClick={onDesktopDrawerToggle}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </div>
+    <Hidden mdUp key="menu-mobile">
+      <Drawer
+        variant="temporary"
+        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+        open={mobileOpen}
+        onClose={onMobileDrawerToggle}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+      >
+        <div>
+          <div className={classes.toolbar} />
           <Divider />
           {menuItems}
-        </Drawer>
-      </Hidden>
-    ),
+        </div>
+      </Drawer>
+    </Hidden>,
+    <Hidden smDown key="menu-desktop">
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: classNames(classes.drawerPaper, !desktopOpen && classes.drawerPaperClose),
+        }}
+        open={desktopOpen}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={onDesktopDrawerToggle}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        {menuItems}
+      </Drawer>
+    </Hidden>,
   ];
 };
 
@@ -113,12 +114,14 @@ Menu.propTypes = {
   desktopOpen: bool.isRequired,
   onMobileDrawerToggle: func.isRequired,
   onDesktopDrawerToggle: func.isRequired,
-  modules: arrayOf(shape({
-    id: string.isRequired,
-    icon: string.isRequired,
-    title: string.isRequired,
-    component: func,
-  })).isRequired,
+  modules: arrayOf(
+    shape({
+      id: string.isRequired,
+      icon: string.isRequired,
+      title: string.isRequired,
+      component: func,
+    }),
+  ).isRequired,
   children: node,
   theme: object.isRequired, // eslint-disable-line react/forbid-prop-types
   classes: object.isRequired, // eslint-disable-line react/forbid-prop-types

@@ -6,8 +6,12 @@ import AbstractEncoderDecoder from './Abstract';
 import { identity } from '../../lib/lang';
 
 class ConcreteEncoderDecoder extends AbstractEncoderDecoder {
-  get isEncodeDisabled() { return true; }
-  get isDecodeDisabled() { return true; }
+  get isEncodeDisabled() {
+    return true;
+  }
+  get isDecodeDisabled() {
+    return true;
+  }
   static encode = identity;
   static decode = identity;
 }

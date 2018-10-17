@@ -30,18 +30,20 @@ const Options = ({ classes, onChange, length, ...switches }) => (
     />
 
     <FormGroup row className={classes.switchGroup}>
-      {(Object.entries(switches).map(([name, checked]) => (
+      {Object.entries(switches).map(([name, checked]) => (
         <FormControlLabel
           key={`password-generator-switch-${name}`}
-          label={{
-            numbers: 'Numbers',
-            symbols: 'Symbols',
-            uppercase: 'Uppercase characters',
-            excludeSimilar: 'Exclude similar characters',
-          }[name]}
+          label={
+            {
+              numbers: 'Numbers',
+              symbols: 'Symbols',
+              uppercase: 'Uppercase characters',
+              excludeSimilar: 'Exclude similar characters',
+            }[name]
+          }
           control={<NamedSwitch {...{ name, checked, onChange }} />}
         />
-      )))}
+      ))}
     </FormGroup>
   </div>
 );

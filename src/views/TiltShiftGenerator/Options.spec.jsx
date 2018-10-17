@@ -5,7 +5,7 @@ import { noop } from '../../lib/lang';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <Options
       disabled
       blur={0}
@@ -16,7 +16,8 @@ it('renders without crashing', () => {
       vignetting={0}
       zoom={0}
       onChange={noop}
-    />
-  ), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

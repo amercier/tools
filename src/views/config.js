@@ -16,12 +16,13 @@ import UnicodeCharacterPicker from './UnicodeCharacterPicker';
 import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
 import TravisConfigValidator from './TravisConfigValidator';
 
-const createTheme = (primary, secondary) => createMuiTheme({
-  palette: { primary, secondary },
-  typography: {
-    useNextVariants: true,
-  },
-});
+const createTheme = (primary, secondary) =>
+  createMuiTheme({
+    palette: { primary, secondary },
+    typography: {
+      useNextVariants: true,
+    },
+  });
 
 export const defaultTheme = createTheme(green, pink);
 

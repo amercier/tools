@@ -23,9 +23,7 @@ const styles = theme => ({
   },
 });
 
-const Nav = ({
-  charactersMap, activeTabIndex, onChange, classes,
-}) => (
+const Nav = ({ charactersMap, activeTabIndex, onChange, classes }) => (
   <Tabs
     value={activeTabIndex}
     onChange={(e, value) => onChange(value)}

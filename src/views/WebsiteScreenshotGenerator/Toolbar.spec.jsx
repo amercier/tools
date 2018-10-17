@@ -5,7 +5,7 @@ import { noop } from '../../lib/lang';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <Toolbar
       url=""
       resolution=""
@@ -13,6 +13,8 @@ it('renders without crashing', () => {
       onUrlChange={noop}
       onResolutionChange={noop}
       onGo={noop}
-    />), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

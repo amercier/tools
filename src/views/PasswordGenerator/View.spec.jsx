@@ -7,7 +7,7 @@ const Noop = () => <div />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <View
       RenderOptions={Noop}
       RenderPassword={Noop}
@@ -25,7 +25,8 @@ it('renders without crashing', () => {
       uppercase
       excludeSimilar
       onOptionChange={noop}
-    />
-  ), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

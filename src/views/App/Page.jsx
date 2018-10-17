@@ -28,9 +28,7 @@ const Page = ({ module }) => {
   return (
     <div>
       <Helmet>
-        <title>
-          {title}
-        </title>
+        <title>{title}</title>
         <meta name="description" content={description} />
       </Helmet>
 

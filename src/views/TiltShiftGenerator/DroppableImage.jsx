@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { string, node, object, func } from 'prop-types';
 
-const supportedTypes = [
-  'image/jpeg',
-  'image/jpg',
-  'image/tiff',
-  'image/gif',
-  'image/png',
-];
+const supportedTypes = ['image/jpeg', 'image/jpg', 'image/tiff', 'image/gif', 'image/png'];
 
 const absoluteCover = {
   position: 'absolute',
@@ -26,43 +20,44 @@ export default class DroppableImage extends Component {
     placeholder: string.isRequired,
     onDrop: func.isRequired,
     children: node,
-  }
+  };
 
   static defaultProps = {
     image: null,
     imageStyle: null,
     imageRef: null,
     children: null,
-  }
+  };
 
   state = {
     dropzoneActive: false,
-  }
+  };
 
   onDragEnter = () => {
     this.setState({
       dropzoneActive: true,
     });
-  }
+  };
 
   onDragLeave = () => {
     this.setState({
       dropzoneActive: false,
     });
-  }
+  };
 
-  onDropAccepted = (files) => {
+  onDropAccepted = files => {
     this.setState({
       dropzoneActive: false,
     });
 
     const { onDrop } = this.props;
     onDrop(files[0].preview);
-  }
+  };
 
-  onDropRejected = (rejectedFiles) => { // eslint-disable-line no-unused-vars
+  onDropRejected = rejectedFiles => {
+    // eslint-disable-line no-unused-vars
     // TODO Implement
-  }
+  };
 
   getStyles(image, imageStyle) {
     const { dropzoneActive } = this.state;
@@ -92,9 +87,7 @@ export default class DroppableImage extends Component {
   }
 
   render() {
-    const {
-      image, imageStyle, imageRef, placeholder, children, ...props
-    } = this.props;
+    const { image, imageStyle, imageRef, placeholder, children, ...props } = this.props;
     const styles = this.getStyles(image, imageStyle);
     return (
       <Dropzone
@@ -109,9 +102,7 @@ export default class DroppableImage extends Component {
         {image ? (
           <img alt="" src={image} style={styles.image} ref={imageRef} {...props} />
         ) : (
-          <span style={styles.placeholder}>
-            {placeholder}
-          </span>
+          <span style={styles.placeholder}>{placeholder}</span>
         )}
         {children}
       </Dropzone>

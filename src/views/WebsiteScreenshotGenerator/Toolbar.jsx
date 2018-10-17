@@ -41,8 +41,14 @@ const styles = {
 };
 
 const Toolbar = ({
-  url, resolution, resolutions, blobUrl, filename,
-  onUrlChange, onResolutionChange, onGo,
+  url,
+  resolution,
+  resolutions,
+  blobUrl,
+  filename,
+  onUrlChange,
+  onResolutionChange,
+  onGo,
   classes,
 }) => (
   <div className={classes.container}>
@@ -58,9 +64,7 @@ const Toolbar = ({
 
     <div className={classes.group2}>
       <FormControl>
-        <InputLabel htmlFor="resolution-helper">
-          Resolution
-        </InputLabel>
+        <InputLabel htmlFor="resolution-helper">Resolution</InputLabel>
         <Select
           value={resolution}
           onChange={eventTargetProperty(onResolutionChange)}
@@ -80,9 +84,7 @@ const Toolbar = ({
           Go
         </Button>
         <a href={blobUrl} download={filename} className={classes.buttons}>
-          <Button disabled={!blobUrl}>
-            Download
-          </Button>
+          <Button disabled={!blobUrl}>Download</Button>
         </a>
       </div>
     </div>

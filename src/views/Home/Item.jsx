@@ -43,9 +43,7 @@ const Item = ({ module, classes }) => {
             <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
               {title}
             </Typography>
-            <Typography component="p">
-              {description}
-            </Typography>
+            <Typography component="p">{description}</Typography>
           </CardContent>
         </Link>
       </ButtonBase>

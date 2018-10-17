@@ -21,7 +21,16 @@ const Spinner = ({ size, thickness }) => {
 
   return (
     <svg style={styles.svg} viewBox="25 25 50 50">
-      <circle className="mdc-circular-progress__path" cx="50" cy="50" r="20" fill="none" strokeWidth={thickness} strokeMiterlimit="10" style={styles.circle} />
+      <circle
+        className="mdc-circular-progress__path"
+        cx="50"
+        cy="50"
+        r="20"
+        fill="none"
+        strokeWidth={thickness}
+        strokeMiterlimit="10"
+        style={styles.circle}
+      />
     </svg>
   );
 };

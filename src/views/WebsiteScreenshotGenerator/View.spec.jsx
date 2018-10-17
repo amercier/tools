@@ -7,7 +7,7 @@ const Noop = () => <div />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <View
       RenderToolbar={Noop}
       RenderImageLoader={Noop}
@@ -20,7 +20,8 @@ it('renders without crashing', () => {
       displayedUrl=""
       blobUrl=""
       loading
-    />
-  ), div);
+    />,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

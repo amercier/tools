@@ -84,12 +84,14 @@ const View = ({
 );
 
 View.propTypes = {
-  modules: arrayOf(shape({
-    id: string.isRequired,
-    icon: string.isRequired,
-    title: string.isRequired,
-    component: func,
-  })).isRequired,
+  modules: arrayOf(
+    shape({
+      id: string.isRequired,
+      icon: string.isRequired,
+      title: string.isRequired,
+      component: func,
+    }),
+  ).isRequired,
   defaultTheme: object.isRequired, // eslint-disable-line react/forbid-prop-types
   mobileOpen: bool.isRequired,
   desktopOpen: bool.isRequired,

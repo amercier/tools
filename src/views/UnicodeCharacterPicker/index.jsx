@@ -11,22 +11,22 @@ export default class UnicodeCharacterPicker extends Component {
     copiedCharacter: null,
     activeTabIndex: 0,
     isNotificationClosed: false,
-  }
+  };
 
-  handleTabChange = (activeTabIndex) => {
+  handleTabChange = activeTabIndex => {
     this.setState({ activeTabIndex });
-  }
+  };
 
-  handleCopy = (copiedCharacter) => {
+  handleCopy = copiedCharacter => {
     this.setState({
       copiedCharacter,
       isNotificationClosed: false,
     });
-  }
+  };
 
   handleCloseNotification = () => {
     this.setState({ isNotificationClosed: true });
-  }
+  };
 
   render() {
     return (

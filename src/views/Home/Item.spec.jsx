@@ -5,10 +5,11 @@ import Item from './Item';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render((
+  ReactDOM.render(
     <BrowserRouter>
       <Item module={{ id: '' }} />
-    </BrowserRouter>
-  ), div);
+    </BrowserRouter>,
+    div,
+  );
   ReactDOM.unmountComponentAtNode(div);
 });

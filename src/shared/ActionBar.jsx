@@ -18,14 +18,24 @@ const styles = ({ spacing }) => ({
 
 const ActionBar = ({
   children,
-  primary, primaryDisabled, onPrimaryClick,
-  secondary, secondaryDisabled, onSecondaryClick,
+  primary,
+  primaryDisabled,
+  onPrimaryClick,
+  secondary,
+  secondaryDisabled,
+  onSecondaryClick,
   classes,
 }) => (
   <div className={classes.root}>
     {children}
     {primary && (
-      <Button variant="contained" color="primary" disabled={primaryDisabled} onClick={onPrimaryClick} className={classes.button}>
+      <Button
+        variant="contained"
+        color="primary"
+        disabled={primaryDisabled}
+        onClick={onPrimaryClick}
+        className={classes.button}
+      >
         {primary}
       </Button>
     )}
