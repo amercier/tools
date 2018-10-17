@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
+// @flow
+
+import * as React from 'react';
 import View from './View';
 
-export default class Base64EncoderDecoder extends Component {
-  static encode() {
-    throw new Error('static encode() is not implemented');
-  }
+type State = {
+  input: string,
+};
 
-  static decode() {
-    throw new Error('static decode() is not implemented');
-  }
+export default class AbstractEncoderDecoder extends React.Component<{}, State> {
+  static encode: (input: string) => string;
+
+  static decode: (input: string) => string;
 
   state = {
     input: '',
   };
 
-  onInputChange = ({ target }) => {
+  onInputChange = ({ target }: { target: Object }) => {
     this.setState({ input: target.value });
   };
 

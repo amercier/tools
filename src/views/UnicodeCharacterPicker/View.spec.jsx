@@ -1,4 +1,6 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import View from './View';
 import { noop } from '../../lib/lang';
@@ -13,7 +15,11 @@ it('renders without crashing', () => {
       RenderCharacter={Noop}
       RenderNotification={Noop}
       RenderKbd={Noop}
-      charactersMap={[{ characters: '' }]}
+      charactersMap={[{
+        name: 'Testing',
+        icon: 'build',
+        characters: '',
+      }]}
       activeTabIndex={0}
       isNotificationClosed={false}
       onTabChange={noop}

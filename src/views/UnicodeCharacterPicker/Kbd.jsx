@@ -1,7 +1,13 @@
-import React from 'react';
-import { string, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+
+type Props = {
+  char?: string,
+  classes: Object,
+};
 
 const styles = ({ palette, spacing, shape }) => ({
   root: {
@@ -18,15 +24,14 @@ const styles = ({ palette, spacing, shape }) => ({
   },
 });
 
-const Kbd = ({ char, classes }) => (
+const Kbd = ({ char, classes }: Props) => (
   <Typography color="primary" component="kbd" className={classes.root}>
     {char}
   </Typography>
 );
 
-Kbd.propTypes = {
-  char: string.isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
+Kbd.defaultProps = {
+  char: undefined,
 };
 
 export default withStyles(styles)(Kbd);

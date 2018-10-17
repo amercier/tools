@@ -1,4 +1,6 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import View from './View';
 import { noop } from '../../lib/lang';
@@ -12,8 +14,8 @@ it('renders without crashing', () => {
       RenderOptions={Noop}
       RenderDroppableImage={Noop}
       RenderToolbar={Noop}
-      imageRef={{}}
-      canvasRef={{}}
+      imageRef={{ current: null }}
+      canvasRef={{ current: null }}
       onDrop={noop}
       onOptionChange={noop}
       onImageLoad={noop}

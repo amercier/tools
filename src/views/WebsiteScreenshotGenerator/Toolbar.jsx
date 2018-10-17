@@ -1,5 +1,6 @@
-import React from 'react';
-import { string, func, object, arrayOf } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -10,6 +11,18 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import isUrl from 'is-url';
 import { eventTargetProperty } from '../../lib/dom';
+
+export type Props = {
+  url: string,
+  resolution: string,
+  resolutions: string[],
+  blobUrl?: string,
+  filename?: string,
+  onUrlChange: (url: string) => void,
+  onResolutionChange: (resolution: string) => void,
+  onGo: () => void,
+  classes: Object,
+};
 
 const valueToMenuItem = (value, i) => (
   <MenuItem key={`menu-item-${i}`} value={value}>
@@ -50,7 +63,7 @@ const Toolbar = ({
   onResolutionChange,
   onGo,
   classes,
-}) => (
+}: Props) => (
   <div className={classes.container}>
     <div className={classes.group1}>
       <TextField
@@ -91,21 +104,9 @@ const Toolbar = ({
   </div>
 );
 
-Toolbar.propTypes = {
-  url: string.isRequired,
-  resolution: string.isRequired,
-  resolutions: arrayOf(string).isRequired,
-  blobUrl: string,
-  filename: string,
-  onUrlChange: func.isRequired,
-  onResolutionChange: func.isRequired,
-  onGo: func.isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
-
 Toolbar.defaultProps = {
-  blobUrl: null,
-  filename: null,
+  blobUrl: undefined,
+  filename: undefined,
 };
 
 export default withStyles(styles)(Toolbar);

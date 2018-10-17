@@ -1,10 +1,17 @@
-import React from 'react';
-import { string, func, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import RefreshIcon from '@material-ui/icons/Refresh';
+
+type Props = {
+  password: string,
+  onPasswordUpdateRequested: () => void,
+  classes: Object,
+};
 
 const styles = ({ spacing }) => ({
   root: {
@@ -24,7 +31,7 @@ const styles = ({ spacing }) => ({
   },
 });
 
-const Password = ({ password, onPasswordUpdateRequested, classes }) => (
+const Password = ({ password, onPasswordUpdateRequested, classes }: Props) => (
   <div className={classes.root}>
     <Typography noWrap component="span" className={classes.password}>
       {password}
@@ -43,11 +50,5 @@ const Password = ({ password, onPasswordUpdateRequested, classes }) => (
     <div />
   </div>
 );
-
-Password.propTypes = {
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  password: string.isRequired,
-  onPasswordUpdateRequested: func.isRequired,
-};
 
 export default withStyles(styles)(Password);

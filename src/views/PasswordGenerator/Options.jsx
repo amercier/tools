@@ -1,11 +1,22 @@
-import React from 'react';
-import { number, bool, object, func } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import LabeledSlider from '../../shared/LabeledSlider';
 import NamedSwitch from '../../shared/NamedSwitch';
 import { minLength, maxLength } from './config';
+
+type Props = {
+  classes: Object,
+  length: number,
+  numbers: boolean,
+  symbols: boolean,
+  uppercase: boolean,
+  excludeSimilar: boolean,
+  onChange: () => void,
+};
 
 const styles = () => ({
   switchGroup: {
@@ -16,7 +27,7 @@ const styles = () => ({
   },
 });
 
-const Options = ({ classes, onChange, length, ...switches }) => (
+const Options = ({ onChange, length, classes, ...switches }: Props) => (
   <div>
     <LabeledSlider
       label={`Length (${length})`}
@@ -47,15 +58,5 @@ const Options = ({ classes, onChange, length, ...switches }) => (
     </FormGroup>
   </div>
 );
-
-Options.propTypes = {
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  length: number.isRequired,
-  numbers: bool.isRequired,
-  symbols: bool.isRequired,
-  uppercase: bool.isRequired,
-  excludeSimilar: bool.isRequired,
-  onChange: func.isRequired,
-};
 
 export default withStyles(styles)(Options);

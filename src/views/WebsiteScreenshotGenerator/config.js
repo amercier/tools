@@ -1,3 +1,5 @@
+// @flow
+
 export const api = {
   protocol: 'https',
   host: 'screenshot.amercier.com',

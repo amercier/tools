@@ -1,9 +1,19 @@
-import React from 'react';
-import { bool, string, func, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
+import Kbd from './Kbd';
+
+type Props = {
+  RenderKbd: typeof Kbd,
+  copiedCharacter?: string,
+  closed: boolean,
+  onClose: () => void,
+  classes: Object,
+};
 
 const styles = ({ spacing }) => ({
   close: {
@@ -15,7 +25,10 @@ const styles = ({ spacing }) => ({
   },
 });
 
-const Notification = ({ RenderKbd, copiedCharacter, closed, onClose, classes }) => (
+const Notification = ({
+  RenderKbd,
+  copiedCharacter, closed, onClose, classes,
+}: Props) => (
   <Snackbar
     anchorOrigin={{
       vertical: 'bottom',
@@ -23,31 +36,24 @@ const Notification = ({ RenderKbd, copiedCharacter, closed, onClose, classes }) 
     }}
     open={copiedCharacter && !closed}
     autoHideDuration={2000}
-    message={
+    message={(
       <span>
         Copied character
         {<RenderKbd char={copiedCharacter} classes={{ root: classes.kbd }} />}
       </span>
-    }
+    )}
     onClose={onClose}
-    action={
+    action={(
       <IconButton aria-label="Close" color="inherit" className={classes.close} onClick={onClose}>
         <CloseIcon />
       </IconButton>
-    }
+    )}
   />
 );
 
-Notification.propTypes = {
-  RenderKbd: func.isRequired,
-  copiedCharacter: string,
-  closed: bool,
-  onClose: func.isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
-
 Notification.defaultProps = {
-  copiedCharacter: null,
+  RenderKbd: Kbd,
+  copiedCharacter: undefined,
   closed: false,
 };
 

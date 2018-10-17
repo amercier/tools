@@ -1,23 +1,27 @@
-import React, { Component } from 'react';
-import Character from './Character';
-import Kbd from './Kbd';
-import Notification from './Notification';
-import Nav from './Nav';
+// @flow
+
+import * as React from 'react';
 import View from './View';
 import { charactersMap } from './config';
 
-export default class UnicodeCharacterPicker extends Component {
+type State = {
+  copiedCharacter?: string,
+  activeTabIndex: number,
+  isNotificationClosed: boolean,
+};
+
+export default class UnicodeCharacterPicker extends React.Component<{}, State> {
   state = {
-    copiedCharacter: null,
+    copiedCharacter: undefined,
     activeTabIndex: 0,
     isNotificationClosed: false,
   };
 
-  handleTabChange = activeTabIndex => {
+  handleTabChange = (activeTabIndex: number) => {
     this.setState({ activeTabIndex });
   };
 
-  handleCopy = copiedCharacter => {
+  handleCopy = (copiedCharacter: string) => {
     this.setState({
       copiedCharacter,
       isNotificationClosed: false,
@@ -31,10 +35,6 @@ export default class UnicodeCharacterPicker extends Component {
   render() {
     return (
       <View
-        RenderNav={Nav}
-        RenderCharacter={Character}
-        RenderNotification={Notification}
-        RenderKbd={Kbd}
         charactersMap={charactersMap}
         onTabChange={this.handleTabChange}
         onCopy={this.handleCopy}

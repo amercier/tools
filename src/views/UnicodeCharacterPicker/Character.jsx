@@ -1,8 +1,15 @@
-import React from 'react';
-import { string, func, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+
+type Props = {
+  character: string,
+  onCopy: () => void,
+  classes: Object,
+};
 
 const styles = ({ spacing }) => ({
   root: {
@@ -16,18 +23,12 @@ const styles = ({ spacing }) => ({
   },
 });
 
-const Character = ({ character, onCopy, classes }) => (
+const Character = ({ character, onCopy, classes }: Props) => (
   <CopyToClipboard text={character} onCopy={onCopy}>
     <IconButton className={classes.root} color="inherit">
       {character}
     </IconButton>
   </CopyToClipboard>
 );
-
-Character.propTypes = {
-  character: string.isRequired,
-  onCopy: func.isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
 
 export default withStyles(styles)(Character);

@@ -1,8 +1,27 @@
+// @flow
+
 import fetchPonyfill from 'fetch-ponyfill';
 
 const { fetch, Headers } = fetchPonyfill();
 
-export function normalize(jsonResponse) {
+type ValidationMessage = {
+  level: string,
+  message: string,
+};
+
+type ValidationResponse = {
+  success: boolean,
+  error?: string,
+  messages: ValidationMessage[],
+};
+
+type TravisYmlValidatorConfig = {
+  parserUrl: string,
+  parserAuthUsername: string,
+  parserAuthPassword: string,
+};
+
+export function normalize(jsonResponse: Object): ValidationResponse {
   if (jsonResponse.error_message) {
     return {
       success: false,
@@ -20,7 +39,15 @@ export function normalize(jsonResponse) {
 }
 
 export class TravisYmlValidator {
+<<<<<<< HEAD
   constructor(config) {
+=======
+  config: TravisYmlValidatorConfig;
+
+  headers: Headers;
+
+  constructor(config: TravisYmlValidatorConfig) {
+>>>>>>> wip
     this.config = config;
 
     const { parserAuthUsername, parserAuthPassword } = config;
@@ -29,7 +56,7 @@ export class TravisYmlValidator {
     this.headers.set('Authorization', `Basic ${credentials}`);
   }
 
-  async validate(input, normal = true) {
+  async validate(input: string): Promise<ValidationResponse> {
     const { parserUrl } = this.config;
 
     let jsonResponse;
@@ -44,6 +71,6 @@ export class TravisYmlValidator {
       // Normalize HTTP errors
       jsonResponse = { error_message: `Error: ${error}` };
     }
-    return normal ? normalize(jsonResponse) : jsonResponse;
+    return normalize(jsonResponse);
   }
 }

@@ -1,8 +1,15 @@
-import React from 'react';
-import { bool, string, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
+
+type Props = {
+  success: boolean,
+  message: string,
+  classes: Object,
+};
 
 const styles = ({ spacing }) => ({
   root: {
@@ -17,7 +24,7 @@ const styles = ({ spacing }) => ({
   },
 });
 
-const ValidationMessage = ({ success, message, classes }) => {
+const ValidationMessage = ({ success, message, classes }: Props) => {
   const icon = success ? 'check' : 'error';
   const color = success ? 'primary' : 'error';
   return (
@@ -26,12 +33,6 @@ const ValidationMessage = ({ success, message, classes }) => {
       {message}
     </Typography>
   );
-};
-
-ValidationMessage.propTypes = {
-  success: bool.isRequired,
-  message: string.isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default withStyles(styles)(ValidationMessage);

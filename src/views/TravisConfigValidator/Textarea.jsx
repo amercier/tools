@@ -1,9 +1,20 @@
-import React from 'react';
-import { bool, number, string, func, object, oneOfType } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { auto } from '../../lib/lang';
 import { eventTargetProperty } from '../../lib/dom';
+
+type Props = {
+  value: string,
+  disabled: boolean,
+  rows: number | string,
+  minRows: number,
+  maxRows: number,
+  onChange: (value: string) => void,
+  classes: Object,
+};
 
 const styles = {
   input: {
@@ -14,30 +25,20 @@ const styles = {
   },
 };
 
-const Textarea = ({ value, rows, minRows, maxRows, onChange, classes, ...props }) => (
+const Textarea = ({ value, rows, minRows, maxRows, onChange, classes, ...props }: Props) => (
   // TODO: add outlined text field once available
   // See https://github.com/mui-org/material-ui/issues/11962
   <TextField
     multiline
     fullWidth
     label="Paste .travis.yml here"
-    rows={auto(rows, minRows, maxRows)(value.split(/\n/).length)}
+    rows={auto(rows, +minRows, +maxRows)(value.split(/\n/).length)}
     value={value}
     onChange={eventTargetProperty(onChange)}
     inputProps={{ className: classes.input }}
     {...props}
   />
 );
-
-Textarea.propTypes = {
-  value: string.isRequired,
-  disabled: bool.isRequired,
-  onChange: func.isRequired,
-  rows: oneOfType([number, string]),
-  minRows: number,
-  maxRows: number,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
 
 Textarea.defaultProps = {
   rows: 'auto',

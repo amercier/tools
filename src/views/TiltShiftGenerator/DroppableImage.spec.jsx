@@ -1,10 +1,12 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import DroppableImage from './DroppableImage';
 import { noop } from '../../lib/lang';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<DroppableImage placeholder="" onDrop={noop} />, div);
+  ReactDOM.render(<DroppableImage placeholder="" onDrop={noop} onLoad={noop} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

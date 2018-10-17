@@ -1,6 +1,7 @@
+// @flow
+
 import classNames from 'classnames';
-import React from 'react';
-import { bool, string, func, object } from 'prop-types';
+import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,6 +15,16 @@ import Typography from '@material-ui/core/Typography';
 
 import GithubToolbarIcon from '../../shared/GithubToolbarIcon';
 import { drawerWidth, githubUrl } from './config';
+
+type Props = {
+  title: string,
+  desktopOpen: boolean,
+  mobileOpen: string,
+  onMobileDrawerToggle: Function,
+  onDesktopDrawerToggle: Function,
+  location: Object,
+  classes: Object,
+};
 
 const styles = ({ breakpoints, mixins, spacing, transitions, zIndex }) => ({
   appBar: {
@@ -72,7 +83,7 @@ const Header = ({
   onDesktopDrawerToggle,
   location,
   classes,
-}) => (
+}: Props) => (
   <AppBar
     position="absolute"
     className={classNames(classes.appBar, desktopOpen && classes.appBarShift)}
@@ -133,15 +144,5 @@ const Header = ({
     </Toolbar>
   </AppBar>
 );
-
-Header.propTypes = {
-  title: string.isRequired,
-  desktopOpen: bool.isRequired,
-  mobileOpen: bool.isRequired,
-  onMobileDrawerToggle: func.isRequired,
-  onDesktopDrawerToggle: func.isRequired,
-  location: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
 
 export default withStyles(styles)(withRouter(Header));

@@ -1,8 +1,13 @@
-import React from 'react';
-import { string } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Button from '@material-ui/core/Button';
 
-const Toolbar = ({ downloadUrl }) => (
+type Props = {
+  downloadUrl?: string,
+};
+
+const Toolbar = ({ downloadUrl }: Props) => (
   <div style={{ margin: '1rem 0', textAlign: 'right' }}>
     <a href={downloadUrl} download="tilt-shift">
       <Button variant="contained" color="primary" disabled={!downloadUrl}>
@@ -12,12 +17,8 @@ const Toolbar = ({ downloadUrl }) => (
   </div>
 );
 
-Toolbar.propTypes = {
-  downloadUrl: string,
-};
-
 Toolbar.defaultProps = {
-  downloadUrl: null,
+  downloadUrl: undefined,
 };
 
 export default Toolbar;

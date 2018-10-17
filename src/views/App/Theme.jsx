@@ -1,7 +1,20 @@
-import React from 'react';
-import { string, node, object, arrayOf, shape } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
+
+import type { Module } from '../config';
+
+type Props = {
+  modules: Module[],
+  defaultTheme: Object,
+  children: React.Node,
+  match: Object,
+  location: Object,
+  history: Object,
+  staticContext?: Object,
+};
 
 const Theme = ({
   modules,
@@ -12,28 +25,13 @@ const Theme = ({
   staticContext,
   children,
   ...props
-}) => {
+}: Props) => {
   const module = modules.find(({ id }) => `/${id}` === location.pathname);
   return (
     <MuiThemeProvider theme={module ? module.theme : defaultTheme} {...props}>
       {children}
     </MuiThemeProvider>
   );
-};
-
-Theme.propTypes = {
-  modules: arrayOf(
-    shape({
-      id: string.isRequired,
-      theme: object,
-    }),
-  ).isRequired,
-  defaultTheme: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  match: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  location: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  history: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  staticContext: object, // eslint-disable-line react/forbid-prop-types
-  children: node.isRequired,
 };
 
 Theme.defaultProps = {

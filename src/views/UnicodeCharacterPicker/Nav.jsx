@@ -1,10 +1,20 @@
-import React from 'react';
-import { number, string, func, object, arrayOf, shape } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Icon from '@material-ui/core/Icon';
 import { nameToId } from '../../lib/lang';
+
+import { type CharacterSet } from './config';
+
+type Props = {
+  activeTabIndex: number,
+  onChange: (activeTabIndex: number) => number,
+  charactersMap: CharacterSet[],
+  classes: Object,
+};
 
 const styles = theme => ({
   root: {
@@ -23,7 +33,9 @@ const styles = theme => ({
   },
 });
 
-const Nav = ({ charactersMap, activeTabIndex, onChange, classes }) => (
+const Nav = ({
+  charactersMap, activeTabIndex, onChange, classes,
+}: Props) => (
   <Tabs
     value={activeTabIndex}
     onChange={(e, value) => onChange(value)}
@@ -48,12 +60,5 @@ const Nav = ({ charactersMap, activeTabIndex, onChange, classes }) => (
     ))}
   </Tabs>
 );
-
-Nav.propTypes = {
-  activeTabIndex: number.isRequired,
-  onChange: func.isRequired,
-  charactersMap: arrayOf(shape({ name: string, icon: string })).isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
 
 export default withStyles(styles)(Nav);

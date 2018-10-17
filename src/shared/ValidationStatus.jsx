@@ -1,9 +1,16 @@
-import React from 'react';
-import { bool, string } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Spinner from './Spinner';
 import ValidationMessage from './ValidationMessage';
 
-const ValidationStatus = ({ loading, success, message }) => {
+type Props = {
+  loading?: boolean,
+  success?: boolean,
+  message?: string,
+};
+
+const ValidationStatus = ({ loading, success, message }: Props) => {
   if (loading) {
     return <Spinner />;
   }
@@ -13,15 +20,9 @@ const ValidationStatus = ({ loading, success, message }) => {
   return <ValidationMessage success={success} message={message} />;
 };
 
-ValidationStatus.propTypes = {
-  loading: bool,
-  success: bool,
-  message: string,
-};
-
 ValidationStatus.defaultProps = {
   loading: false,
-  message: null,
+  message: undefined,
   success: false,
 };
 

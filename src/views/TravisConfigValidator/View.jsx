@@ -1,22 +1,34 @@
-import React from 'react';
-import { bool, string, func, arrayOf, shape } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import ActionBar from '../../shared/ActionBar';
+import Log from './Log';
 import Textarea from './Textarea';
 import ValidationStatus from '../../shared/ValidationStatus';
-import { textarea as textareaProps } from './config';
+import { textarea as textareaProps, type Message } from './config';
+
+type Props = {
+  RenderLog: typeof Log,
+  input: string,
+  loading: boolean,
+  success: boolean,
+  status?: string,
+  messages: Message[],
+  onInputChange: (value: string) => void,
+  onValidate: () => void,
+};
 
 const View = ({
   RenderLog,
-  input,
-  onInputChange,
-  onValidate,
-  loading,
-  success,
-  status,
-  messages,
-}) => (
+  input, onInputChange, onValidate, loading, success, status, messages,
+}: Props) => (
   <div>
-    <Textarea value={input} disabled={loading} onChange={onInputChange} {...textareaProps} />
+    <Textarea
+      value={input}
+      disabled={loading}
+      onChange={onInputChange}
+      {...textareaProps}
+    />
 
     <ActionBar
       primary="Validate"
@@ -30,24 +42,9 @@ const View = ({
   </div>
 );
 
-View.propTypes = {
-  RenderLog: func.isRequired,
-  input: string.isRequired,
-  onInputChange: func.isRequired,
-  onValidate: func.isRequired,
-  loading: bool.isRequired,
-  success: bool.isRequired,
-  status: string,
-  messages: arrayOf(
-    shape({
-      level: string.isRequired,
-      message: string.isRequired,
-    }),
-  ).isRequired,
-};
-
 View.defaultProps = {
-  status: null,
+  RenderLog: Log,
+  status: undefined,
 };
 
 export default View;

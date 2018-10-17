@@ -1,3 +1,11 @@
+// @flow
+
+export type CharacterSet = {
+  name: string,
+  icon: string,
+  characters: string,
+};
+
 export const charactersMap = [
   {
     name: 'Our favorite set',

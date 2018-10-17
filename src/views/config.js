@@ -1,3 +1,6 @@
+// @flow
+
+import * as React from 'react';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import green from '@material-ui/core/colors/green';
 import lightBlue from '@material-ui/core/colors/lightBlue';
@@ -16,7 +19,7 @@ import UnicodeCharacterPicker from './UnicodeCharacterPicker';
 import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
 import TravisConfigValidator from './TravisConfigValidator';
 
-const createTheme = (primary, secondary) =>
+const createTheme = (primary: Object, secondary: Object): Object =>
   createMuiTheme({
     palette: { primary, secondary },
     typography: {
@@ -24,9 +27,18 @@ const createTheme = (primary, secondary) =>
     },
   });
 
-export const defaultTheme = createTheme(green, pink);
+export const defaultTheme: Object = createTheme(green, pink);
 
-export const modules = [
+export type Module = {
+  id: string,
+  title: string,
+  icon: string,
+  component: React.Component<{}> | null | any, // FIXME
+  description?: string,
+  theme?: Object,
+};
+
+export const modules: Module[] = [
   {
     id: 'url-encoder',
     title: 'URL encoder/decoder',
@@ -39,6 +51,7 @@ export const modules = [
     id: 'json-validator',
     title: 'JSON validator',
     icon: 'spellcheck',
+    component: null,
   },
   {
     id: 'base64-encoder',
@@ -52,6 +65,7 @@ export const modules = [
     id: 'base64-image',
     title: 'Base64 image',
     icon: 'developer_mode',
+    component: null,
   },
   {
     id: 'unicode-characters',
@@ -65,11 +79,13 @@ export const modules = [
     id: 'css-minifier',
     title: 'CSS minifier/gzipper',
     icon: 'straighten',
+    component: null,
   },
   {
     id: 'favicon-generator',
     title: 'Favicon generator',
     icon: 'insert_photo',
+    component: null,
   },
   {
     id: 'travis-validator',

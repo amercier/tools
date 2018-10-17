@@ -1,5 +1,6 @@
-import React from 'react';
-import { string, object, shape } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -7,6 +8,13 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+
+import { type Module } from '../config';
+
+type Props = {
+  module: Module,
+  classes: Object,
+};
 
 const styles = {
   root: {
@@ -32,7 +40,7 @@ const styles = {
   },
 };
 
-const Item = ({ module, classes }) => {
+const Item = ({ module, classes }: Props) => {
   const { id, title, description } = module;
   return (
     <Card className={classes.root}>
@@ -49,15 +57,6 @@ const Item = ({ module, classes }) => {
       </ButtonBase>
     </Card>
   );
-};
-
-Item.propTypes = {
-  module: shape({
-    id: string,
-    title: string,
-    description: string,
-  }).isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default withStyles(styles)(Item);

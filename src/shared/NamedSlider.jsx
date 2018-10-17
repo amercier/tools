@@ -1,14 +1,15 @@
-import React from 'react';
-import { string, func } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Slider from '@material-ui/lab/Slider';
 
-const NamedSlider = ({ name, onChange, ...props }) => (
+type Props = {
+  name: string,
+  onChange: (name: string, value: number) => void,
+};
+
+const NamedSlider = ({ name, onChange, ...props }: Props) => (
   <Slider onChange={(_, value) => onChange(name, value)} {...props} />
 );
-
-NamedSlider.propTypes = {
-  name: string.isRequired,
-  onChange: func.isRequired,
-};
 
 export default NamedSlider;

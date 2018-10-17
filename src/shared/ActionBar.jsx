@@ -1,8 +1,20 @@
-import React from 'react';
-import { bool, string, func, node, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { noop } from '../lib/lang';
+
+type Props = {
+  primary?: string,
+  primaryDisabled?: boolean,
+  onPrimaryClick?: () => any,
+  secondary?: string,
+  secondaryDisabled?: boolean,
+  onSecondaryClick?: () => any,
+  children?: React.Node,
+  classes: Object,
+};
 
 const styles = ({ spacing }) => ({
   root: {
@@ -46,17 +58,6 @@ const ActionBar = ({
     )}
   </div>
 );
-
-ActionBar.propTypes = {
-  children: node,
-  primary: string,
-  primaryDisabled: bool,
-  onPrimaryClick: func,
-  secondary: string,
-  secondaryDisabled: bool,
-  onSecondaryClick: func,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
 
 ActionBar.defaultProps = {
   children: null,

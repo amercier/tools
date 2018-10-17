@@ -1,43 +1,53 @@
-import { format as formatUrl } from 'url';
-import React, { Component } from 'react';
+// @flow
+
 import fetchPonyfill from 'fetch-ponyfill';
-import ImageLoader from './ImageLoader';
-import Toolbar from './Toolbar';
+import { format as formatUrl } from 'url';
+
+import * as React from 'react';
+
 import View from './View';
 import { api, resolutions } from './config';
 
 const { fetch } = fetchPonyfill();
 
-export function getScreenshotUrl(url, width, height) {
+export function getScreenshotUrl(url: string, width: number, height: number) {
   return formatUrl({
     ...api,
     query: { url, width, height },
   });
 }
 
-export default class WebsiteScreenshotGenerator extends Component {
+type State = {
+  url: string,
+  resolution: string,
+  loading: boolean,
+  displayedUrl?: string,
+  blobUrl?: string,
+};
+
+export default class WebsiteScreenshotGenerator extends React.Component<{}, State> {
   state = {
     url: 'https://google.com/',
     resolution: resolutions[2],
     loading: false,
   };
 
-  onUrlChange = url => {
+  handleUrlChange = (url: string) => {
     this.setState({ url });
   };
 
-  onResolutionChange = resolution => {
+  handleResolutionChange = (resolution: string) => {
     this.setState({ resolution });
   };
 
-  go = async () => {
+  handleGo = async () => {
     const { url, resolution } = this.state;
     const [width, height] = resolution.split(' x ');
-    const actualUrl = getScreenshotUrl(url, width, height);
+    const actualUrl = getScreenshotUrl(url, +width, +height);
 
     this.setState({
       displayedUrl: url,
-      blobUrl: null,
+      blobUrl: undefined,
       loading: true,
     });
 
@@ -57,12 +67,10 @@ export default class WebsiteScreenshotGenerator extends Component {
   render() {
     return (
       <View
-        RenderToolbar={Toolbar}
-        RenderImageLoader={ImageLoader}
         resolutions={resolutions}
-        onUrlChange={this.onUrlChange}
-        onResolutionChange={this.onResolutionChange}
-        onGo={this.go}
+        onUrlChange={this.handleUrlChange}
+        onResolutionChange={this.handleResolutionChange}
+        onGo={this.handleGo}
         {...this.props}
         {...this.state}
       />

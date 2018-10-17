@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// @flow
+
+>>>>>>> wip
 export const defaults = {
   position: 50,
   perspective: 10,

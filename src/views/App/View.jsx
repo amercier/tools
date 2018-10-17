@@ -1,14 +1,33 @@
-import React from 'react';
-import { bool, string, func, arrayOf, shape, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 import Home from '../Home';
+import type { Module } from '../config';
 
 import Header from './Header';
 import Menu from './Menu';
 import Page from './Page';
 import Theme from './Theme';
+
+type Props = {
+  RenderHeader: typeof Header,
+  RenderMenu: typeof Menu,
+  RenderHome: typeof Home,
+  RenderTheme: typeof Home,
+  RenderPage: typeof Page,
+
+  modules: Module[],
+  defaultTheme: Object,
+  mobileOpen: boolean,
+  desktopOpen: boolean,
+  onMobileDrawerToggle: () => void,
+  onDesktopDrawerToggle: () => void,
+
+  classes: Object,
+};
 
 const styles = theme => ({
   root: {
@@ -49,7 +68,7 @@ const View = ({
   RenderPage,
 
   classes,
-}) => (
+}: Props) => (
   <BrowserRouter>
     <RenderTheme modules={modules} defaultTheme={defaultTheme}>
       <div className={classes.root}>
@@ -70,7 +89,7 @@ const View = ({
           <main className={classes.main}>
             <Switch>
               <Route exact path="/" component={RenderHome} />
-              {modules.filter(r => r.component).map(module => (
+              {modules.filter(m => m.component).map(module => (
                 <Route key={`page-route-${module.id}`} exact path={`/${module.id}`}>
                   <RenderPage module={module} />
                 </Route>
@@ -82,29 +101,6 @@ const View = ({
     </RenderTheme>
   </BrowserRouter>
 );
-
-View.propTypes = {
-  modules: arrayOf(
-    shape({
-      id: string.isRequired,
-      icon: string.isRequired,
-      title: string.isRequired,
-      component: func,
-    }),
-  ).isRequired,
-  defaultTheme: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  mobileOpen: bool.isRequired,
-  desktopOpen: bool.isRequired,
-  onMobileDrawerToggle: func.isRequired,
-  onDesktopDrawerToggle: func.isRequired,
-  RenderHeader: func,
-  RenderMenu: func,
-  RenderHome: func,
-  RenderTheme: func,
-  RenderPage: func,
-
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
 
 View.defaultProps = {
   RenderHeader: Header,

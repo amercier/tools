@@ -1,14 +1,16 @@
-import React from 'react';
-import { string, func } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Switch from '@material-ui/core/Switch';
+import { namedEventTargetProperty } from '../lib/dom';
 
-const NamedSwitch = ({ name, onChange, ...props }) => (
-  <Switch onChange={({ target }) => onChange(name, target.checked)} {...props} />
-);
-
-NamedSwitch.propTypes = {
-  name: string.isRequired,
-  onChange: func.isRequired,
+type Props = {
+  name: string,
+  onChange: (name: string, checked: boolean) => void,
 };
+
+const NamedSwitch = ({ name, onChange, ...props }: Props) => (
+  <Switch onChange={namedEventTargetProperty(name, onChange, 'checked')} {...props} />
+);
 
 export default NamedSwitch;

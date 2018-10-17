@@ -1,35 +1,45 @@
-import React, { Component } from 'react';
+// @flow
+
+import * as React from 'react';
 import Log from './Log';
 import View from './View';
 import { TravisYmlValidator } from './validator';
 import * as config from './config';
 
-export default class TravisConfigValidator extends Component {
+type State = {
+  input: string,
+  loading: boolean,
+  success: boolean,
+  status?: string,
+  messages: config.Message[],
+};
+
+export default class TravisConfigValidator extends React.Component<{}, State> {
   validator = new TravisYmlValidator(config);
 
   state = {
     input: '',
     loading: false,
     success: false,
-    status: null,
+    status: undefined,
     messages: [],
   };
 
-  onInputChange = input => {
+  handleInputChange = (input: string) => {
     this.setState({
-      status: null,
+      status: undefined,
       input,
     });
   };
 
-  onValidate = () => {
+  handleValidate = () => {
     this.setState({
-      status: null,
+      status: undefined,
       loading: true,
     });
 
     const { input } = this.state;
-    return this.validator.validate(input).then(({ success, error, messages }) =>
+    this.validator.validate(input).then(({ success, error, messages }) =>
       this.setState({
         loading: false,
         success,
@@ -43,8 +53,8 @@ export default class TravisConfigValidator extends Component {
     return (
       <View
         RenderLog={Log}
-        onInputChange={this.onInputChange}
-        onValidate={this.onValidate}
+        onInputChange={this.handleInputChange}
+        onValidate={this.handleValidate}
         {...this.props}
         {...this.state}
       />

@@ -1,6 +1,21 @@
-import React, { Component } from 'react';
+// @flow
+
+import * as React from 'react';
 import Dropzone from 'react-dropzone';
-import { string, node, object, func } from 'prop-types';
+
+type Props = {
+  image?: string,
+  imageStyle?: Object,
+  imageRef?: React.Ref<*>,
+  placeholder: string,
+  onDrop: (preview: string) => void,
+  onLoad: (event: { target: HTMLImageElement } & Event) => void,
+  children?: React.Node,
+};
+
+type State = {
+  dropzoneActive: boolean,
+};
 
 const supportedTypes = ['image/jpeg', 'image/jpg', 'image/tiff', 'image/gif', 'image/png'];
 
@@ -12,20 +27,11 @@ const absoluteCover = {
   left: '0',
 };
 
-export default class DroppableImage extends Component {
-  static propTypes = {
-    image: string,
-    imageStyle: object, // eslint-disable-line react/forbid-prop-types
-    imageRef: object, // eslint-disable-line react/forbid-prop-types
-    placeholder: string.isRequired,
-    onDrop: func.isRequired,
-    children: node,
-  };
-
+export default class DroppableImage extends React.Component<Props, State> {
   static defaultProps = {
-    image: null,
-    imageStyle: null,
-    imageRef: null,
+    image: undefined,
+    imageStyle: undefined,
+    imageRef: undefined,
     children: null,
   };
 
@@ -33,28 +39,7 @@ export default class DroppableImage extends Component {
     dropzoneActive: false,
   };
 
-  onDragEnter = () => {
-    this.setState({
-      dropzoneActive: true,
-    });
-  };
-
-  onDragLeave = () => {
-    this.setState({
-      dropzoneActive: false,
-    });
-  };
-
-  onDropAccepted = files => {
-    this.setState({
-      dropzoneActive: false,
-    });
-
-    const { onDrop } = this.props;
-    onDrop(files[0].preview);
-  };
-
-  getStyles(image, imageStyle) {
+  getStyles(image?: string, imageStyle?: Object) {
     const { dropzoneActive } = this.state;
     const inactiveBorderColor = image ? 'transparent' : '#ccc';
     return {
@@ -81,6 +66,32 @@ export default class DroppableImage extends Component {
     };
   }
 
+  handleDragEnter = () => {
+    this.setState({
+      dropzoneActive: true,
+    });
+  };
+
+  handleDragLeave = () => {
+    this.setState({
+      dropzoneActive: false,
+    });
+  };
+
+  handleDropAccepted = (files: Object[]) => {
+    this.setState({
+      dropzoneActive: false,
+    });
+
+    const { onDrop } = this.props;
+    onDrop(files[0].preview);
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  handleDropRejected = (rejectedFiles: Object[]) => {
+    // TODO Implement
+  };
+
   render() {
     const { image, imageStyle, imageRef, placeholder, children, ...props } = this.props;
     const styles = this.getStyles(image, imageStyle);
@@ -88,10 +99,10 @@ export default class DroppableImage extends Component {
       <Dropzone
         accept={supportedTypes.join(',')}
         multiple={false}
-        onDragEnter={this.onDragEnter}
-        onDragLeave={this.onDragLeave}
-        onDropAccepted={this.onDropAccepted}
-        onDropRejected={this.onDropRejected}
+        onDragEnter={this.handleDragEnter}
+        onDragLeave={this.handleDragLeave}
+        onDropAccepted={this.handleDropAccepted}
+        onDropRejected={this.handleDropRejected}
         style={styles.dropZone}
       >
         {image ? (

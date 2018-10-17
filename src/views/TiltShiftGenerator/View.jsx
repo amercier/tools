@@ -1,5 +1,29 @@
-import React from 'react';
-import { number, string, object, func } from 'prop-types';
+// @flow
+
+import * as React from 'react';
+import DroppableImage from './DroppableImage';
+import Options from './Options';
+import Toolbar from './Toolbar';
+
+type ReactObjRef<ElementType: React.ElementType> = {
+  current: null | React.ElementRef<ElementType>
+};
+
+type Props = {
+  RenderOptions: typeof Options,
+  RenderDroppableImage: typeof DroppableImage,
+  RenderToolbar: typeof Toolbar,
+
+  image: string,
+  imageHeight: number,
+  downloadUrl: string,
+  imageRef: ReactObjRef<'img'>,
+  canvasRef: ReactObjRef<'div'>,
+
+  onDrop: (preview: string) => void,
+  onOptionChange: (name: string, value: number) => void,
+  onImageLoad: (event: { target: HTMLImageElement } & Event) => void,
+};
 
 const View = ({
   RenderOptions,
@@ -14,7 +38,7 @@ const View = ({
   onOptionChange,
   onImageLoad,
   ...optionValues
-}) => (
+}: Props) => (
   <div>
     <RenderOptions
       disabled={!imageHeight}
@@ -38,26 +62,14 @@ const View = ({
   </div>
 );
 
-View.propTypes = {
-  RenderOptions: func.isRequired,
-  RenderDroppableImage: func.isRequired,
-  RenderToolbar: func.isRequired,
-
-  image: string,
-  imageHeight: number,
-  downloadUrl: string,
-  imageRef: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  canvasRef: object.isRequired, // eslint-disable-line react/forbid-prop-types
-
-  onDrop: func.isRequired,
-  onOptionChange: func.isRequired,
-  onImageLoad: func.isRequired,
-};
-
 View.defaultProps = {
-  image: null,
-  imageHeight: null,
-  downloadUrl: null,
+  RenderOptions: Options,
+  RenderDroppableImage: DroppableImage,
+  RenderToolbar: Toolbar,
+
+  image: undefined,
+  imageHeight: undefined,
+  downloadUrl: undefined,
 };
 
 export default View;

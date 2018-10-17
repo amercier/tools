@@ -1,8 +1,19 @@
-import React from 'react';
-import { bool, number, string } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Spinner from '../../shared/Spinner';
 
-const ImageLoader = ({ width, height, loading, blobUrl, alt }) => {
+export type Props = {
+  width: number,
+  height: number,
+  loading: boolean,
+  blobUrl?: string,
+  alt?: string,
+};
+
+const ImageLoader = ({
+  width, height, loading, blobUrl, alt,
+}: Props) => {
   const styles = {
     container: {
       height: 0,
@@ -50,17 +61,9 @@ const ImageLoader = ({ width, height, loading, blobUrl, alt }) => {
   );
 };
 
-ImageLoader.propTypes = {
-  width: number.isRequired,
-  height: number.isRequired,
-  loading: bool.isRequired,
-  blobUrl: string,
-  alt: string,
-};
-
 ImageLoader.defaultProps = {
-  blobUrl: null,
-  alt: null,
+  blobUrl: undefined,
+  alt: undefined,
 };
 
 export default ImageLoader;

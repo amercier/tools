@@ -1,12 +1,19 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
-import { string, func, shape } from 'prop-types';
 
-const Page = ({ module }) => {
+import type { Module } from '../config';
+
+type Props = {
+  module: Module,
+};
+
+const Page = ({ module }: Props) => {
   const { title, description, component } = module;
 
   const styles = {
@@ -43,18 +50,9 @@ const Page = ({ module }) => {
         </Link>
       </div>
 
-      {React.createElement(component)}
+      {component && React.createElement(component)}
     </div>
   );
-};
-
-Page.propTypes = {
-  module: shape({
-    id: string,
-    title: string,
-    description: string,
-    component: func,
-  }).isRequired,
 };
 
 export default Page;

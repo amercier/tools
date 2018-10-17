@@ -1,11 +1,18 @@
-import React from 'react';
-import { string, func, arrayOf, shape } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import LogEntry from './LogEntry';
+import { type Message } from './config';
 
 const messageKey = ({ message, level }) =>
   `log-${level}-${message.replace(/ /g, '-').toLowerCase()}`;
 
-const Log = ({ messages, RenderEntry }) =>
+type Props = {
+  RenderEntry: typeof LogEntry,
+  messages: Message[],
+};
+
+const Log = ({ messages, RenderEntry }: Props) =>
   messages.length > 0 ? (
     <div>
       {messages.map(message => (
@@ -13,16 +20,6 @@ const Log = ({ messages, RenderEntry }) =>
       ))}
     </div>
   ) : null;
-
-Log.propTypes = {
-  messages: arrayOf(
-    shape({
-      level: string.isRequired,
-      message: string.isRequired,
-    }),
-  ).isRequired,
-  RenderEntry: func,
-};
 
 Log.defaultProps = {
   RenderEntry: LogEntry,

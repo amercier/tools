@@ -1,6 +1,7 @@
+// @flow
 /* eslint-disable lines-between-class-members, class-methods-use-this */
 
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import AbstractEncoderDecoder from './Abstract';
 import { identity } from '../../lib/lang';

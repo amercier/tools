@@ -1,25 +1,36 @@
-import React from 'react';
+// @flow
+
 import filenamifyUrl from 'filenamify-url';
-import { bool, string, func, arrayOf } from 'prop-types';
+import * as React from 'react';
+import ImageLoader from './ImageLoader';
+import Toolbar from './Toolbar';
 
 function getFilenameFromUrl(url, extension) {
   const basename = filenamifyUrl(url, { replacement: '-' });
   return `${basename}.${extension}`;
 }
 
+type Props = {
+  RenderToolbar: typeof Toolbar,
+  RenderImageLoader: typeof ImageLoader,
+
+  url: string,
+  resolution: string,
+  resolutions: string[],
+  displayedUrl?: string,
+  blobUrl?: string,
+  loading: boolean,
+
+  onUrlChange: (url: string) => *,
+  onResolutionChange: (resolution: string) => *,
+  onGo: () => *,
+};
+
 const View = ({
-  RenderToolbar,
-  RenderImageLoader,
-  url,
-  resolution,
-  resolutions,
-  displayedUrl,
-  blobUrl,
-  loading,
-  onUrlChange,
-  onResolutionChange,
-  onGo,
-}) => {
+  RenderToolbar, RenderImageLoader,
+  url, resolution, resolutions, displayedUrl, blobUrl, loading,
+  onUrlChange, onResolutionChange, onGo,
+}: Props) => {
   const [imageWidth, imageHeight] = resolution.split(' x ').map(x => +x);
   return (
     <div>
@@ -33,7 +44,6 @@ const View = ({
         blobUrl={blobUrl}
         filename={displayedUrl && getFilenameFromUrl(displayedUrl, 'jpg')}
       />
-
       <RenderImageLoader
         width={imageWidth}
         height={imageHeight}
@@ -45,25 +55,11 @@ const View = ({
   );
 };
 
-View.propTypes = {
-  RenderToolbar: func.isRequired,
-  RenderImageLoader: func.isRequired,
-
-  url: string.isRequired,
-  resolution: string.isRequired,
-  resolutions: arrayOf(string).isRequired,
-  onUrlChange: func.isRequired,
-  onResolutionChange: func.isRequired,
-  onGo: func.isRequired,
-
-  displayedUrl: string,
-  blobUrl: string,
-  loading: bool.isRequired,
-};
-
 View.defaultProps = {
-  displayedUrl: null,
-  blobUrl: null,
+  RenderToolbar: Toolbar,
+  RenderImageLoader: ImageLoader,
+  displayedUrl: undefined,
+  blobUrl: undefined,
 };
 
 export default View;

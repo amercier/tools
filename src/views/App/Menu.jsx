@@ -1,6 +1,7 @@
+// @flow
+
 import classNames from 'classnames';
-import React from 'react';
-import { bool, string, func, object, node, arrayOf, shape } from 'prop-types';
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -14,7 +15,19 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import LinkListItem from '../../shared/LinkListItem';
+import type { Module } from '../config';
 import { drawerWidth } from './config';
+
+type Props = {
+  mobileOpen: boolean,
+  desktopOpen: boolean,
+  modules: Module[],
+  onMobileDrawerToggle: () => void,
+  onDesktopDrawerToggle: () => void,
+  children: React.Node,
+  theme: Object,
+  classes: Object,
+};
 
 const styles = ({ breakpoints, mixins, spacing, transitions }) => ({
   toolbar: {
@@ -54,7 +67,7 @@ const Menu = ({
   desktopOpen,
   onMobileDrawerToggle,
   onDesktopDrawerToggle,
-}) => {
+}: Props) => {
   const menuItems = (
     <List>
       {modules.map(module => (
@@ -107,24 +120,6 @@ const Menu = ({
       </Drawer>
     </Hidden>,
   ];
-};
-
-Menu.propTypes = {
-  mobileOpen: bool.isRequired,
-  desktopOpen: bool.isRequired,
-  onMobileDrawerToggle: func.isRequired,
-  onDesktopDrawerToggle: func.isRequired,
-  modules: arrayOf(
-    shape({
-      id: string.isRequired,
-      icon: string.isRequired,
-      title: string.isRequired,
-      component: func,
-    }),
-  ).isRequired,
-  children: node,
-  theme: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default withStyles(styles, { withTheme: true })(Menu);

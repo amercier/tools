@@ -1,8 +1,19 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-import { bool, string, func, object } from 'prop-types';
+
+type Props = {
+  input: string,
+  onInputChange: Object => any,
+  onEncode: () => any,
+  onDecode: () => any,
+  isDecodeDisabled: boolean,
+  isEncodeDisabled: boolean,
+  classes: Object,
+};
 
 const styles = theme => ({
   toolbar: {
@@ -15,14 +26,14 @@ const styles = theme => ({
 });
 
 function EncoderDecoderView({
-  classes,
   input,
   onInputChange,
   onEncode,
   onDecode,
   isDecodeDisabled,
   isEncodeDisabled,
-}) {
+  classes,
+}: Props) {
   const { toolbar, button } = classes;
   const buttonProps = { variant: 'contained', className: button };
   // TODO: add outlined text field once available
@@ -48,15 +59,5 @@ function EncoderDecoderView({
     </div>
   );
 }
-
-EncoderDecoderView.propTypes = {
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  input: string.isRequired,
-  onInputChange: func.isRequired,
-  onEncode: func.isRequired,
-  onDecode: func.isRequired,
-  isEncodeDisabled: bool.isRequired,
-  isDecodeDisabled: bool.isRequired,
-};
 
 export default withStyles(styles)(EncoderDecoderView);

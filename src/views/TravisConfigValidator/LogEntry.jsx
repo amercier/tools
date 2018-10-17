@@ -1,14 +1,15 @@
-import React from 'react';
-import { string, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
+import { logIcons } from './config';
 
-const logIcons = {
-  info: 'info',
-  warn: 'warning',
-  error: 'error',
-  default: 'message',
+type Props = {
+  level: string,
+  message: string,
+  classes: Object,
 };
 
 const styles = ({ spacing }) => ({
@@ -34,7 +35,7 @@ const styles = ({ spacing }) => ({
   },
 });
 
-const LogEntry = ({ level, message, classes }) => (
+const LogEntry = ({ level, message, classes }: Props) => (
   <Typography className={classes.root}>
     <Icon className={`${classes.icon} ${classes[`${level}Icon`] || ''}`}>
       {logIcons[level] || logIcons.default}
@@ -43,11 +44,5 @@ const LogEntry = ({ level, message, classes }) => (
     {message}
   </Typography>
 );
-
-LogEntry.propTypes = {
-  level: string.isRequired,
-  message: string.isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
 
 export default withStyles(styles)(LogEntry);
