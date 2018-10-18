@@ -50,6 +50,7 @@
     "lint": "run-p lint:*",
     "lint:prettier": "prettier --list-different '**/*'",
     "lint:eslint": "eslint --ext .js --ext .jsx --ignore-path .gitignore .",
+    "lint:flow": "flow",
     "lint:stylelint": "stylelint --ignore-path .gitignore --syntax scss '**/*.scss'",
     "start": "react-scripts start",
     "build": "react-scripts build",
