@@ -1,9 +1,14 @@
-import React from 'react';
-import { node, arrayOf } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { spacing, xs, sm, md, lg, xl } from './config';
 
-const Panel = ({ children }) => (
+type Props = {|
+  children: React.Node[],
+|};
+
+const Panel = ({ children }: Props) => (
   <Grid container spacing={spacing} alignItems="stretch">
     {children.map((child, i) => (
       <Grid
@@ -16,9 +21,5 @@ const Panel = ({ children }) => (
     ))}
   </Grid>
 );
-
-Panel.propTypes = {
-  children: arrayOf(node).isRequired,
-};
 
 export default Panel;
