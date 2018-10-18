@@ -1,41 +1,43 @@
-import React, { Component } from 'react';
+// @flow
+
+import * as React from 'react';
 import View from './View';
 
-export default class Base64EncoderDecoder extends Component {
-  static encode() {
-    throw new Error('static encode() is not implemented');
-  }
+type State = {|
+  input: string,
+|};
 
-  static decode() {
-    throw new Error('static decode() is not implemented');
-  }
+export default class AbstractEncoderDecoder extends React.Component<{}, State> {
+  static encode: (input: string) => string | null;
+
+  static decode: (input: string) => string | null;
 
   state = {
     input: '',
   };
 
-  onInputChange = ({ target }) => {
-    this.setState({ input: target.value });
-  };
-
-  get isEncodeDisabled() {
+  get isEncodeDisabled(): boolean {
     const { input } = this.state;
     return input === '';
   }
 
-  get isDecodeDisabled() {
+  get isDecodeDisabled(): boolean {
     const { input } = this.state;
     return input === '' || this.constructor.decode(input) === null;
   }
 
-  encode = () => {
-    const { input } = this.state;
-    this.setState({ input: this.constructor.encode(input) });
+  handleInputChange = (value: string) => {
+    this.setState({ input: value });
   };
 
-  decode = () => {
+  handleEncode = () => {
     const { input } = this.state;
-    this.setState({ input: this.constructor.decode(input) });
+    this.setState({ input: this.constructor.encode(input) || '' });
+  };
+
+  handleDecode = () => {
+    const { input } = this.state;
+    this.setState({ input: this.constructor.decode(input) || '' });
   };
 
   render() {
@@ -43,11 +45,11 @@ export default class Base64EncoderDecoder extends Component {
       <View
         {...this.props}
         {...this.state}
-        onInputChange={this.onInputChange}
-        onEncode={this.encode}
-        onDecode={this.decode}
         isEncodeDisabled={this.isEncodeDisabled}
         isDecodeDisabled={this.isDecodeDisabled}
+        onEncode={this.handleEncode}
+        onDecode={this.handleDecode}
+        onInputChange={this.handleInputChange}
       />
     );
   }

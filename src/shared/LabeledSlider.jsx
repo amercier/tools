@@ -1,8 +1,16 @@
-import React from 'react';
-import { node, object, oneOfType, arrayOf } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 import NamedSlider from './NamedSlider';
+
+type Props = {|
+  label: React.Node,
+  name: string,
+  onChange: (name: string, value: number) => void,
+  classes: Object,
+|};
 
 const styles = theme => ({
   root: {
@@ -16,7 +24,7 @@ const styles = theme => ({
   },
 });
 
-const LabeledSlider = ({ label, classes, ...props }) => (
+const LabeledSlider = ({ label, classes, ...props }: Props) => (
   <FormControlLabel
     classes={classes}
     label={label}
@@ -24,10 +32,5 @@ const LabeledSlider = ({ label, classes, ...props }) => (
     control={<NamedSlider className={classes.control} {...props} />}
   />
 );
-
-LabeledSlider.propTypes = {
-  label: oneOfType([arrayOf(node), node]).isRequired,
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-};
 
 export default withStyles(styles)(LabeledSlider);

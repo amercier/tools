@@ -1,14 +1,20 @@
-import React from 'react';
-import { number } from 'prop-types';
+// @flow
 
-const Spinner = ({ size, thickness }) => {
+import * as React from 'react';
+
+type Props = {|
+  size?: number,
+  thickness?: number,
+|};
+
+const Spinner = ({ size, thickness }: Props) => {
   const styles = {
     svg: {
       position: 'relative',
       animation: 'rotate 2s linear infinite',
       verticalAlign: 'middle',
-      width: `${size}px`,
-      height: `${size}px`,
+      width: `${+size}px`,
+      height: `${+size}px`,
     },
     circle: {
       animation: 'dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite',
@@ -33,11 +39,6 @@ const Spinner = ({ size, thickness }) => {
       />
     </svg>
   );
-};
-
-Spinner.propTypes = {
-  size: number,
-  thickness: number,
 };
 
 Spinner.defaultProps = {

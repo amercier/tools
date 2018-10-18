@@ -1,17 +1,33 @@
-import React from 'react';
-import { bool, string, node } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { Link, Route, withRouter } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 
+type Props = {|
+  to: string,
+  disabled?: boolean,
+  children: React.Node,
+|};
+
+type ListItemWithRouterProps = {|
+  location: Object,
+  match: Object,
+  history: Object,
+  staticContext: Object,
+  children: React.Node,
+  props?: Object,
+|};
+
 const ListItemWithRouter = withRouter(
-  ({ location, match, history, staticContext, children, ...props }) => (
+  ({ location, match, history, staticContext, children, ...props }: ListItemWithRouterProps) => (
     <ListItem selected={!!match} {...props}>
       {children}
     </ListItem>
   ),
 );
 
-const LinkListItem = ({ to, disabled, children, ...props }) =>
+const LinkListItem = ({ to, disabled, children, ...props }: Props) =>
   disabled ? (
     <ListItem disabled>{children}</ListItem>
   ) : (
@@ -21,12 +37,6 @@ const LinkListItem = ({ to, disabled, children, ...props }) =>
       </Link>
     </Route>
   );
-
-LinkListItem.propTypes = {
-  to: string.isRequired,
-  disabled: bool,
-  children: node.isRequired,
-};
 
 LinkListItem.defaultProps = {
   disabled: false,
