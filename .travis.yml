@@ -7,6 +7,9 @@ env:
   global:
     - AWS_S3_BUCKET=amercier-tools
     - AWS_S3_REGION=eu-west-3
+install:
+  - npm install --ignore-scripts
+  - npm rebuild
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter

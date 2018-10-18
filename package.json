@@ -51,6 +51,7 @@
     "jest": "^23.6.0"
   },
   "scripts": {
+    "install": "flow-typed install --overwrite --skip",
     "lint": "run-p lint:*",
     "lint:prettier": "prettier --ignore-path .ignore --list-different '**/*'",
     "lint:eslint": "eslint --ignore-path .ignore --ext .js --ext .jsx .",
