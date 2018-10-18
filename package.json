@@ -27,6 +27,7 @@
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-flowtype": "^3.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
@@ -102,10 +103,12 @@
   "eslintConfig": {
     "extends": [
       "airbnb",
+      "plugin:flowtype/recommended",
       "plugin:react/recommended",
       "plugin:unicorn/recommended",
       "plugin:prettier/recommended",
       "prettier",
+      "prettier/flowtype",
       "prettier/react",
       "prettier/unicorn"
     ],
