@@ -1,5 +1,32 @@
-import React from 'react';
-import { bool, number, string, func } from 'prop-types';
+// @flow
+
+import * as React from 'react';
+
+import CopyToClipboard from './CopyToClipboard';
+import Notification from './Notification';
+import Options from './Options';
+import Password from './Password';
+
+type Props = {|
+  RenderOptions: typeof Options,
+  RenderPassword: typeof Password,
+  RenderCopyToClipboard: typeof CopyToClipboard,
+  RenderNotification: typeof Notification,
+
+  password: string | null,
+  copied: boolean,
+  showCopyMessage: boolean,
+  length: number,
+  numbers: boolean,
+  symbols: boolean,
+  uppercase: boolean,
+  excludeSimilar: boolean,
+
+  onPasswordUpdateRequested: () => void,
+  onCopy: () => void,
+  onCopyMessageClose: () => void,
+  onOptionChange: (name: string, value: boolean | number) => void,
+|};
 
 const View = ({
   RenderOptions,
@@ -14,7 +41,7 @@ const View = ({
   onCopyMessageClose,
   onOptionChange,
   ...optionsProps
-}) => (
+}: Props) => (
   <div className="password-generator">
     <RenderOptions onChange={onOptionChange} {...optionsProps} />
     <RenderPassword password={password} onPasswordUpdateRequested={onPasswordUpdateRequested} />
@@ -23,25 +50,11 @@ const View = ({
   </div>
 );
 
-View.propTypes = {
-  RenderOptions: func.isRequired,
-  RenderPassword: func.isRequired,
-  RenderCopyToClipboard: func.isRequired,
-  RenderNotification: func.isRequired,
-
-  password: string.isRequired,
-  onPasswordUpdateRequested: func.isRequired,
-  onCopy: func.isRequired,
-  copied: bool.isRequired,
-  showCopyMessage: bool.isRequired,
-  onCopyMessageClose: func.isRequired,
-
-  length: number.isRequired,
-  numbers: bool.isRequired,
-  symbols: bool.isRequired,
-  uppercase: bool.isRequired,
-  excludeSimilar: bool.isRequired,
-  onOptionChange: func.isRequired,
+View.defaultProps = {
+  RenderOptions: Options,
+  RenderPassword: Password,
+  RenderCopyToClipboard: CopyToClipboard,
+  RenderNotification: Notification,
 };
 
 export default View;

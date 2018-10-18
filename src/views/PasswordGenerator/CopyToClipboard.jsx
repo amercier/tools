@@ -1,8 +1,15 @@
-import React from 'react';
-import { string, func, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Copy from 'react-copy-to-clipboard';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+
+type Props = {|
+  password: string,
+  onCopy: () => void,
+  classes: Object,
+|};
 
 const styles = () => ({
   root: {
@@ -14,7 +21,7 @@ const styles = () => ({
   },
 });
 
-const CopyToClipboard = ({ password, onCopy, classes }) => (
+const CopyToClipboard = ({ password, onCopy, classes }: Props) => (
   <div className={classes.root}>
     <Copy text={password} onCopy={onCopy}>
       <Button variant="contained" color="primary" className={classes.button}>
@@ -23,11 +30,5 @@ const CopyToClipboard = ({ password, onCopy, classes }) => (
     </Copy>
   </div>
 );
-
-CopyToClipboard.propTypes = {
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  password: string.isRequired,
-  onCopy: func.isRequired,
-};
 
 export default withStyles(styles)(CopyToClipboard);

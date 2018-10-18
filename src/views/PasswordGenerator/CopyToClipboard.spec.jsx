@@ -1,4 +1,6 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import CopyToClipboard from './CopyToClipboard';
 import { noop } from '../../lib/lang';

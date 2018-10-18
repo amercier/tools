@@ -1,12 +1,21 @@
+// @flow
+
 import { generate as generatePassword } from 'generate-password';
-import React, { Component } from 'react';
-import CopyToClipboard from './CopyToClipboard';
-import Notification from './Notification';
-import Options from './Options';
-import Password from './Password';
+import * as React from 'react';
 import View from './View';
 
-export default class PasswordGenerator extends Component {
+type State = {|
+  password: string | null,
+  length: number,
+  numbers: boolean,
+  symbols: boolean,
+  uppercase: boolean,
+  excludeSimilar: boolean,
+  copied: boolean,
+  showCopyMessage: boolean,
+|};
+
+export default class PasswordGenerator extends React.Component<{}, State> {
   state = {
     password: null,
     length: 32,
@@ -25,7 +34,7 @@ export default class PasswordGenerator extends Component {
     });
   };
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props: Object, state: Object) {
     if (state.password !== null) {
       return null;
     }
@@ -33,7 +42,7 @@ export default class PasswordGenerator extends Component {
     return { password };
   }
 
-  handleOptionChange = (name, value) => {
+  handleOptionChange = (name: string, value: boolean | number) => {
     this.setState({ [name]: value });
     this.updatePassword();
   };
@@ -67,10 +76,6 @@ export default class PasswordGenerator extends Component {
 
     return (
       <View
-        RenderOptions={Options}
-        RenderPassword={Password}
-        RenderCopyToClipboard={CopyToClipboard}
-        RenderNotification={Notification}
         password={password}
         onPasswordUpdateRequested={this.handlePasswordUpdateRequested}
         copied={copied}
