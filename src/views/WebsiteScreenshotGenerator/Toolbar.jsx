@@ -9,7 +9,6 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import isUrl from 'is-url';
-import { eventTargetProperty } from '../../lib/dom';
 
 const valueToMenuItem = (value, i) => (
   <MenuItem key={`menu-item-${i}`} value={value}>
@@ -55,7 +54,7 @@ const Toolbar = ({
     <div className={classes.group1}>
       <TextField
         label="Website URL"
-        onChange={eventTargetProperty(onUrlChange)}
+        onChange={event => onUrlChange(event.target.value)}
         value={url}
         className={classes.url}
         fullWidth
@@ -67,7 +66,7 @@ const Toolbar = ({
         <InputLabel htmlFor="resolution-helper">Resolution</InputLabel>
         <Select
           value={resolution}
-          onChange={eventTargetProperty(onResolutionChange)}
+          onChange={event => onResolutionChange(event.target.value)}
           input={<Input name="resolution" id="resolution-helper" />}
         >
           {resolutions.map(valueToMenuItem)}
