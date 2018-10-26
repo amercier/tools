@@ -21,6 +21,7 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -31,25 +32,47 @@
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-unicorn": "^6.0.1",
     "jest-prop-type-error": "^1.1.0",
+    "lint-staged": "^7.3.0",
     "node-sass": "^4.9.3",
     "npm-run-all": "^4.1.3",
-    "react-app-rewired": "^1.6.2",
+    "prettier": "^1.14.3",
     "react-scripts": "^2.0.4",
     "react-test-renderer": "^16.5.2",
     "stylelint": "^9.6.0",
     "stylelint-config-idiomatic-sass": "^1.0.0",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-strict-scss": "^0.5.0",
-    "stylelint-scss": "^3.3.1",
-    "stylelint-webpack-plugin": "^0.10.5"
+    "stylelint-scss": "^3.3.1"
   },
   "scripts": {
     "lint": "run-p lint:*",
-    "lint:js": "eslint --ext .js --ext .jsx --ignore-path .gitignore .",
-    "lint:scss": "stylelint --ignore-path .gitignore --syntax scss '**/*.scss'",
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-app-rewired eject"
+    "lint:prettier": "prettier --list-different '**/*'",
+    "lint:eslint": "eslint --ext .js --ext .jsx --ignore-path .gitignore .",
+    "lint:stylelint": "stylelint --ignore-path .gitignore --syntax scss '**/*.scss'",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --list-different"
+    ],
+    "*.{js,jsx}": [
+      "eslint --ignore-path .gitignore",
+      "cross-env CI=run-once react-scripts test --env=jsdom --bail --findRelatedTests"
+    ],
+    "*.{css}": [
+      "stylelint --ignore-path .gitignore"
+    ],
+    "*.{scss}": [
+      "stylelint --ignore-path .gitignore --syntax scss"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "browserslist": {
     "development": [
@@ -139,7 +162,8 @@
   "stylelint": {
     "extends": [
       "stylelint-config-strict-scss",
-      "stylelint-config-idiomatic-sass"
+      "stylelint-config-idiomatic-sass",
+      "stylelint-config-prettier"
     ]
   }
 }

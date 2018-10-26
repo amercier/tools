@@ -1,0 +1,11 @@
+/node_modules
+/coverage
+/build
+.DS_Store
+CNAME
+.*ignore
+*.html
+*.ico
+*.log
+*.png
+*.svg
