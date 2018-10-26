@@ -69,6 +69,11 @@
       "stylelint --ignore-path .gitignore --syntax scss"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "browserslist": {
     "development": [
       "last 2 chrome versions",
