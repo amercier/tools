@@ -39,6 +39,7 @@
     "react-test-renderer": "^16.5.2",
     "stylelint": "^9.6.0",
     "stylelint-config-idiomatic-sass": "^1.0.0",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-strict-scss": "^0.5.0",
     "stylelint-scss": "^3.3.1"
   },
@@ -151,7 +152,8 @@
   "stylelint": {
     "extends": [
       "stylelint-config-strict-scss",
-      "stylelint-config-idiomatic-sass"
+      "stylelint-config-idiomatic-sass",
+      "stylelint-config-prettier"
     ]
   }
 }
