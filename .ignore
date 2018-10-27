@@ -1,5 +1,6 @@
 /build
 /coverage
+/flow-typed
 /node_modules
 .DS_Store
 .flowconfig
