@@ -1,9 +1,16 @@
-import React from 'react';
-import { bool, func, object } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
+
+type Props = {|
+  classes: Object,
+  showCopyMessage: boolean,
+  onClose: () => void,
+|};
 
 const styles = theme => ({
   close: {
@@ -12,7 +19,7 @@ const styles = theme => ({
   },
 });
 
-const Notification = ({ showCopyMessage, onClose, classes }) => (
+const Notification = ({ showCopyMessage, onClose, classes }: Props) => (
   <Snackbar
     anchorOrigin={{
       vertical: 'bottom',
@@ -29,11 +36,5 @@ const Notification = ({ showCopyMessage, onClose, classes }) => (
     }
   />
 );
-
-Notification.propTypes = {
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  showCopyMessage: bool.isRequired,
-  onClose: func.isRequired,
-};
 
 export default withStyles(styles)(Notification);

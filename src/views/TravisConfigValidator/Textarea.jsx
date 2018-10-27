@@ -1,9 +1,8 @@
 import React from 'react';
-import { bool, number, string, func, object, oneOfType } from 'prop-types';
+import { bool, number, string, func, object } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { auto } from '../../lib/lang';
-import { eventTargetProperty } from '../../lib/dom';
+import { between } from '../../lib/math';
 
 const styles = {
   input: {
@@ -21,9 +20,9 @@ const Textarea = ({ value, rows, minRows, maxRows, onChange, classes, ...props }
     multiline
     fullWidth
     label="Paste .travis.yml here"
-    rows={auto(rows, minRows, maxRows)(value.split(/\n/).length)}
+    rows={between(minRows, maxRows)(value.split(/\n/).length)}
     value={value}
-    onChange={eventTargetProperty(onChange)}
+    onChange={event => onChange(event.target.value)}
     inputProps={{ className: classes.input }}
     {...props}
   />
@@ -33,14 +32,12 @@ Textarea.propTypes = {
   value: string.isRequired,
   disabled: bool.isRequired,
   onChange: func.isRequired,
-  rows: oneOfType([number, string]),
   minRows: number,
   maxRows: number,
   classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 Textarea.defaultProps = {
-  rows: 'auto',
   minRows: 1,
   maxRows: +Infinity,
 };

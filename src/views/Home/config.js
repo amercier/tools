@@ -1,3 +1,5 @@
+// @flow
+
 export const spacing = 24;
 export const xs = 6;
 export const sm = 4;

@@ -1,4 +1,6 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 
 const GithubToolbarIcon = () => (
   <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24" fill="currentColor">

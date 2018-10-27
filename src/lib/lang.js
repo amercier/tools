@@ -1,13 +1,9 @@
-import { between } from './math';
+// @flow
 
-export const noop = () => {};
-export const identity = value => value;
+export function noop() {}
 
-export const nameToId = name => name.replace(/\s+/, '-').toLowerCase();
-
-export function auto(setting, minValue, maxValue) {
-  if (setting === 'auto') {
-    return between(minValue, maxValue);
-  }
-  return identity;
+export function identity<T>(value: T): T {
+  return value;
 }
+
+export const nameToId: (name: string) => string = name => name.replace(/\s+/, '-').toLowerCase();

@@ -1,3 +1,5 @@
+// @flow
+
 import { urlEncode, urlDecode } from './url';
 import AbstactEncoderDecoder from '../../shared/EncoderDecoder/Abstract';
 

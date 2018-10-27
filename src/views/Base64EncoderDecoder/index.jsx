@@ -1,3 +1,5 @@
+// @flow
+
 import { base64EncodeUnicode, base64DecodeUnicode } from './base64';
 import AbstactEncoderDecoder from '../../shared/EncoderDecoder/Abstract';
 

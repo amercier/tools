@@ -1,11 +1,22 @@
-import React from 'react';
-import { number, bool, object, func } from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import LabeledSlider from '../../shared/LabeledSlider';
 import NamedSwitch from '../../shared/NamedSwitch';
 import { minLength, maxLength } from './config';
+
+type Props = {|
+  classes: Object,
+  length: number,
+  numbers: boolean,
+  symbols: boolean,
+  uppercase: boolean,
+  excludeSimilar: boolean,
+  onChange: () => void,
+|};
 
 const styles = () => ({
   switchGroup: {
@@ -16,11 +27,19 @@ const styles = () => ({
   },
 });
 
-const Options = ({ classes, onChange, length, ...switches }) => (
+const Options = ({
+  onChange,
+  length,
+  classes,
+  numbers,
+  symbols,
+  uppercase,
+  excludeSimilar,
+}: Props) => (
   <div>
     <LabeledSlider
-      label={`Length (${length})`}
       name="length"
+      label={`Length (${length})`}
       value={length}
       min={minLength}
       max={maxLength}
@@ -30,32 +49,24 @@ const Options = ({ classes, onChange, length, ...switches }) => (
     />
 
     <FormGroup row className={classes.switchGroup}>
-      {Object.entries(switches).map(([name, checked]) => (
-        <FormControlLabel
-          key={`password-generator-switch-${name}`}
-          label={
-            {
-              numbers: 'Numbers',
-              symbols: 'Symbols',
-              uppercase: 'Uppercase characters',
-              excludeSimilar: 'Exclude similar characters',
-            }[name]
-          }
-          control={<NamedSwitch {...{ name, checked, onChange }} />}
-        />
-      ))}
+      <FormControlLabel
+        label="Numbers"
+        control={<NamedSwitch name="numbers" checked={numbers} onChange={onChange} />}
+      />
+      <FormControlLabel
+        label="Symbols"
+        control={<NamedSwitch name="symbols" checked={symbols} onChange={onChange} />}
+      />
+      <FormControlLabel
+        label="Uppercase characters"
+        control={<NamedSwitch name="uppercase" checked={uppercase} onChange={onChange} />}
+      />
+      <FormControlLabel
+        label="Exclude similar characters"
+        control={<NamedSwitch name="excludeSimilar" checked={excludeSimilar} onChange={onChange} />}
+      />
     </FormGroup>
   </div>
 );
-
-Options.propTypes = {
-  classes: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  length: number.isRequired,
-  numbers: bool.isRequired,
-  symbols: bool.isRequired,
-  uppercase: bool.isRequired,
-  excludeSimilar: bool.isRequired,
-  onChange: func.isRequired,
-};
 
 export default withStyles(styles)(Options);
