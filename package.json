@@ -48,10 +48,10 @@
   },
   "scripts": {
     "lint": "run-p lint:*",
-    "lint:prettier": "prettier --list-different '**/*'",
-    "lint:eslint": "eslint --ext .js --ext .jsx --ignore-path .gitignore .",
+    "lint:prettier": "prettier --ignore-path .ignore --list-different '**/*'",
+    "lint:eslint": "eslint --ignore-path .ignore --ext .js --ext .jsx .",
     "lint:flow": "flow",
-    "lint:stylelint": "stylelint --ignore-path .gitignore --syntax scss '**/*.scss'",
+    "lint:stylelint": "stylelint --ignore-path .ignore --syntax scss '**/*.scss'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -62,14 +62,14 @@
       "prettier --list-different"
     ],
     "*.{js,jsx}": [
-      "eslint --ignore-path .gitignore",
+      "eslint",
       "cross-env CI=run-once react-scripts test --env=jsdom --bail --findRelatedTests"
     ],
     "*.{css}": [
-      "stylelint --ignore-path .gitignore"
+      "stylelint"
     ],
     "*.{scss}": [
-      "stylelint --ignore-path .gitignore --syntax scss"
+      "stylelint --syntax scss"
     ]
   },
   "husky": {
