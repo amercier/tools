@@ -21,16 +21,20 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
+    "@babel/preset-flow": "^7.0.0",
     "cross-env": "^5.2.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-flowtype": "^3.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-unicorn": "^6.0.1",
+    "flow-bin": "^0.83.0",
+    "flow-typed": "^2.5.1",
     "jest-prop-type-error": "^1.1.0",
     "lint-staged": "^7.3.0",
     "node-sass": "^4.9.3",
@@ -44,11 +48,16 @@
     "stylelint-config-strict-scss": "^0.5.0",
     "stylelint-scss": "^3.3.1"
   },
+  "peerDependencies": {
+    "jest": "^23.6.0"
+  },
   "scripts": {
+    "install": "flow-typed install --overwrite --skip",
     "lint": "run-p lint:*",
-    "lint:prettier": "prettier --list-different '**/*'",
-    "lint:eslint": "eslint --ext .js --ext .jsx --ignore-path .gitignore .",
-    "lint:stylelint": "stylelint --ignore-path .gitignore --syntax scss '**/*.scss'",
+    "lint:prettier": "prettier --ignore-path .ignore --list-different '**/*'",
+    "lint:eslint": "eslint --ignore-path .ignore --ext .js --ext .jsx .",
+    "lint:flow": "flow",
+    "lint:stylelint": "stylelint --ignore-path .ignore --syntax scss '**/*.scss'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -59,14 +68,14 @@
       "prettier --list-different"
     ],
     "*.{js,jsx}": [
-      "eslint --ignore-path .gitignore",
+      "eslint",
       "cross-env CI=run-once react-scripts test --env=jsdom --bail --findRelatedTests"
     ],
     "*.{css}": [
-      "stylelint --ignore-path .gitignore"
+      "stylelint"
     ],
     "*.{scss}": [
-      "stylelint --ignore-path .gitignore --syntax scss"
+      "stylelint --syntax scss"
     ]
   },
   "husky": {
@@ -94,10 +103,12 @@
   "eslintConfig": {
     "extends": [
       "airbnb",
+      "plugin:flowtype/recommended",
       "plugin:react/recommended",
       "plugin:unicorn/recommended",
       "plugin:prettier/recommended",
       "prettier",
+      "prettier/flowtype",
       "prettier/react",
       "prettier/unicorn"
     ],
@@ -105,6 +116,63 @@
     "env": {
       "browser": true,
       "node": false
+    },
+    "settings": {
+      "flowtype": {
+        "onlyFilesWithFlowAnnotation": true
+      }
+    },
+    "rules": {
+      "react/require-default-props": [
+        "error",
+        {
+          "forbidDefaultForRequired": false
+        }
+      ],
+      "react/default-props-match-prop-types": [
+        "error",
+        {
+          "allowRequiredDefaults": true
+        }
+      ],
+      "flowtype/newline-after-flow-annotation": "error",
+      "flowtype/no-dupe-keys": "error",
+      "flowtype/no-existential-type": "warn",
+      "flowtype/no-flow-fix-me-comments": "warn",
+      "flowtype/no-primitive-constructor-types": "error",
+      "flowtype/no-weak-types": [
+        "warn",
+        {
+          "any": true,
+          "mixed": false,
+          "Object": false,
+          "Function": true
+        }
+      ],
+      "flowtype/require-exact-type": "warn",
+      "flowtype/require-parameter-type": [
+        "error",
+        {
+          "excludeArrowFunctions": "expressionsOnly",
+          "excludeParameterMatch": "^_"
+        }
+      ],
+      "flowtype/require-return-type": [
+        "warn",
+        {
+          "excludeArrowFunctions": "expressionsOnly"
+        }
+      ],
+      "flowtype/require-types-at-top": "error",
+      "flowtype/require-valid-file-annotation": [
+        "error",
+        "never",
+        {
+          "annotationStyle": "line"
+        }
+      ],
+      "flowtype/semi": "error",
+      "flowtype/type-import-style": "error"
     },
     "overrides": [
       {

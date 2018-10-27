@@ -1,7 +1,9 @@
-/node_modules
-/coverage
 /build
+/coverage
+/flow-typed
+/node_modules
 .DS_Store
+.flowconfig
 CNAME
 .*ignore
 *.html
