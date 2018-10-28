@@ -15,11 +15,10 @@ const styles = {
 };
 
 const Textarea = ({ value, rows, minRows, maxRows, onChange, classes, ...props }) => (
-  // TODO: add outlined text field once available
-  // See https://github.com/mui-org/material-ui/issues/11962
   <TextField
     multiline
     fullWidth
+    variant="outlined"
     label="Paste .travis.yml here"
     rows={auto(rows, minRows, maxRows)(value.split(/\n/).length)}
     value={value}
