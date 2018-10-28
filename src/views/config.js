@@ -8,14 +8,6 @@ import teal from '@material-ui/core/colors/teal';
 import yellow from '@material-ui/core/colors/yellow';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-import Base64EncoderDecoder from './Base64EncoderDecoder';
-import PasswordGenerator from './PasswordGenerator';
-import TiltShiftGenerator from './TiltShiftGenerator';
-import UrlEncoderDecoder from './UrlEncoderDecoder';
-import UnicodeCharacterPicker from './UnicodeCharacterPicker';
-import WebsiteScreenshotGenerator from './WebsiteScreenshotGenerator';
-import TravisConfigValidator from './TravisConfigValidator';
-
 const createTheme = (primary, secondary) =>
   createMuiTheme({
     palette: { primary, secondary },
@@ -31,7 +23,7 @@ export const modules = [
     id: 'url-encoder',
     title: 'URL encoder/decoder',
     icon: 'compare_arrows',
-    component: UrlEncoderDecoder,
+    component: 'UrlEncoderDecoder',
     description: 'Encode or decode text using percent (URL) encoding.',
     theme: createTheme(pink, green),
   },
@@ -44,7 +36,7 @@ export const modules = [
     id: 'base64-encoder',
     title: 'Base64 encoder/decoder',
     icon: 'code',
-    component: Base64EncoderDecoder,
+    component: 'Base64EncoderDecoder',
     description: 'Encode or decode text using base64 encoding.',
     theme: createTheme(orange, lightBlue),
   },
@@ -57,7 +49,7 @@ export const modules = [
     id: 'unicode-characters',
     title: 'Unicode character picker',
     icon: 'colorize',
-    component: UnicodeCharacterPicker,
+    component: 'UnicodeCharacterPicker',
     description: 'Copy fancy unicode characters to your clipboard.',
     theme: createTheme(lightBlue, orange),
   },
@@ -75,7 +67,7 @@ export const modules = [
     id: 'travis-validator',
     title: 'Travis.yml validator',
     icon: 'assignment_turned_in',
-    component: TravisConfigValidator,
+    component: 'TravisConfigValidator',
     description: 'Travis CI Yaml config validator.',
     theme: createTheme(deepPurple, yellow),
   },
@@ -83,7 +75,7 @@ export const modules = [
     id: 'password-generator',
     title: 'Password generator',
     icon: 'visibility_off',
-    component: PasswordGenerator,
+    component: 'PasswordGenerator',
     description: 'Generate a strong password and copy it to your clipboard.',
     theme: createTheme(yellow, deepPurple),
   },
@@ -91,7 +83,7 @@ export const modules = [
     id: 'website-screenshot',
     title: 'Website screenshot',
     icon: 'camera_alt',
-    component: WebsiteScreenshotGenerator,
+    component: 'WebsiteScreenshotGenerator',
     description: 'Generate a screenshot from a website.',
     theme: createTheme(teal, red),
   },
@@ -99,7 +91,7 @@ export const modules = [
     id: 'tilt-shift',
     title: 'Tilt–shift generator',
     icon: 'blur_on',
-    component: TiltShiftGenerator,
+    component: 'TiltShiftGenerator',
     description: 'Generate a screenshot from a website with a fancy tilt-shift effect.',
     theme: createTheme(red, teal),
   },
