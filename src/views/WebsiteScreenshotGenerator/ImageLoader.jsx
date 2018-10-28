@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, number, string } from 'prop-types';
-import Spinner from '../../shared/Spinner';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ImageLoader = ({ width, height, loading, blobUrl, alt }) => {
   const styles = {
@@ -44,7 +44,7 @@ const ImageLoader = ({ width, height, loading, blobUrl, alt }) => {
       <img src={blobUrl} width={width} height={height} alt={alt} style={styles.image} />
 
       <div style={styles.spinner}>
-        <Spinner size={128} thickness={2} />
+        <CircularProgress size={128} thickness={1.5} />
       </div>
     </div>
   );
