@@ -18,6 +18,8 @@ const createTheme = (primary, secondary) =>
 
 export const defaultTheme = createTheme(green, pink);
 
+export const monospaceFontFamily = 'Roboto, monospace';
+
 export const modules = [
   {
     id: 'url-encoder',

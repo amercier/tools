@@ -5,6 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import { monospaceFontFamily } from '../config';
 
 const styles = ({ spacing }) => ({
   root: {
@@ -15,8 +16,7 @@ const styles = ({ spacing }) => ({
     justifyContent: 'center',
   },
   password: {
-    // TODO Set in theme
-    fontFamily: 'Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+    fontFamily: monospaceFontFamily,
     fontSize: '1.2rem',
   },
   button: {

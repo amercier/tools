@@ -2,6 +2,7 @@ import React from 'react';
 import { string, object } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { monospaceFontFamily } from '../config';
 
 const styles = ({ palette, spacing, shape }) => ({
   root: {
@@ -9,8 +10,7 @@ const styles = ({ palette, spacing, shape }) => ({
     width: spacing.unit * 6,
     height: spacing.unit * 4,
     display: 'inline-block',
-    // TODO Set in theme
-    fontFamily: 'Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+    fontFamily: monospaceFontFamily,
     fontSize: '1.3rem',
     borderRadius: shape.borderRadius,
     textAlign: 'center',

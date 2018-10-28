@@ -4,12 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { auto } from '../../lib/lang';
 import { eventTargetProperty } from '../../lib/dom';
+import { monospaceFontFamily } from '../config';
 
 const styles = {
   input: {
-    // TODO Set in theme
-    fontFamily: 'Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
-    fontSize: '0.8rem',
+    fontFamily: monospaceFontFamily,
+    fontSize: '0.85rem',
     lineHeight: 1.2,
   },
 };
