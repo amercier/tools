@@ -89,7 +89,7 @@ View.propTypes = {
       id: string.isRequired,
       icon: string.isRequired,
       title: string.isRequired,
-      component: func,
+      component: string,
     }),
   ).isRequired,
   defaultTheme: object.isRequired, // eslint-disable-line react/forbid-prop-types

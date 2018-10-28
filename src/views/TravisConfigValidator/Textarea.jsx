@@ -4,22 +4,21 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { auto } from '../../lib/lang';
 import { eventTargetProperty } from '../../lib/dom';
+import { monospaceFontFamily } from '../config';
 
 const styles = {
   input: {
-    // TODO Set in theme
-    fontFamily: 'Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
-    fontSize: '0.8rem',
+    fontFamily: monospaceFontFamily,
+    fontSize: '0.85rem',
     lineHeight: 1.2,
   },
 };
 
 const Textarea = ({ value, rows, minRows, maxRows, onChange, classes, ...props }) => (
-  // TODO: add outlined text field once available
-  // See https://github.com/mui-org/material-ui/issues/11962
   <TextField
     multiline
     fullWidth
+    variant="outlined"
     label="Paste .travis.yml here"
     rows={auto(rows, minRows, maxRows)(value.split(/\n/).length)}
     value={value}

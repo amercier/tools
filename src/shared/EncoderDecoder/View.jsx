@@ -25,13 +25,12 @@ function EncoderDecoderView({
 }) {
   const { toolbar, button } = classes;
   const buttonProps = { variant: 'contained', className: button };
-  // TODO: add outlined text field once available
-  // See https://github.com/mui-org/material-ui/issues/11962
   return (
     <div>
       <TextField
         multiline
         fullWidth
+        variant="outlined"
         label="Text to encode or decode"
         value={input}
         onChange={onInputChange}

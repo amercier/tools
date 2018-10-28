@@ -1,38 +1,16 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-// TODO Remove exception after ESLint 5 upgrade
 import React from 'react';
-import { bool, number, func, node, object } from 'prop-types';
+import { bool, number, func, string, object } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import LabeledSlider from '../../shared/LabeledSlider';
 
-const GridItem = ({ children, ...props }) => (
-  <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
-    <LabeledSlider label={children} {...props} />
-  </Grid>
-);
-GridItem.propTypes = {
-  children: node.isRequired,
-};
-
 const styles = () => ({
   sliderLabel: {
-    minWidth: '9em',
+    minWidth: '10em',
   },
 });
 
-const Options = ({
-  disabled,
-  onChange,
-  blur,
-  distance,
-  maxDistance,
-  perspective,
-  position,
-  vignetting,
-  zoom,
-  classes,
-}) => {
+const Options = ({ disabled, maxDistance, onChange, classes, ...values }) => {
   const labelProps = {
     step: 1,
     disabled,
@@ -41,36 +19,41 @@ const Options = ({
       label: classes.sliderLabel,
     },
   };
-  const beta = <sup>beta</sup>;
+
+  const GridItem = ({ name, label, unit, beta, ...props }) => (
+    <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+      <LabeledSlider
+        name={name}
+        value={values[name]}
+        label={
+          <span>
+            {label}
+            {beta && <sup>beta</sup>} ({values[name]}
+            {unit})
+          </span>
+        }
+        {...props}
+      />
+    </Grid>
+  );
+  GridItem.propTypes = {
+    name: string.isRequired,
+    label: string.isRequired,
+    unit: string.isRequired,
+    beta: bool,
+  };
+  GridItem.defaultProps = {
+    beta: false,
+  };
 
   return (
     <Grid container spacing={24} alignItems="stretch">
-      <GridItem name="position" value={position} {...labelProps}>
-        Position ({position}
-        %)
-      </GridItem>
-      <GridItem name="blur" value={blur} {...labelProps} max={200}>
-        Blur ({blur}
-        px)
-      </GridItem>
-      <GridItem name="distance" value={distance} {...labelProps} max={maxDistance}>
-        Distance ({distance}
-        px)
-      </GridItem>
-      <GridItem name="perspective" value={perspective} {...labelProps}>
-        Perspective ({perspective}
-        %)
-      </GridItem>
-      <GridItem name="zoom" value={zoom} {...labelProps}>
-        Zoom
-        {beta} ({zoom}
-        %)
-      </GridItem>
-      <GridItem name="vignetting" value={vignetting} {...labelProps}>
-        Vignetting
-        {beta} ({vignetting}
-        %)
-      </GridItem>
+      <GridItem name="position" label="Position" unit="%" {...labelProps} />
+      <GridItem name="blur" label="Blur" unit="px" {...labelProps} max={200} />
+      <GridItem name="distance" label="Distance" unit="px" {...labelProps} max={maxDistance} />
+      <GridItem name="perspective" label="Perspective" unit="%" beta {...labelProps} />
+      <GridItem name="zoom" label="Zoom" unit="%" {...labelProps} />
+      <GridItem name="vignetting" label="Vignetting" unit="%" beta {...labelProps} />
     </Grid>
   );
 };

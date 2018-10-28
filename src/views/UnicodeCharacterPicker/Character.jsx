@@ -3,14 +3,14 @@ import { string, func, object } from 'prop-types';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import { monospaceFontFamily } from '../config';
 
 const styles = ({ spacing }) => ({
   root: {
     height: 7 * spacing.unit,
     width: 7 * spacing.unit,
     margin: spacing.unit / 2,
-    // TODO Set in theme
-    fontFamily: 'Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+    fontFamily: monospaceFontFamily,
     fontSize: '1.8rem',
     lineHeight: 1,
   },
