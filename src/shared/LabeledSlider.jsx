@@ -1,7 +1,7 @@
 import React from 'react';
 import { node, object, oneOfType, arrayOf } from 'prop-types';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import NamedSlider from './NamedSlider';
 
 const styles = theme => ({

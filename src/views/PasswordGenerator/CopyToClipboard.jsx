@@ -2,7 +2,7 @@ import React from 'react';
 import { string, func, object } from 'prop-types';
 import Copy from 'react-copy-to-clipboard';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 
 const styles = () => ({
   root: {

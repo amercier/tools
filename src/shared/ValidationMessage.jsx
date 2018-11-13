@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, string, object } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 

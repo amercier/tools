@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, number, func, string, object } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import LabeledSlider from '../../shared/LabeledSlider';
 

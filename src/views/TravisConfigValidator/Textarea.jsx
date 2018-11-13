@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, number, string, func, object, oneOfType } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import TextField from '@material-ui/core/TextField';
 import { auto } from '../../lib/lang';
 import { eventTargetProperty } from '../../lib/dom';

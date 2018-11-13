@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool, string, func, node, object } from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import { noop } from '../lib/lang';
 
 const styles = ({ spacing }) => ({

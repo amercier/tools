@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { bool, string, func, object } from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
