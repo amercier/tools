@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { bool, string, func, object, node, arrayOf, shape } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Divider from '@material-ui/core/Divider';

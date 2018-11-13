@@ -6,17 +6,15 @@ import pink from '@material-ui/core/colors/pink';
 import red from '@material-ui/core/colors/red';
 import teal from '@material-ui/core/colors/teal';
 import yellow from '@material-ui/core/colors/yellow';
-import { createMuiTheme } from '@material-ui/core/styles';
 
-const createTheme = (primary, secondary) =>
-  createMuiTheme({
-    palette: { primary, secondary },
-    typography: {
-      useNextVariants: true,
-    },
-  });
+const makeTheme = (primary, secondary) => ({
+  palette: { primary, secondary },
+  typography: {
+    useNextVariants: true,
+  },
+});
 
-export const defaultTheme = createTheme(green, pink);
+export const defaultTheme = makeTheme(green, pink);
 
 export const monospaceFontFamily = 'Roboto, monospace';
 
@@ -27,7 +25,7 @@ export const modules = [
     icon: 'compare_arrows',
     component: 'UrlEncoderDecoder',
     description: 'Encode or decode text using percent (URL) encoding.',
-    theme: createTheme(pink, green),
+    theme: makeTheme(pink, green),
   },
   {
     id: 'json-validator',
@@ -40,7 +38,7 @@ export const modules = [
     icon: 'code',
     component: 'Base64EncoderDecoder',
     description: 'Encode or decode text using base64 encoding.',
-    theme: createTheme(orange, lightBlue),
+    theme: makeTheme(orange, lightBlue),
   },
   {
     id: 'base64-image',
@@ -53,7 +51,7 @@ export const modules = [
     icon: 'colorize',
     component: 'UnicodeCharacterPicker',
     description: 'Copy fancy unicode characters to your clipboard.',
-    theme: createTheme(lightBlue, orange),
+    theme: makeTheme(lightBlue, orange),
   },
   {
     id: 'css-minifier',
@@ -71,7 +69,7 @@ export const modules = [
     icon: 'assignment_turned_in',
     component: 'TravisConfigValidator',
     description: 'Travis CI Yaml config validator.',
-    theme: createTheme(deepPurple, yellow),
+    theme: makeTheme(deepPurple, yellow),
   },
   {
     id: 'password-generator',
@@ -79,7 +77,7 @@ export const modules = [
     icon: 'visibility_off',
     component: 'PasswordGenerator',
     description: 'Generate a strong password and copy it to your clipboard.',
-    theme: createTheme(yellow, deepPurple),
+    theme: makeTheme(yellow, deepPurple),
   },
   {
     id: 'website-screenshot',
@@ -87,7 +85,7 @@ export const modules = [
     icon: 'camera_alt',
     component: 'WebsiteScreenshotGenerator',
     description: 'Generate a screenshot from a website.',
-    theme: createTheme(teal, red),
+    theme: makeTheme(teal, red),
   },
   {
     id: 'tilt-shift',
@@ -95,6 +93,6 @@ export const modules = [
     icon: 'blur_on',
     component: 'TiltShiftGenerator',
     description: 'Generate a screenshot from a website with a fancy tilt-shift effect.',
-    theme: createTheme(red, teal),
+    theme: makeTheme(red, teal),
   },
 ];

@@ -1,8 +1,10 @@
 import React from 'react';
 import { string, object } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/styles';
+
+const styledBy = (property, mapping) => props => mapping[props[property]];
 
 const logIcons = {
   info: 'info',
@@ -21,17 +23,11 @@ const styles = ({ spacing }) => ({
   icon: {
     marginRight: spacing.unit,
   },
-  // TODO: Use `level` prop once available
-  // See https://github.com/mui-org/material-ui/issues/7633
-  errorIcon: {
-    color: '#b00020',
-  },
-  warnIcon: {
-    color: '#ff8f00',
-  },
-  infoIcon: {
-    color: '#0336ff',
-  },
+  color: styledBy('level', {
+    error: '#b00020',
+    warn: '#ff8f00',
+    info: '#0336ff',
+  }),
 });
 
 const LogEntry = ({ level, message, classes }) => (

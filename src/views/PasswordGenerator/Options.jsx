@@ -1,6 +1,6 @@
 import React from 'react';
 import { number, bool, object, func } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import LabeledSlider from '../../shared/LabeledSlider';

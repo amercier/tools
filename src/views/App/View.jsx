@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool, string, func, arrayOf, shape, object } from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 
 import Home from '../Home';
 

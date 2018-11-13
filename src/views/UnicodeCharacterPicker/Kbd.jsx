@@ -1,6 +1,6 @@
 import React from 'react';
 import { string, object } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 import { monospaceFontFamily } from '../config';
 

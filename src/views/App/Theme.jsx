@@ -1,7 +1,7 @@
 import React from 'react';
 import { string, node, object, arrayOf, shape } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 const Theme = ({
   modules,
@@ -15,9 +15,9 @@ const Theme = ({
 }) => {
   const module = modules.find(({ id }) => `/${id}` === location.pathname);
   return (
-    <MuiThemeProvider theme={module ? module.theme : defaultTheme} {...props}>
+    <ThemeProvider theme={module ? module.theme : defaultTheme} {...props}>
       {children}
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 };
 
