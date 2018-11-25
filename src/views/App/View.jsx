@@ -70,11 +70,13 @@ const View = ({
           <main className={classes.main}>
             <Switch>
               <Route exact path="/" component={RenderHome} />
-              {modules.filter(r => r.component).map(module => (
-                <Route key={`page-route-${module.id}`} exact path={`/${module.id}`}>
-                  <RenderPage module={module} />
-                </Route>
-              ))}
+              {modules
+                .filter(r => r.component)
+                .map(module => (
+                  <Route key={`page-route-${module.id}`} exact path={`/${module.id}`}>
+                    <RenderPage module={module} />
+                  </Route>
+                ))}
             </Switch>
           </main>
         </div>
