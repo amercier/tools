@@ -1,0 +1,7 @@
+language: node_js
+node_js: --lts # Latest LTS
+cache: yarn
+script:
+  - 'echo WARNING: tests not implemented. >& 2'
+after_success:
+  - yarn build # Prevent before_deploy not being tested in PRs
