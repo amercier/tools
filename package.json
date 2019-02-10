@@ -5,10 +5,16 @@
     "react-dom": "^16.8.1"
   },
   "devDependencies": {
-    "next": "^7.0.3"
+    "next": "^7.0.3",
+    "prettier": "^1.16.4"
   },
   "scripts": {
     "dev": "next",
-    "build": "next build && next export -o dist"
+    "build": "next build && next export -o dist",
+    "lint": "prettier --ignore-path .gitignore '**/*.{html,jsx?,json,md,s?css,ya?ml}' --list-different"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
