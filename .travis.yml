@@ -1,6 +1,8 @@
 language: node_js
 node_js: --lts # Latest LTS
 cache: yarn
+before_script:
+  - yarn lint
 script:
   - 'echo WARNING: tests not implemented. >& 2'
 after_success:
