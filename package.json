@@ -8,6 +8,7 @@
   "devDependencies": {
     "eslint": "^5.13.0",
     "eslint-plugin-react-hooks": "^1.0.1",
+    "if-ci": "^3.0.0",
     "next": "^8.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.16.4"
@@ -15,9 +16,11 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export -o dist",
+    "eslint": "eslint --ext js,jsx --ignore-path .gitignore .",
+    "prettier": "prettier --ignore-path .gitignore '**/*.{html,json,md,s?css,ya?ml}'",
     "lint": "run-p lint:*",
-    "lint:prettier": "prettier --ignore-path .gitignore '**/*.{html,json,md,s?css,ya?ml}' --list-different",
-    "lint:eslint": "eslint --ext js,jsx --ignore-path .gitignore ."
+    "lint:prettier": "if-ci run-p 'prettier --list-different' && if-not-ci run-p 'prettier --write'",
+    "lint:eslint": "if-ci run-p eslint && if-not-ci run-p 'eslint --fix'"
   },
   "prettier": {
     "singleQuote": true,
