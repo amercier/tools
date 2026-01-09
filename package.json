@@ -19,7 +19,7 @@
     "react-dom": "^16.6.3",
     "react-dropzone": "^7.0.1",
     "react-helmet": "^5.2.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^6.30.2"
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.0.0",
